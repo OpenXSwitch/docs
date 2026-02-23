@@ -64,6 +64,10 @@
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook"
             ]
+          },
+          {
+            "tab": "Wallet as a service",
+            "openapi": "openapi/developer-api.json"
           }
         ]
       }
