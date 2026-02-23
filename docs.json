@@ -66,8 +66,10 @@
             ]
           },
           {
-            "tab": "Wallet as a service",
-            "openapi": "openapi/developer-api.json"
+            "group": "Wallet as a service",
+            "openapi": {
+              "source": "/openapi/developer-api.json"
+            }
           }
         ]
       }
