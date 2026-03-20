@@ -128,7 +128,7 @@
           {
             "group": "Wallet as a service",
             "openapi": {
-              "source": "/openapi/developer-api.json"
+              "source": "openapi/waas/developer-api.json"
             }
           },
           {
