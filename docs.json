@@ -1,22 +1,91 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "aspen",
+  "name": "OpenXSwitch | Docs",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/LinkedinX.png",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Documentation",
+          "icon": "book-open-cover",
+          "href": "https://mintlify.com/docs"
+        },
+        {
+          "anchor": "Blog",
+          "icon": "newspaper",
+          "href": "https://blog.openxswitch.com/"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Guides",
+        "pages": [
+          "introduction",
+          {
+            "group": "Products",
+            "pages": [
+              "wallet-as-a-service",
+              "stable-wallet"
+            ]
+          },
+          {
+            "group": "Get Started",
+            "pages": [
+              "authentication",
+              {
+                "group": "Tutorials",
+                "pages": [
+                  "untitled-page-1",
+                  "untitled-page"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Manage your WorkSapce",
+            "pages": []
+          },
+          {
+            "group": "Compliance Engine",
+            "pages": [
+              "compliance/overview",
+              "complaince/watchlists"
+            ]
+          },
+          {
+            "group": "Developer Services",
+            "pages": [
+              "Supported-Blockchains",
+              "idempotent-requests",
+              "manage-team-members",
+              "api-permissions",
+              {
+                "group": "Webhook",
+                "pages": [
+                  "webhook/overview",
+                  "webhook/events"
+                ]
+              },
+              "pagination",
+              "glossary"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides Example",
+        "hidden": true,
         "groups": [
           {
             "group": "Getting started",
             "pages": [
-              "index",
               "quickstart",
               "development"
             ]
@@ -57,47 +126,63 @@
             ]
           },
           {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          },
-          {
             "group": "Wallet as a service",
             "openapi": {
               "source": "/openapi/developer-api.json"
             }
+          },
+          {
+            "group": "Markets",
+            "openapi": "openapi/waas/developer-markets.json"
+          },
+          {
+            "group": "Instant Swap",
+            "openapi": "openapi/waas/developer-swap-api.json"
+          },
+          {
+            "group": "Webhook",
+            "openapi": "openapi/waas/developer-api-webhook.json"
+          },
+          {
+            "group": "Sandbox",
+            "openapi": "openapi/waas/sandbox-api.json"
           }
         ]
+      },
+      {
+        "tab": "Stable Wallet API reference",
+        "groups": [
+          {
+            "group": "API documentation",
+            "pages": [
+              "stable-wallet/introduction"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Stablecoin Card API reference",
+        "hidden": true
+      },
+      {
+        "tab": "Changlog",
+        "pages": [
+          "changlog/2026",
+          "changlog/2025"
+        ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/LightBlog(1).png",
+    "dark": "/images/DarkBlog(1).png",
+    "href": "/"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@openxswitch.com"
       }
     ],
     "primary": {
@@ -120,9 +205,18 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/OpenXSwitch",
+      "linkedin": "https://linkedin.com/company/OpenXSwitch"
     }
+  },
+  "appearance": {
+    "default": "system"
+  },
+  "interaction": {
+    "drilldown": false
+  },
+  "styling": {
+    "eyebrows": "section",
+    "latex": false
   }
 }
