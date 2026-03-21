@@ -40,6 +40,22 @@
             "pages": [
               "authentication",
               {
+                "group": "Wallet as a Service",
+                "pages": [
+                  "wallet-as-a-service/architecture",
+                  "wallet-as-a-service/collection-rule",
+                  "wallet-as-a-service/sandbox-vs-live"
+                ]
+              },
+              {
+                "group": "Stable Wallet",
+                "pages": [
+                  "stable-wallet/architecture",
+                  "stable-wallet/testnet-vs-mainnet",
+                  "testnet-faucets"
+                ]
+              },
+              {
                 "group": "Tutorials",
                 "pages": [
                   "untitled-page-1",
@@ -47,10 +63,6 @@
                 ]
               }
             ]
-          },
-          {
-            "group": "Manage your WorkSapce",
-            "pages": []
           },
           {
             "group": "Compliance Engine",
@@ -122,7 +134,8 @@
           {
             "group": "API documentation",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "api-reference/sandbox"
             ]
           },
           {
@@ -188,7 +201,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://console.openxswitch.com"
     }
   },
   "contextual": {
