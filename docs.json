@@ -25,14 +25,15 @@
     },
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "pages": [
           "introduction",
           {
             "group": "Products",
             "pages": [
               "wallet-as-a-service",
-              "stable-wallet"
+              "smart-accounts",
+              "comparing-our-wallet-products"
             ]
           },
           {
@@ -43,14 +44,16 @@
                 "group": "Wallet as a Service",
                 "pages": [
                   "wallet-as-a-service/architecture",
+                  "wallet-as-a-service/quickstart",
                   "wallet-as-a-service/collection-rule",
                   "wallet-as-a-service/sandbox-vs-live"
                 ]
               },
               {
-                "group": "Stable Wallet",
+                "group": "Smart Accounts",
                 "pages": [
                   "stable-wallet/architecture",
+                  "stable-wallet/quickstart",
                   "stable-wallet/testnet-vs-mainnet",
                   "testnet-faucets"
                 ]
@@ -60,6 +63,12 @@
                 "pages": [
                   "untitled-page-1",
                   "untitled-page"
+                ]
+              },
+              {
+                "group": "Security",
+                "pages": [
+                  "security/overview"
                 ]
               }
             ]
@@ -129,7 +138,7 @@
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "API Reference",
         "groups": [
           {
             "group": "API documentation",
@@ -163,13 +172,17 @@
         ]
       },
       {
-        "tab": "Stable Wallet API reference",
+        "tab": "Smart Account API Reference",
         "groups": [
           {
             "group": "API documentation",
             "pages": [
               "stable-wallet/introduction"
             ]
+          },
+          {
+            "group": "Reference",
+            "openapi": "openapi/smart-account/openapi.json"
           }
         ]
       },
@@ -178,10 +191,15 @@
         "hidden": true
       },
       {
-        "tab": "Changlog",
-        "pages": [
-          "changlog/2026",
-          "changlog/2025"
+        "tab": "Changlogs",
+        "groups": [
+          {
+            "group": "Changelogs",
+            "pages": [
+              "changlog/smart-accounts",
+              "changlog/wallet-as-a-service"
+            ]
+          }
         ]
       }
     ]

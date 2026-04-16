@@ -1,0 +1,24 @@
+---
+title: "Security"
+sidebarTitle: "Overview"
+---
+
+# Overview
+
+**Wallet as a Service** and **Stable Wallets** are secured by OpenXSwitch’s [**Trusted Execution Environment**](https://en.wikipedia.org/wiki/Trusted_execution_environment)(TEE), a highly isolated compute environment that is used for sensitive cryptographic operations such as private key generation and transaction signing.
+
+The TEE is hosted on [**AWS Nitro Enclaves**](https://aws.amazon.com/ec2/nitro/nitro-enclaves/), an isolated, secure compute environment. The TEE has **no persistent storage**,**no interactive access**, and **no external networking**, ensuring that even a root or admin user cannot access or SSH into the TEE.
+
+All operations that take place in the TEE are not visible to OpenXSwitch, AWS, or the outside world.
+
+# How it works
+
+# Secret
+
+### 2FA
+
+### Lost Access
+
+# Compliance
+
+### OFAC sanctions screening
