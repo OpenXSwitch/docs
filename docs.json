@@ -25,7 +25,8 @@
     },
     "tabs": [
       {
-        "tab": "Docs",
+        "tab": "Home",
+        "icon": "house-flag",
         "pages": [
           "introduction",
           {
@@ -61,8 +62,7 @@
               {
                 "group": "Tutorials",
                 "pages": [
-                  "untitled-page-1",
-                  "untitled-page"
+                  "untitled-page-1"
                 ]
               },
               {
@@ -83,8 +83,6 @@
           {
             "group": "Developer Services",
             "pages": [
-              "Supported-Blockchains",
-              "idempotent-requests",
               "manage-team-members",
               "api-permissions",
               {
@@ -139,12 +137,15 @@
       },
       {
         "tab": "API Reference",
+        "icon": "code-simple",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "API Reference",
             "pages": [
               "api-reference/introduction",
-              "api-reference/sandbox"
+              "api-reference/idempotency-keys",
+              "api-reference/webhooks",
+              "api-reference/supported-blockchains"
             ]
           },
           {
@@ -173,15 +174,19 @@
       },
       {
         "tab": "Smart Account API Reference",
-        "groups": [
+        "icon": "code",
+        "pages": [
           {
-            "group": "API documentation",
+            "group": "API Reference",
             "pages": [
-              "stable-wallet/introduction"
+              "stable-wallet/introduction",
+              "stable-wallet/idempotency-keys",
+              "stable-wallet/webhooks",
+              "stable-wallet/supported-blockchains"
             ]
           },
           {
-            "group": "Reference",
+            "group": "Endpoints",
             "openapi": "openapi/smart-account/openapi.json"
           }
         ]
@@ -192,6 +197,7 @@
       },
       {
         "tab": "Changlogs",
+        "icon": "calendar",
         "groups": [
           {
             "group": "Changelogs",
