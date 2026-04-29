@@ -190,7 +190,7 @@
             "openapi": "openapi/smart-account/openapi.json"
           },
           {
-            "group": "Compliance",
+            "group": "Compliance Engine",
             "openapi": "openapi/compliance-specs.json"
           }
         ]
