@@ -188,6 +188,10 @@
           {
             "group": "Endpoints",
             "openapi": "openapi/smart-account/openapi.json"
+          },
+          {
+            "group": "Compliance",
+            "openapi": "openapi/compliance-specs.json"
           }
         ]
       },
