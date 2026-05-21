@@ -168,10 +168,6 @@
           {
             "group": "Endpoints",
             "asyncapi": "openapi/smart-accounts/openapi.json"
-          },
-          {
-            "group": "Webhook",
-            "asyncapi": "openapi/developer-api-webhook.json"
           }
         ]
       },
