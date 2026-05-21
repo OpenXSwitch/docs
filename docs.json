@@ -134,10 +134,6 @@
             ]
           },
           {
-            "group": "Wallet as a service",
-            "asyncapi": "openapi/waas/developer-api.json"
-          },
-          {
             "group": "Markets",
             "asyncapi": "openapi/waas/developer-markets.json"
           },
