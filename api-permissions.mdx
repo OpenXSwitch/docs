@@ -1,0 +1,90 @@
+---
+title: "API Permissions"
+---
+
+OpenXSwitch uses a granular permission-based API access system to control how applications interact with platform infrastructure, wallets, transactions, and operational services.
+
+Each API key is assigned specific permissions that determine which actions and endpoints can be accessed within a workspace.
+
+> API keys are environment-specific.\
+> Sandbox API keys only work within the sandbox/tesnet environment, while separate live API keys are required for production usage.
+
+### Permission Levels
+
+#### Wallet-as-a-Service Permissions
+
+| Permission | Description |
+| :-- | :-- |
+| `read` | Grants read-only access to wallets, balances, transactions, and operational data. |
+| `write` | Required for creating or modifying resources and operational configurations. |
+| `withdraw` | Allows external withdrawals from wallets. Requires `write` permission. |
+| `transfer` | Enables internal transfers between Prime Wallets and Sub-Wallets. Requires `write` permission. |
+| `swap` | Grants access to swap functionality across supported assets. Requires `write` permission. |
+| `trade` | Enables trading operations including market and limit order execution. Requires `write` permission. |
+| `sub-wallet` | Allows creation and management of Sub-Wallet infrastructure. |
+
+#### Smart Account Permissions
+
+| Permission | Description |
+| :-- | :-- |
+| `read` | Grants read-only access to accounts, wallets, balances, and transaction activity. |
+| `write` | Required for creating or modifying smart account resources and configurations. |
+| `withdraw` | Allows external withdrawals and asset transfers from smart wallets. Requires `write` permission. |
+| `execute` | Enables smart account transaction execution including sponsored transactions, batch execution, and programmable wallet operations. Requires `write` permission. |
+
+### Permission Dependencies
+
+Certain operations require multiple permissions to be assigned together.
+
+| Action | Required Permissions |
+| :-- | :-- |
+| Wallet Withdrawals | `write` \+ `withdraw` |
+| Internal Transfers | `write` \+ `transfer` |
+| Swaps | `write` \+ `swap` |
+| Trading | `write` \+ `trade` |
+| Smart Account Execution | `write` \+ `execute` |
+
+### Permission Validation
+
+Before processing a request, OpenXSwitch validates that the API key has the required permissions for the requested action.
+
+Example response when permissions are missing:
+
+```json
+{
+  "statusCode": 403,
+  "timestamp": "2026-05-20T10:00:00.000Z",
+  "path": "/v1/withdraw",
+  "message": "The API key does not have 'withdraw' permission."
+}
+```
+
+### API Key Management
+
+API keys can be created and managed through:
+
+**Accounts → API Management**
+
+Supported management operations include:
+
+- Create API keys
+- Assign permissions
+- Rotate credentials
+- Revoke compromised keys
+- Monitor API usage
+- View API activity logs
+
+### Security Considerations & Best Practices
+
+| Security Practice | Description |  |
+| :-- | :-- | --- |
+| Principle of Least Privilege | Only assign the minimum permissions required for an application or integration. |  |
+| Secure Storage | Store API keys securely using encrypted secret managers or vault infrastructure. |  |
+| API Key Rotation | Periodically rotate sensitive API credentials. |  |
+| IP Whitelisting | Restrict API access to approved IP addresses where supported. |  |
+| Audit Monitoring | Monitor API activity logs for suspicious or unauthorized access patterns. |  |
+| Withdrawal Restrictions | Limit access to withdrawal permissions to trusted operational systems only. | --- |
+| title: "API Permissions" |  |  |
+| sidebarTitle: "API Permissions" |  |  |
+
+---

@@ -1,0 +1,53 @@
+---
+title: "Pagination"
+---
+
+OpenXSwitch API uses pagination for REST endpoints that return array-based responses.
+
+Pagination allows applications to retrieve large datasets in smaller, structured batches. Endpoints that return lists such as deposits, withdrawals, transactions, wallets, orders, or sub-wallets support pagination through the `pageNo` and `pageLimit` query parameters.
+
+By default, endpoints return the most recent records first.
+
+> The base endpoint is: `https://api.openxswitch.com`
+
+### Example Request
+
+```javascript
+GET {base}/v1/sub-wallet/list?pageNo=1&pageLimit=20
+```
+
+Example response:
+
+```json
+{
+  "pageNo": 1,
+  "pageLimit": 20,
+  "totalPage": 1,
+  "data": []
+}
+```
+
+### Pagination Parameters
+
+| Parameter | Default | Description |
+| :-- | :-- | :-- |
+| `pageNo` | `1` | Specifies the current page number to retrieve. |
+| `pageLimit` | `10` | Specifies the number of records returned per request. |
+
+### Pagination Response Fields
+
+| Field | Description |
+| :-- | :-- |
+| `pageNo` | Current page number returned in the response. |
+| `pageLimit` | Number of records returned per page. |
+| `totalPage` | Total number of available pages for the request. |
+| `data` | Array containing the requested records. |
+
+### Usage Notes
+
+- Pagination is supported only on endpoints that return array-based results.
+- Results are typically returned in descending order based on creation time or latest activity.
+- To retrieve additional records, increment the `pageNo` value in subsequent requests.
+- The `pageLimit` parameter controls the maximum number of records returned per request.--- title: "Pagination"
+
+---

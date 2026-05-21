@@ -1,0 +1,87 @@
+---
+title: "Overview"
+---
+
+<Check>
+  OpenXSwitch abstracts away native gas management, account funding requirements, and network-specific setup steps, enabling users and developers to interact across chains without acquiring, managing, or pre-funding native gas tokens, account rents, or other protocol-level constraints.
+</Check>
+
+### Problem with Gas Fees
+
+Blockchains rely on gas fees to incentivize validators and prevent network abuse such as denial-of-service attacks. These fees are typically enforced at the protocol level and must be paid in each network’s native token by the wallet initiating the transaction.
+
+This requirement introduces significant friction for users and applications, as users are often required to acquire, hold, and manage multiple native tokens across different blockchains before they can perform basic onchain actions. This creates a fragmented and unintuitive onboarding experience, especially in multi-chain environments.
+
+Depending on the blockchain architecture, there are different approaches to abstracting gas fees.
+
+For example:
+
+- **On EVM chains:** With the introduction of `ERC-4337` (`Account Abstraction`), network fees can be sponsored or paid in non-native tokens through smart contracts known as Paymasters.
+- **On Solana:** Using the concept of `Fee-Payers`, third-party wallets can sponsor transaction fees on behalf of users.
+- **On Stellar:** Sponsored reserves and `fee-bump` transactions allow third parties to sponsor account and transaction costs for users.
+
+### OpenXSwitch's Solution
+
+<AccordionGroup>
+  <Accordion title="Wallet-as-a-Service">
+    OpenXSwitch Wallet-as-a-Service abstracts much of the operational complexity around blockchain gas management through internally managed treasury and gas infrastructure.
+
+    The infrastructure includes:
+
+    - Internal gas station systems
+    - Treasury-assisted withdrawals
+    - Operational gas routing
+    - Network fee abstraction
+
+    In some cases, withdrawals are executed from treasury-controlled operational wallets while OpenXSwitch and infrastructure partners handle the underlying network gas mechanics.
+
+    Network and operational fees are deducted from the transferred asset while the underlying gas requirements are handled operationally by OpenXSwitch infrastructure.
+  </Accordion>
+
+  <Accordion title="Smart Account">
+    OpenXSwitch Smart Account infrastructure utilizes:
+
+    - **Paymasters** on EVM networks
+    - **Fee-Payers** on Solana
+    - **Fee sponsorship mechanisms** on Stellar
+
+    to create programmable wallet infrastructure that abstracts gas from the end-user experience.
+
+    This enables:
+
+    - Gasless transactions
+    - Sponsored execution
+    - Stablecoin-native interactions
+    - Embedded wallet experiences
+    - Chain-abstracted transaction flows
+  </Accordion>
+</AccordionGroup>
+
+### Smart Account Gas Infrastructure
+
+The Smart Account gas abstraction model consists of the following components:
+
+| Component | Description |
+| :-- | :-- |
+| **Gas Sponsor** | Third-party infrastructure responsible for paying or sponsoring on-chain gas fees according to configured sponsorship policies and execution conditions. |
+| **Paymaster (EVM)** | ERC-4337 smart contract infrastructure used to sponsor or abstract gas fees on EVM-compatible networks. |
+| **Fee-Payer (Solana)** | Operational wallet infrastructure that pays Solana transaction fees on behalf of users. |
+| **Fee Sponsorship (Stellar)** | Sponsored reserves and fee-bump transaction infrastructure used to abstract operational costs on Stellar. |
+
+### Smart Account Pricing Model
+
+OpenXSwitch Smart Account infrastructure typically charges between:
+
+```plaintext
+$0.01 → $0.05
+```
+
+per on-chain execution for gas sponsorship, transaction execution infrastructure, and platform services.
+
+This pricing model allows developers to deliver:
+
+- Gasless user experiences
+- Sponsored transactions
+- Stablecoin-native interactions
+- Consumer-grade onboarding flows
+- Simplified blockchain UX without requiring users to manage native gas assets.

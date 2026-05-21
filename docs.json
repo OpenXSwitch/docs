@@ -135,25 +135,23 @@
           },
           {
             "group": "Wallet as a service",
-            "openapi": {
-              "source": "openapi/waas/developer-api.json"
-            }
+            "asyncapi": "openapi/waas/developer-api.json"
           },
           {
             "group": "Markets",
-            "openapi": "openapi/waas/developer-markets.json"
+            "asyncapi": "openapi/waas/developer-markets.json"
           },
           {
             "group": "Instant Swap",
-            "openapi": "openapi/waas/developer-instant-swap.json"
+            "asyncapi": "openapi/waas/developer-instant-swap.json"
           },
           {
             "group": "Webhook",
-            "openapi": "openapi/waas/developer-api-webhook.json"
+            "asyncapi": "openapi/waas/developer-api-webhook.json"
           },
           {
             "group": "Sandbox",
-            "openapi": "openapi/waas/sandbox-api.json"
+            "asyncapi": "openapi/waas/sandbox-api.json"
           }
         ]
       },
@@ -169,15 +167,15 @@
           },
           {
             "group": "Endpoints",
-            "openapi": "openapi/smart-accounts/openapi.json"
+            "asyncapi": "openapi/smart-accounts/openapi.json"
           },
           {
             "group": "Compliance Engine",
-            "openapi": "openapi/compliance-specs.json"
+            "asyncapi": "openapi/compliance-specs.json"
           },
           {
             "group": "Webhook",
-            "openapi": "openapi/developer-api-webhook.json"
+            "asyncapi": "openapi/developer-api-webhook.json"
           }
         ]
       },
