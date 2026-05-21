@@ -1,0 +1,159 @@
+---
+title: "Overview"
+---
+
+Webhooks in OpenXSwitch provide real-time notifications for key system events such as `transfers`, `swap`, `withdrawals`, and `deposits`   across all wallet products. For example, you can receive instant updates when a withdrawal is initiated, an order is executed, or a deposit is confirmed.
+
+This guide explains how to configure, test, and secure webhooks for seamless integration with the OpenXSwitch API.
+
+### Setting Up Webhooks
+
+#### Step 1: Add Webhook URL and Secret
+
+1. Navigate to **Accounts → Webhook** on the OpenXSwitch Console.
+2. Add your webhook `endpoint` and `secret`.
+3. Select the event types you want to subscribe to (e.g., `withdraw`, `deposit`, `transfer`).
+4. Choose the environment mode:
+   - **Sandbox (default)** - for development/`testnet` and testing
+   - **Live** - for production/`mainnet` events
+5. Confirm and submit to save your webhook configuration
+
+#### Step 2: Verify Webhook Setup
+
+To ensure your webhook integration is working correctly, you can use the **OpenXSwitch Simulation API** to trigger test events. This allows you to simulate real scenarios such as transaction updates or deposit confirmations and verify that your endpoint processes them correctly.
+
+### Webhook Structure
+
+When an event occurs, OpenXSwitch sends a JSON payload via HTTP POST to your webhook URL.
+
+#### Payload Format
+
+<CodeGroup>
+
+```json Wallet as a service highlight={12-13}
+{
+  "requestId": "",
+  "method": "deposit.accepted",
+  "params": {
+    ...
+  }
+}
+```
+
+```json Smart Accounts
+{
+  "requestId": "",
+  "method": "smart-account:deposit.success",
+  "params": {
+    ...
+  }
+}
+```
+
+</CodeGroup>
+
+<Tip>
+  👍 For details on available event types and statuses, refer to the Webhook Events Documentation: [https://docs.openxswitch.com/webhook/events](https://docs.openxswitch.com/webhook/events)
+</Tip>
+
+### Securing Your Webhooks
+
+To ensure webhook requests are authentic, OpenXSwitch includes an `X-Webhook-Signature` header with each request. This signature is generated using SHA256 and your webhook secret.
+
+<Tip>
+  You should verify this signature before processing any incoming event.
+</Tip>
+
+### **Verification Example**
+
+Here's an example of how to verify the webhook signature in `Node`, `Python` and `PHP`:
+
+<CodeGroup>
+
+```typescript Node.js highlight={12-13}
+const crypto = require('crypto');
+
+// Your webhook secret
+const secret = 'your_webhook_secret';
+
+// The raw body of the webhook event (as a string)
+const body = '{"requestId": "","method": "deposit.accepted","params": {.....}}';
+
+// The signature from the X-Webhook-Signature header
+const signature = req.headers['x-webhook-signature'];
+
+// Create the HMAC
+
+const hmac = crypto.createHmac('sha256', secret);
+hmac.update(body);
+const digest = hmac.digest('hex');
+
+// Compare the generated HMAC digest with the signature
+if (digest === signature) {
+  console.log('Webhook signature is valid.');
+} else {
+  console.log('Invalid webhook signature.');
+}
+```
+
+```python Python
+import hmac
+import hashlib
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+SECRET = "your_webhook_secret"
+
+@app.route("/webhook", methods=["POST"])
+def verify_webhook():
+    received_signature = request.headers.get("x-webhook-signature", "")
+    raw_body = request.data
+
+    computed_hmac = hmac.new(SECRET.encode(), raw_body, hashlib.sha256).hexdigest()
+
+    if hmac.compare_digest(computed_hmac, received_signature):
+        print("Webhook signature is valid.")
+        return jsonify({"status": "success"}), 200
+    else:
+        print("Invalid webhook signature.")
+        return jsonify({"error": "Invalid signature"}), 401
+
+if __name__ == "__main__":
+    app.run(port=3000)
+```
+
+```php PHP
+<?php
+$secret = 'your_webhook_secret';
+$headers = getallheaders();
+$signature = $headers['x-webhook-signature'] ?? '';
+
+$rawBody = file_get_contents('php://input');
+$computedSignature = hash_hmac('sha256', $rawBody, $secret);
+
+if (hash_equals($computedSignature, $signature)) {
+    http_response_code(200);
+    echo json_encode(["status" => "success"]);
+} else {
+    http_response_code(401);
+    echo json_encode(["error" => "Invalid signature"]);
+}
+?>
+```
+
+</CodeGroup>
+
+### **Webhook Retries**
+
+To ensure reliable event delivery, OpenXSwitch automatically retries failed webhook notifications when your endpoint does not acknowledge an event successfully.
+
+#### Retry Policy
+
+- Your webhook endpoint must return a `2xx` HTTP status code to confirm successful delivery.
+- Any `4xx`, `5xx`, timeout, or failed response will trigger a retry.
+- Webhook deliveries are retried every **5 minutes** for up to **12 hours**.
+- If delivery still fails after 12 hours, the event is marked as `undelivered` and no further retries will occur.
+
+#### Manual Replay
+
+## If your service misses a webhook event, you can manually replay the event either from the workspace console or programmatically via the Webhook API.--- title: "Overview"

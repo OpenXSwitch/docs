@@ -95,6 +95,8 @@
               {
                 "group": "Webhook",
                 "pages": [
+                  "webhook/overview",
+                  "webhook/balance-synchronization",
                   {
                     "group": "Events",
                     "pages": [

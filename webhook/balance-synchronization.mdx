@@ -1,0 +1,85 @@
+---
+title: "Balance Synchronization"
+sidebarTitle: "Balance Synchronization"
+---
+
+<Note>
+  Do not implement **balance** updates using **increment**/**decrement** logic from webhook amounts.\
+  Always overwrite balances using the latest balance values returned in webhook payloads to prevent drift, duplicate accounting, or inconsistent wallet state.
+</Note>
+
+| Product | Balance Source | Recommended Handling |
+| :-- | :-- | :-- |
+| Wallet-as-a-Service | `wallet.asset.balance` or `wallet.assets[].balance` | Replace the stored wallet balance directly using the latest `balance` value returned in the webhook payload. |
+| Smart Accounts | `wallet.token.balance.value` or `wallet.tokens[].balance.value` | Replace the token balance directly using the latest `balance.value` returned for the token in the webhook payload. |
+
+### Wallet-as-a-Service Example
+
+Wallet-as-a-Service `balances` may not always map 1:1 to immediate onchain balances because the platform supports `off-chain` ledger `operations`, internal transfers, settlement abstractions, and managed wallet accounting.
+
+Use the balance from:
+
+`wallet → asset or assets → balance`
+
+```json highlight={9}
+{
+  "wallet": {
+    "id": "6812b103908d2d0d49c7ff79",
+    "clientUserId": null,
+    "email": "email@openxswitch.com",
+    "name": "openxswitch-subwallet",
+    "asset": {
+      "coin": "USDT",
+      "balance": 9,
+      "frozen": 0,
+      "updatedAt": "2025-05-04T23:58:20.494Z"
+    },
+    "isSubWallet": false
+  }
+}
+```
+
+In this example:
+
+- Current wallet balance: `wallet.asset.balance = 9`
+
+### Smart Accounts
+
+Smart Account `wallets` are always synchronized with `onchain` state. `Balance` values returned in webhook events reflect the latest blockchain state for the wallet and token.
+
+Use the balance from:
+
+`wallet → token or tokens → balance → value`
+
+```json highlight={18-21} wrap
+{
+   "wallet":{
+	  "id":"69eba664a8d8bc8c594d17fd",
+	  "address":"0x7A750D8D6e12cce09A7c15482077a8A4d4c37de4",
+	  "type":"settlement",
+	  "protocol":"EVM",
+	  "name":"Default Wallet(EVM)",
+	  "refId":"b2be0f63-f73e-49f5-bc52-93dae008b1d7",
+	  "custodyType":"DEVELOPER",
+	  "token":{
+	    "name":"Euro Coin",
+		"symbol":"EURC",
+		"blockchain":"BASE",
+		"tokenAddress":"0x808456652fdb597867f38412077a9182bf77359f",
+		"isNative":false,
+		"decimals":6,
+		"standard":"ERC20",
+		"balance":{
+			"value":"20",
+			"rawValue":"20000000"
+			}
+		 }
+	   }
+	}
+}
+```
+
+In this example:
+
+- Human-readable balance: `balance.value = "20"`
+- Raw blockchain balance: `balance.rawValue = "20000000"`
