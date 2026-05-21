@@ -132,10 +132,6 @@
             "pages": [
               "api-reference/introduction"
             ]
-          },
-          {
-            "group": "Sandbox",
-            "asyncapi": "openapi/waas/sandbox-api.json"
           }
         ]
       },
