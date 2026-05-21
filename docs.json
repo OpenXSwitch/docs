@@ -24,8 +24,8 @@
           {
             "group": "Get Started",
             "pages": [
-              "authentication",
-              "technical-support-and-onboarding",
+              "get-started/authentication",
+              "get-started/technical-support-and-onboarding",
               {
                 "group": "Wallet as a Service",
                 "pages": [
@@ -38,7 +38,6 @@
                 "group": "Smart Accounts",
                 "pages": [
                   "smart-accounts/architecture",
-                  "smart-accounts/wallet-address-model",
                   "smart-accounts/quickstart",
                   "smart-accounts/testnet-vs-mainnet"
                 ]
@@ -46,7 +45,7 @@
               {
                 "group": "Automation",
                 "pages": [
-                  "collection-and-auto-sweep-rule"
+                  "automation/collection-and-auto-sweep-rule"
                 ]
               },
               {
@@ -76,22 +75,25 @@
             ]
           },
           {
+            "group": "Platform",
+            "pages": [
+              "platform/manage-team-members",
+              "platform/api-permissions"
+            ]
+          },
+          {
+            "group": "Gas Fees",
+            "pages": [
+              "gas-fees/overview",
+              "gas-fees/sponsorship-models"
+            ]
+          },
+          {
             "group": "Developer Services",
             "pages": [
               {
-                "group": "Gas Fees",
-                "pages": [
-                  "developer-services/overview",
-                  "developer-services/sponsorship-models"
-                ]
-              },
-              "manage-team-members",
-              "api-permissions",
-              {
                 "group": "Webhook",
                 "pages": [
-                  "webhook/overview",
-                  "webhook/balance-handling",
                   {
                     "group": "Events",
                     "pages": [
@@ -117,8 +119,8 @@
                   }
                 ]
               },
-              "idempotent-requests",
-              "pagination"
+              "developer-services/idempotent-requests",
+              "developer-services/pagination"
             ]
           }
         ]
