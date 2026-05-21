@@ -153,8 +153,7 @@
             "group": "Sandbox",
             "asyncapi": "openapi/waas/sandbox-api.json"
           }
-        ],
-        "hidden": true
+        ]
       },
       {
         "tab": "Smart Accounts API Reference",
@@ -169,10 +168,6 @@
           {
             "group": "Endpoints",
             "asyncapi": "openapi/smart-accounts/openapi.json"
-          },
-          {
-            "group": "Compliance Engine",
-            "asyncapi": "openapi/compliance-specs.json"
           },
           {
             "group": "Webhook",
