@@ -164,10 +164,6 @@
             "pages": [
               "smart-accounts-api-reference/introduction"
             ]
-          },
-          {
-            "group": "Endpoints",
-            "asyncapi": "openapi/smart-accounts/openapi.json"
           }
         ]
       },
