@@ -142,10 +142,6 @@
             "asyncapi": "openapi/waas/developer-markets.json"
           },
           {
-            "group": "Webhook",
-            "asyncapi": "openapi/waas/developer-api-webhook.json"
-          },
-          {
             "group": "Sandbox",
             "asyncapi": "openapi/waas/sandbox-api.json"
           }
