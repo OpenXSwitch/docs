@@ -142,10 +142,6 @@
             "asyncapi": "openapi/waas/developer-markets.json"
           },
           {
-            "group": "Instant Swap",
-            "asyncapi": "openapi/waas/developer-instant-swap.json"
-          },
-          {
             "group": "Webhook",
             "asyncapi": "openapi/waas/developer-api-webhook.json"
           },
