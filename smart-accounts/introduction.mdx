@@ -1,0 +1,167 @@
+---
+title: "Introduction"
+description: "Smart Account APIs use a layered authentication model to secure wallet creation, account management, and transaction execution across the OpenXSwitch Vault/MPC infrastructure."
+---
+
+
+
+### Authentication
+
+Certain Smart Account endpoints require an additional authentication header when interacting with the OpenXSwitch Vault/MPC infrastructure.
+
+This applies to sensitive operations such as:
+
+- `Create Accounts`
+- `Create Wallets`
+- `Create Transfer Transactions`
+
+These endpoints require the `x-wallet-secret` header in addition to your standard API authentication.
+
+### Required Header
+
+```typescript
+x-wallet-secret: your_wallet_secret
+```
+
+### Example Request
+
+```http
+POST /smart-accounts/wallets
+Authorization: Bearer YOUR_API_KEY
+x-wallet-secret: your_wallet_secret
+Content-Type: application/json
+```
+
+```json
+{
+  "name": "Treasury Wallet",
+  "blockchain": "BASE",
+  "accountId": "acc_682bc92a"
+}
+```
+
+### About the **Wallet Secret**
+
+The `wallet secret` is an additional security credential used to authorize operations against the OpenXSwitch Vault/MPC service. It helps protect sensitive wallet management and transaction-signing actions.
+
+The wallet secret is scoped to your workspace and should be treated as a highly sensitive credential.
+
+Use the wallet secret only for endpoints that:
+
+- Create or manage wallets/accounts
+- Initiate signing or transfer operations
+- Interact with Vault/MPC-controlled resources
+
+### How to Obtain the Wallet Secret
+
+You can generate or retrieve your wallet secret from:
+
+**OpenXSwitch Console → Smart Accounts → Settings → Wallet Secret**
+
+Store the secret securely and never expose it in frontend applications, client-side code, or public repositories.
+
+Certain Smart Account endpoints require an additional authentication header when interacting with the OpenXSwitch Vault/MPC infrastructure.
+
+This applies to sensitive operations such as:
+
+- `Create Accounts`
+- `Create Wallets`
+- `Create Transfer Transactions`
+
+These endpoints require the `x-wallet-secret` header in addition to your standard API authentication.
+
+### Required Header
+
+```typescript
+x-wallet-secret: your_wallet_secret
+```
+
+### Example Request
+
+```http
+POST /smart-accounts/wallets
+Authorization: Bearer YOUR_API_KEY
+x-wallet-secret: your_wallet_secret
+Content-Type: application/json
+```
+
+```json
+{
+  "name": "Treasury Wallet",
+  "blockchain": "BASE",
+  "accountId": "acc_682bc92a"
+}
+```
+
+### About the **Wallet Secret**
+
+The `wallet secret` is an additional security credential used to authorize operations against the OpenXSwitch Vault/MPC service. It helps protect sensitive wallet management and transaction-signing actions.
+
+The wallet secret is scoped to your workspace and should be treated as a highly sensitive credential.
+
+Use the wallet secret only for endpoints that:
+
+- Create or manage wallets/accounts
+- Initiate signing or transfer operations
+- Interact with Vault/MPC-controlled resources
+
+### How to Obtain the Wallet Secret
+
+You can generate or retrieve your wallet secret from:
+
+**OpenXSwitch Console → Smart Accounts → Settings → Wallet Secret**
+
+Store the secret securely and never expose it in frontend applications, client-side code, or public repositories.
+
+Certain Smart Account endpoints require an additional authentication header when interacting with the OpenXSwitch Vault/MPC infrastructure.
+
+This applies to sensitive operations such as:
+
+- `Create Accounts`
+- `Create Wallets`
+- `Create Transfer Transactions`
+
+These endpoints require the `x-wallet-secret` header in addition to your standard API authentication.
+
+### Required Header
+
+```typescript
+x-wallet-secret: your_wallet_secret
+```
+
+### Example Request
+
+```http
+POST /smart-accounts/wallets
+Authorization: Bearer YOUR_API_KEY
+x-wallet-secret: your_wallet_secret
+Content-Type: application/json
+```
+
+```json
+{
+  "name": "Treasury Wallet",
+  "blockchain": "BASE",
+  "accountId": "acc_682bc92a"
+}
+```
+
+### About the **Wallet Secret**
+
+The `wallet secret` is an additional security credential used to authorize operations against the OpenXSwitch Vault/MPC service. It helps protect sensitive wallet management and transaction-signing actions.
+
+The wallet secret is scoped to your workspace and should be treated as a highly sensitive credential.
+
+Use the wallet secret only for endpoints that:
+
+- Create or manage wallets/accounts
+- Initiate signing or transfer operations
+- Interact with Vault/MPC-controlled resources
+
+### How to Obtain the Wallet Secret
+
+You can generate or retrieve your wallet secret from:
+
+**OpenXSwitch Console → Smart Accounts → Settings → Wallet Secret**
+
+Store the secret securely and never expose it in frontend applications, client-side code, or public repositories.

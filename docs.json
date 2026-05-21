@@ -14,8 +14,8 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Get Started",
-        "icon": "house-flag",
+        "tab": "Docs",
+        "icon": "file-doc",
         "pages": [
           "introduction",
           "platform-overview",
@@ -125,50 +125,13 @@
         ]
       },
       {
-        "tab": "Guides Example",
-        "hidden": true,
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "icon": "code-simple",
         "groups": [
           {
             "group": "API Reference",
             "pages": [
-              "api-reference/webhooks"
+              "api-reference/introduction"
             ]
           },
           {
@@ -183,7 +146,7 @@
           },
           {
             "group": "Instant Swap",
-            "openapi": "openapi/waas/developer-swap-api.json"
+            "openapi": "openapi/waas/developer-instant-swap.json"
           },
           {
             "group": "Webhook",
@@ -202,22 +165,22 @@
           {
             "group": "API Reference",
             "pages": [
-              "stable-wallet/introduction"
+              "smart-accounts/introduction"
             ]
           },
           {
             "group": "Endpoints",
-            "openapi": "openapi/smart-account/openapi.json"
+            "openapi": "openapi/smart-accounts/openapi.json"
           },
           {
             "group": "Compliance Engine",
             "openapi": "openapi/compliance-specs.json"
+          },
+          {
+            "group": "Webhook",
+            "openapi": "openapi/developer-api-webhook.json"
           }
         ]
-      },
-      {
-        "tab": "Stablecoin Card API reference",
-        "hidden": true
       },
       {
         "tab": "Changlogs",
