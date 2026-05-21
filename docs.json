@@ -118,8 +118,7 @@
                 ]
               },
               "idempotent-requests",
-              "pagination",
-              "glossary"
+              "pagination"
             ]
           }
         ]
