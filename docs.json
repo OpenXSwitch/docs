@@ -137,27 +137,27 @@
           },
           {
             "group": "Wallet as a Service",
-            "asyncapi": "https://docs.openxswitch.com/openapi/waas/developer-api.json"
+            "openapi": "https://docs.openxswitch.com/openapi/waas/developer-api.json"
           },
           {
             "group": "Markets",
-            "asyncapi": "https://docs.openxswitch.com/openapi/waas/developer-markets.json"
+            "openapi": "https://docs.openxswitch.com/openapi/waas/developer-markets.json"
           },
           {
             "group": "Instant Swap",
-            "asyncapi": "https://docs.openxswitch.com/openapi/waas/developer-instant-swap.json"
+            "openapi": "https://docs.openxswitch.com/openapi/waas/developer-instant-swap.json"
           },
           {
             "group": "Compliance",
-            "asyncapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
+            "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
           },
           {
             "group": "Webhook",
-            "asyncapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
+            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
           },
           {
             "group": "Sandbox",
-            "asyncapi": "https://docs.openxswitch.com/openapi/waas/sandbox-api.json"
+            "openapi": "https://docs.openxswitch.com/openapi/waas/sandbox-api.json"
           }
         ]
       },
@@ -172,11 +172,11 @@
           },
           {
             "group": "Webhook",
-            "asyncapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
+            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
           },
           {
             "group": "Compliance",
-            "asyncapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
+            "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
           }
         ]
       },
