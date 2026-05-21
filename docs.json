@@ -37,10 +37,10 @@
               {
                 "group": "Smart Accounts",
                 "pages": [
-                  "stable-wallet/architecture",
-                  "stable-wallet/wallet-address-model",
-                  "stable-wallet/quickstart",
-                  "stable-wallet/testnet-vs-mainnet"
+                  "smart-accounts/architecture",
+                  "smart-accounts/wallet-address-model",
+                  "smart-accounts/quickstart",
+                  "smart-accounts/testnet-vs-mainnet"
                 ]
               },
               {
@@ -52,7 +52,7 @@
               {
                 "group": "Tutorials",
                 "pages": [
-                  "untitled-page-1"
+                  "tutorial/transfer-funds-from-sub-wallets-to-prime-wallet"
                 ]
               },
               {
@@ -81,8 +81,8 @@
               {
                 "group": "Gas Fees",
                 "pages": [
-                  "overview",
-                  "sponsorship-models"
+                  "developer-services/overview",
+                  "developer-services/sponsorship-models"
                 ]
               },
               "manage-team-members",
@@ -91,26 +91,26 @@
                 "group": "Webhook",
                 "pages": [
                   "webhook/overview",
+                  "webhook/balance-handling",
                   {
                     "group": "Events",
                     "pages": [
-                      "overview-1",
-                      "webhook/balance-handling",
+                      "events/overview",
                       {
                         "group": "Wallet as a Service",
                         "pages": [
-                          "deposit-event",
-                          "withdrawal-event",
-                          "internal-transfer-event",
-                          "instant-swap-event"
+                          "events/waas/deposit-event",
+                          "events/waas/withdrawal-event",
+                          "events/waas/internal-transfer-event",
+                          "events/waas/instant-swap-event"
                         ]
                       },
                       {
                         "group": "Smart Accounts",
                         "pages": [
-                          "deposit-event-1",
-                          "webhooks-for-the-deposit-flow-notifies-you-about-incoming-deposits-and-their-status-parent-method-deposit-sub-methods-pending-triggered-when-a-deposit-is-initiated-and-is-awaiting-blockchain-confirmation-updated-triggered-when-the-deposit-progresses-through-intermediate-confirmations-0-2-success-triggered-when-the-deposit-is-fully-confirmed-and-credited-to-the-wallet",
-                          "balance-event"
+                          "events/smart-accounts/deposit-event",
+                          "events/smart-accounts/withdraw-event",
+                          "events/smart-accounts/balance-event"
                         ]
                       }
                     ]
@@ -159,13 +159,13 @@
         ]
       },
       {
-        "tab": "Smart Account API Reference",
+        "tab": "Smart Accounts API Reference",
         "icon": "code",
         "pages": [
           {
             "group": "API Reference",
             "pages": [
-              "smart-accounts/introduction"
+              "smart-accounts-api-reference/introduction"
             ]
           },
           {
