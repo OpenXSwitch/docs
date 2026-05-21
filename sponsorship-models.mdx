@@ -1,0 +1,32 @@
+---
+title: "Sponsorship Models (Smart Account)"
+sidebarTitle: "Sponsorship Models"
+---
+
+<Note>
+  Without sponsorship, users must source and maintain native tokens in their wallets across chain before they can execute transactions.
+
+  **EVM:** Users must hold native gas tokens (e.g., ETH or equivalent) in their wallets to pay for transaction execution, regardless of the asset being transferred or the application being used.
+
+  **Solana:** Users are required to fund rent-exempt balances and create Associated Token Accounts (ATAs) before they can receive or interact with SPL tokens.
+
+  **Stellar:** Users must maintain minimum account reserves and ensure sufficient XLM balance to cover transaction fees and network requirements before interacting with Stellar-based assets and services.
+</Note>
+
+### EVM Gas Sponsorship
+
+**EVM** transactions normally require native gas tokens such as `ETH`, `BNB`, or `POL` to execute transactions onchain. OpenXSwitch uses ERC-4337 `Paymaster infrastructure` to sponsor gas fees and abstract native token requirements from users.
+
+Gas sponsorship allows users to interact onchain without holding native gas assets, enabling stablecoin-native and gasless wallet experiences.
+
+### Solana ATA Sponsorship
+
+Solana token transfers require an `Associated Token Account` (ATA) for every token a wallet holds. OpenXSwitch Gas Station sponsors the rent deposit required to create these ATAs, removing the need for users to fund token account creation manually.
+
+For the first `deposit` of a token into a wallet, `ATA` rent must be paid and can sometimes exceed `$0.20` depending on network conditions. Subsequent transfers for the same token reuse the existing ATA and do not require additional rent creation costs.
+
+### Stellar Fee Sponsorship
+
+Stellar transactions may require `account reserves`, `trustline reserves`, and transaction fees before wallets can interact with supported assets onchain. OpenXSwitch utilizes Stellar sponsorship infrastructure and `fee-bump` transactions to abstract these operational costs from users.
+
+This allows wallets to receive assets and interact with the Stellar network without requiring users to pre-fund `XLM` for operational reserves or transaction execution.

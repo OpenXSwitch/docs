@@ -1,4 +1,73 @@
----
-title: "Architecture"
-sidebarTitle: "Architecture"
----
+This section introduces the core concepts and wallet models used across the OpenXSwitch Smart Account infrastructure.
+
+Smart Account is a section within the OpenXSwitch platform that houses programmable smart wallet infrastructure for gasless transactions, sponsored execution, programmable transfers, and wallet orchestration.
+
+<Note>
+  Within the OpenXSwitch platform, “**Smart Account**” refers to the infrastructure layer and operational section, while “**Smart Wallet**” refers to the actual programmable blockchain wallet address infrastructure.
+</Note>
+
+### Architecture Overview
+
+OpenXSwitch Smart Account supports multiple account and wallet models designed for programmable wallet operations, treasury routing, settlement flows, and end-user wallet infrastructure.
+
+| Model | Description | Best For |
+| :-- | :-- | :-- |
+| **Accounts** | Logical container used to group and manage smart wallets. | Treasury separation, application-level grouping, operational isolation, and user segmentation. |
+| **Wallets** | Actual blockchain wallet addresses grouped and managed under an account structure. | Deposits, programmable transfers, gasless transactions, and wallet execution flows. |
+
+### Types of Accounts
+
+| Account Type | Description | Use Case |
+| :-- | :-- | :-- |
+| **Settlement** | Treasury-level account used for operational liquidity and settlement management. | Auto-sweep destination, treasury management, liquidity routing, and settlement operations. |
+| **User** | Account structure used for end-user applications and wallet orchestration. | Consumer applications, embedded wallets, user balances, and programmable wallet flows. |
+
+### Types of Wallets
+
+Wallets within Smart Account infrastructure are known as **Smart Wallets**.
+
+| Wallet Type | Description | Use Case |
+| :-- | :-- | :-- |
+| **Settlement** | The first wallet automatically created under a Settlement Account. | Treasury reserve management and auto-sweep destination wallet. |
+| **Deposit** | Additional smart wallet addresses created under accounts. | User deposits, programmable transfers, wallet interactions, and application-level wallet operations. |
+
+<Card title="EVM Wallet Address Model" type="note">
+  All supported EVM networks share the same wallet address infrastructure. A single smart wallet address can be used to receive supported assets across multiple supported EVM chains and tokens.\
+  \
+  [Learn More About Smart Wallet Addresses Model](/stable-wallet/wallet-address-model)
+</Card>
+
+### Supported Asset Endpoints
+
+Supported asset coverage for deposits and withdrawals is shared across Smart Account infrastructure.
+
+| Action | Description | Link |
+| :-- | :-- | :-- |
+| **Get Supported Blockchains** | Retrieve supported blockchain networks available within Smart Account infrastructure. | `api-reference/mix-endpoints/get-list-of-rechargeable-currencies` |
+| **Get Supported Tokens** | Retrieve supported tokens available across supported blockchain networks. | `api-reference/mix-endpoints/get-all-supported-currencies` |
+| **Get Supported Tokens With Blockchains** | Retrieve supported tokens alongside their supported blockchain networks. | — |
+
+### Provisioning
+
+OpenXSwitch Smart Account infrastructure supports programmable wallet provisioning for both operational and user wallet flows.
+
+| Wallet Type | Provisioning | Use Case |
+| :-- | :-- | :-- |
+| **Settlement** | Settlement accounts and wallets are provisioned automatically after successful workspace onboarding and activation. | Treasury operations, liquidity management, and auto-sweep infrastructure. |
+| **Deposit / User** | Smart wallets can be created programmatically using a valid email string and name through the API. | End-user wallets, embedded wallet infrastructure, and application wallet provisioning. |
+
+# Supported Operations
+
+Smart Wallets support programmable wallet infrastructure for:
+
+- Deposits
+- Balances
+- Withdrawals
+- Smart account execution
+- Gasless transactions (`EVM`)
+- Sponsored transactions (`Stellar`, `Solana`)
+- Auto-sweep operations
+- Batch transactions
+- On-chain swap and bridge operations
+
+All transaction flows within Smart Account infrastructure are designed to support programmable and gas-abstracted operational experiences.

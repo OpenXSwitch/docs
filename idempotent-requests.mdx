@@ -1,0 +1,35 @@
+---
+title: "Idempotent Requests"
+---
+
+Idempotency keys allow you to safely retry API requests without accidentally creating duplicate operations. 
+
+OpenXSwitch uses idempotency controls across Wallet-as-a-Service and Smart Account operations to ensure reliability during retries, network failures, or client timeouts.
+
+### Wallet-as-a-Service
+
+| Operation | Idempotency Key | Description |
+| :-- | :-- | :-- |
+| Withdrawal | `clientTxId` | Unique per withdrawal request. Prevents duplicate transactions. |
+| Transfer | `clientTxId` | Must be unique per transfer request. Enables safe retries without duplication. |
+| Trade | `clientTxId` | Used to identify and deduplicate trade orders. |
+| Instant Swap | `extId` | Unique external identifier provided by the client system for swap tracking and deduplication. |
+
+### Smart Accounts
+
+Smart Account APIs support the `idempotencyKey` parameter for endpoints that create new resources or initiate state-changing operations, including:
+
+- Create wallet
+- Create account
+- Create transfer transaction
+
+Using the same `idempotencyKey` when retrying a request ensures the operation is executed only once, even if the original request times out or is retried by the client.
+
+### Webhook
+
+| Operation | Idempotency Key | Description |
+| :-- | :-- | :-- |
+| Webhooks | `event.params.id` | Unique identifier for each event. Use to ensure an event is processed only once. |
+| Webhooks (alternative) | `requestId` | Unique per webhook delivery request. Useful for preventing duplicate handling during retries. |
+
+ 

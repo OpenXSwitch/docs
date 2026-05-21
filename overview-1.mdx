@@ -1,0 +1,28 @@
+---
+title: "Overview"
+---
+
+OpenXSwitch provides `webhook` notifications for multiple `event` flows across `Wallet-as-a-Service` and `Smart Accounts`. Each flow consists of a `parent method` with `sub-methods` representing the lifecycle, status, or progress of an event.
+
+These webhooks enable real-time updates for `deposits`, `withdrawals`, `transfers`, `swaps`, and `balance` activities within your application.
+
+### Parent Methods
+
+| Event Flow | Wallet-as-a-Service | Smart Accounts |
+| :-- | :-- | :-- |
+| Deposit | `deposit` | `smart-accounts:deposit` |
+| Withdrawal | `withdraw` | `smart-accounts:withdraw` |
+| Internal Transfer | `internal_transfer` | — |
+| Instant Swap | `instant_swap` | — |
+| Wallets | — | `smart-accounts:wallets` |
+
+<Note>
+  **Parent methods** are used as the top-level event namespace, while sub-methods define the specific event state or action (e.g., `pending`, `updated`, `success`).
+</Note>
+
+### **Best Practices**
+
+1. **Idempotent Processing:** Ensure your webhook handlers are idempotent to avoid duplicate processing.
+2. **Final Events Only:** Update balances only on final events, Refer to the full list of `supported events` to identify valid final event types.
+3. **Acknowledgment:** Always respond with a **2xx HTTP status code** within 1 minutes to acknowledge receipt.
+4. **Security:** Verify webhook payload signatures to ensure authenticity.

@@ -1,8 +1,41 @@
----
-title: "Comparing Our Wallet Products"
----
+OpenXSwitch offers two wallet products designed for different developer, operational, and scalability requirements.
 
-OpenXSwitch offers two wallet products to support different developer/business needs:
+|  | **Wallet-as-a-Service** | Smart **Accounts** |
+| :-- | :-- | :-- |
+| **Overview** | Custodial wallet infrastructure optimized for exchanges, fintechs, payment systems, and operational treasury management. | Programmable `smart account` infrastructure optimized for seamless stablecoin experiences, gasless transactions, and advanced wallet orchestration. |
+| **Architecture** | `Prime Wallet` and `Sub-Wallet` architecture (1:N model). One Prime Wallet manages liquidity and treasury operations across many Sub-Wallets. Sub-Wallets limits depend on the current workspace plan. | `Accounts` and `Wallets`architecture (1:N model). One Account acts as a container for multiple programmable wallets with isolated controls and configurations. |
+| **Pricing Model** | Monthly subscription pricing starting from **\$50/month** depending on infrastructure limits and usage. | Usage-based pricing with onboarding/setup fees depending on business requirements, starting from **\$500**. |
+| **Fund Isolation** | Prime Wallet and Sub-Wallet balances are logically isolated with configurable withdrawal and access control policies. | Funds are isolated at both Account and Wallet levels with programmable access controls and policy-based transaction authorization. |
+| **Asset Management** | Unified `off-chain` token balances across supported chains with `flexible withdrawals` from any supported blockchain network. | Assets remain fully `on-chain` with programmable execution, routing, and wallet-level asset management. |
+| **Internal Transfers** | `Free internal transfers` between Prime Wallet and Sub-Wallets, and between Sub-Wallets. | `Internal transfers` between wallets are executed on-chain. |
+| **Auto Collection** | Auto-collection is powered through internal transfers, making collections instant and free. | Auto-collection operates fully on-chain with programmable routing and execution. |
+| **Swap Infrastructure** | Instant `off-chain` swaps up to **\$300,000** per request. | Swaps and bridges are executed on-chain through programmable transaction flows. |
+| **Withdrawals** | Flexible `withdrawals` supported across available blockchain networks. | `Chain-agnostic` withdrawals with programmable transaction execution and routing. |
+| **Transaction Model** | Primarily on/off-chain infrastructure optimized for operational efficiency and reduced transaction costs. | `On-chain` transaction execution powered by smart account infrastructure. |
+| **Gas Management** | Managed by `OpenXSwitch` and infrastructure partners while abstracting most blockchain operational complexity from developers | Supports `sponsored` and `gasless` transactions by default. |
+| **Programmability** | Operational wallet infrastructure with predefined flows and automation support. | Fully programmable wallet infrastructure with smart account execution capabilities. |
+| **Batch Transactions** | Not supported. | Supported through `smart account` transaction batching. |
+| **Chain & Token Expansion** | More rigid infrastructure. | Flexible architecture. `New token` and `chain` integrations can typically be completed within days or weeks if dependencies are available. |
+| **Minimum Transfers** | Minimum external withdrawal outside OpenXSwitch: **\$10**. Minimum internal transfer within OpenXSwitch: **\$1**. | No enforced minimum withdrawal amount beyond required blockchain network fees. |
+| **Environment** | `Sandbox` environment is an off-chain simulation of production infrastructure. No faucet or testnet interaction required. | Uses native blockchain `testnet `environments for supported networks and protocols. |
 
-- **Wallet as a Service:** 
-- **Stable Wallet:** 
+### Which Product Should You Choose?
+
+| Use Case | Recommended Product |
+| :-- | :-- |
+| Exchange infrastructure | `Wallet-as-a-Service` or `Smart Accounts` |
+| Treasury management | `Wallet-as-a-Service` or `Smart Accounts` |
+| Custodial wallets | `Wallet-as-a-Service `or `Smart Accounts` |
+| Internal ledger-based operations | `Wallet-as-a-Service` |
+| Gasless stablecoin wallets | `Smart Accounts` |
+| Embedded onchain wallets | `Smart Accounts` |
+| Consumer-facing Web3 experiences | `Wallet-as-a-Service` or `Smart Accounts` |
+| Programmable transaction flows | `Smart Accounts` |
+| Smart account infrastructure | `Smart Accounts` |
+| On-chain automation and orchestration | `Smart Accounts` |
+
+### Key Architectural Difference
+
+**Wallet-as-a-Service** is optimized around operational efficiency through off-chain infrastructure abstraction, unified balances, and internal ledger systems.
+
+**Smart Accounts** is optimized around programmable on-chain execution using `smart account infrastructure`, enabling gas abstraction, transaction sponsorship, and advanced wallet orchestration.

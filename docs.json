@@ -7,46 +7,30 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/images/LinkedinX.png",
+  "favicon": {
+    "light": "/images/LinkedinX.png",
+    "dark": "/images/LinkedinX.png"
+  },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "icon": "book-open-cover",
-          "href": "https://mintlify.com/docs"
-        },
-        {
-          "anchor": "Blog",
-          "icon": "newspaper",
-          "href": "https://blog.openxswitch.com/"
-        }
-      ]
-    },
     "tabs": [
       {
-        "tab": "Home",
+        "tab": "Get Started",
         "icon": "house-flag",
         "pages": [
           "introduction",
-          {
-            "group": "Products",
-            "pages": [
-              "wallet-as-a-service",
-              "smart-accounts",
-              "comparing-our-wallet-products"
-            ]
-          },
+          "platform-overview",
+          "supported-blockchains",
+          "comparing-our-wallet-products",
           {
             "group": "Get Started",
             "pages": [
               "authentication",
+              "technical-support-and-onboarding",
               {
                 "group": "Wallet as a Service",
                 "pages": [
                   "wallet-as-a-service/architecture",
                   "wallet-as-a-service/quickstart",
-                  "wallet-as-a-service/collection-rule",
                   "wallet-as-a-service/sandbox-vs-live"
                 ]
               },
@@ -54,9 +38,15 @@
                 "group": "Smart Accounts",
                 "pages": [
                   "stable-wallet/architecture",
+                  "stable-wallet/wallet-address-model",
                   "stable-wallet/quickstart",
-                  "stable-wallet/testnet-vs-mainnet",
-                  "testnet-faucets"
+                  "stable-wallet/testnet-vs-mainnet"
+                ]
+              },
+              {
+                "group": "Automation",
+                "pages": [
+                  "collection-and-auto-sweep-rule"
                 ]
               },
               {
@@ -74,24 +64,60 @@
             ]
           },
           {
-            "group": "Compliance Engine",
+            "group": "Compliance",
             "pages": [
-              "compliance/overview",
-              "complaince/watchlists"
+              {
+                "group": "Compliance Engine",
+                "pages": [
+                  "compliance/overview",
+                  "complaince/watchlists"
+                ]
+              }
             ]
           },
           {
             "group": "Developer Services",
             "pages": [
+              {
+                "group": "Gas Fees",
+                "pages": [
+                  "overview",
+                  "sponsorship-models"
+                ]
+              },
               "manage-team-members",
               "api-permissions",
               {
                 "group": "Webhook",
                 "pages": [
                   "webhook/overview",
-                  "webhook/events"
+                  {
+                    "group": "Events",
+                    "pages": [
+                      "overview-1",
+                      "webhook/balance-handling",
+                      {
+                        "group": "Wallet as a Service",
+                        "pages": [
+                          "deposit-event",
+                          "withdrawal-event",
+                          "internal-transfer-event",
+                          "instant-swap-event"
+                        ]
+                      },
+                      {
+                        "group": "Smart Accounts",
+                        "pages": [
+                          "deposit-event-1",
+                          "webhooks-for-the-deposit-flow-notifies-you-about-incoming-deposits-and-their-status-parent-method-deposit-sub-methods-pending-triggered-when-a-deposit-is-initiated-and-is-awaiting-blockchain-confirmation-updated-triggered-when-the-deposit-progresses-through-intermediate-confirmations-0-2-success-triggered-when-the-deposit-is-fully-confirmed-and-credited-to-the-wallet",
+                          "balance-event"
+                        ]
+                      }
+                    ]
+                  }
                 ]
               },
+              "idempotent-requests",
               "pagination",
               "glossary"
             ]
@@ -142,10 +168,7 @@
           {
             "group": "API Reference",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/idempotency-keys",
-              "api-reference/webhooks",
-              "api-reference/supported-blockchains"
+              "api-reference/webhooks"
             ]
           },
           {
@@ -179,10 +202,7 @@
           {
             "group": "API Reference",
             "pages": [
-              "stable-wallet/introduction",
-              "stable-wallet/idempotency-keys",
-              "stable-wallet/webhooks",
-              "stable-wallet/supported-blockchains"
+              "stable-wallet/introduction"
             ]
           },
           {
@@ -259,5 +279,8 @@
   "styling": {
     "eyebrows": "section",
     "latex": false
+  },
+  "markdown": {
+    "schema": false
   }
 }

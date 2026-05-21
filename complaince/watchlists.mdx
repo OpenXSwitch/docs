@@ -2,3 +2,41 @@
 title: "Watchlists"
 sidebarTitle: "Watchlists"
 ---
+
+
+
+<Note>
+  Withdrawals are filtered through `watchlist` rules to enforce operational policies, reduce unauthorized activity, and restrict transfers to high-risk or prohibited destinations.
+</Note>
+
+### Withdrawal Protection via Watchlist
+
+OpenXSwitch secures withdrawal operations using Watchlist Policies. Through allowlists and blocklists, businesses can control which wallet addresses are permitted or restricted from receiving funds across both Wallet-as-a-Service and Smart Account infrastructure.
+
+Watchlist policies can be applied to:
+
+- Prime Wallet withdrawals
+- Sub-Wallet withdrawals
+- Smart Account wallet transactions
+
+### Watchlist Types
+
+| Type | Description |
+| :-- | :-- |
+| **Allowlist** | Only addresses explicitly approved within the allowlist are permitted to receive funds from Prime Wallets (Wallet-as-a-Service) and Settlement Wallets (Smart Account). All other addresses are rejected by default. Recommended for high-security operational environments. |
+| **Blocklist** | All addresses are permitted except addresses explicitly added to the blocklist. Used to prevent transfers to known malicious, restricted, or non-approved destinations. |
+
+### Supported Operations
+
+Watchlist policies can be enforced during:
+
+- External withdrawals
+- Settlement operations
+- Smart account transaction execution
+
+### Operational Notes
+
+- Watchlist policies are evaluated automatically during transaction execution.
+- Policies apply only to supported withdrawal and transfer operations.
+- Address validation occurs before transaction submission.
+- Restricted transactions are rejected before execution.

@@ -1,0 +1,55 @@
+---
+title: "Wallet Address Model"
+---
+
+ `Smart Account` addresses/wallets are generated per blockchain protocol model.
+
+<Info>
+  All supported **EVM** networks share the same wallet address infrastructure. A single smart wallet address can be used to receive supported assets across multiple supported EVM chains and tokens.
+</Info>
+
+| Protocol Model | Address Behavior |
+| :-- | :-- |
+| **EVM Networks** | One wallet address shared across supported EVM-compatible blockchains and tokens. |
+| **Solana** | Wallet addresses are unique to the Solana network. |
+| **Stellar** | Wallet addresses are unique to the Stellar network. |
+| **Other Networks** | Wallet addresses are protocol-specific and isolated per blockchain network. |
+
+### How It Works
+
+Addresses are generated and managed based on blockchain protocol groups rather than individual chains.
+
+### Example
+
+If you send a request to create a wallet on `BASE` using:
+
+```json
+{
+  "accountId": "e29b41d4a7164440",
+  "refId": "550e8400-e29b-41d4-a716-446655440000",
+  "blockchain": "BASE"
+}
+```
+
+an **EVM** wallet address will be generated.
+
+If you later send another wallet creation request using the same `refId` but with another supported EVM blockchain such as `ETH` or `POLYGON`:
+
+```json
+{
+  "accountId": "e29b41d4a7164440",
+  "refId": "550e8400-e29b-41d4-a716-446655440000",
+  "blockchain": "ETH"
+}
+```
+
+the same **EVM** wallet address will be returned.
+
+<Card title="This behavior allows developers to either:" type="note">
+  - Generate a single EVM wallet address using one `refId` and reuse that address across supported EVM chains for the same user.
+  - Or use different `refId` values to generate unique wallet addresses per user or per blockchain strategy.
+</Card>
+
+### **Recommendation**
+
+We recommend using a single unique `refId` per user across all supported EVM chains. This ensures the same wallet address is consistently returned across EVM networks, simplifying wallet management, deposit handling, reconciliation, and operational tracking.
