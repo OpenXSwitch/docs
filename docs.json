@@ -45,6 +45,7 @@
               {
                 "group": "Automation",
                 "pages": [
+                  "automation/collection-and-auto-sweep-rule",
                   "automation/collection-and-auto-sweep-rule"
                 ]
               },
@@ -69,7 +70,7 @@
                 "group": "Compliance Engine",
                 "pages": [
                   "compliance/overview",
-                  "complaince/watchlists"
+                  "compliance/watchlists"
                 ]
               }
             ]
