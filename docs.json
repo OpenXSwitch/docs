@@ -15,7 +15,6 @@
     "tabs": [
       {
         "tab": "Docs",
-        "icon": "file-doc",
         "pages": [
           "introduction",
           "platform-overview",
@@ -45,8 +44,7 @@
               {
                 "group": "Automation",
                 "pages": [
-                  "automation/collection-and-auto-sweep-rule",
-                  "automation/collection-and-auto-sweep-rule"
+                  "get-started/automation/collection-auto-sweep-rule"
                 ]
               },
               {
@@ -130,7 +128,6 @@
       },
       {
         "tab": "API Reference",
-        "icon": "code-simple",
         "groups": [
           {
             "group": "API Reference",
@@ -142,7 +139,6 @@
       },
       {
         "tab": "Smart Accounts API Reference",
-        "icon": "code",
         "pages": [
           {
             "group": "API Reference",
@@ -154,7 +150,6 @@
       },
       {
         "tab": "Changlogs",
-        "icon": "calendar",
         "groups": [
           {
             "group": "Changelogs",
