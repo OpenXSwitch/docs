@@ -1,0 +1,53 @@
+---
+title: "architecture"
+---
+
+This section introduces the core custody concepts and wallet models used across the OpenXSwitch Wallet-as-a-Service infrastructure.
+
+### Architecture Overview
+
+OpenXSwitch Wallet-as-a-Service supports multiple custody models designed for different operational requirements, ranging from treasury management and liquidity operations to user wallet segregation and scalable account infrastructure.
+
+| Wallet Type | Description | Best For |
+| :-- | :-- | :-- |
+| **Prime Wallet** | Hybrid hot-cold operational wallet infrastructure with fast settlement and network-agnostic withdrawals. | Active treasury reserves, operational liquidity, exchange flows, trading connectivity, and settlement operations. |
+| **Sub-Wallet** | Segregated account-level wallets operating under a Prime Wallet infrastructure model. | Platforms, brokerages, exchanges, and businesses managing multiple users, customers, or operational accounts. |
+
+### Supported Asset Endpoints
+
+Supported asset coverage for deposits and withdrawals is shared across both `Prime Wallet` and `Sub-Wallet`.
+
+**Rechargeable currencies** represent assets supported for deposits and withdrawals, while additional supported currencies may be available for trading and swap operations.
+
+| Action | Description | Link |
+| :-- | :-- | :-- |
+| **Get List of Rechargeable Currencies** | Returns assets supported for deposits and withdrawals across supported blockchain networks. | `api-reference/mix-endpoints/get-list-of-rechargeable-currencies` |
+| **Get supported instant swap currencies** | Returns all supported currencies available for instant swap operations. | `api-reference/mix-endpoints/get-all-supported-currencies` |
+
+### Provisioning
+
+OpenXSwitch Wallet-as-a-Service infrastructure supports wallet provisioning for both Prime Wallets and Sub-Wallets.
+
+| Wallet Type | Provisioning Model |
+| :-- | :-- |
+| **Prime Wallet** | Prime Wallets are provisioned automatically after successful workspace onboarding and activation. |
+| **Sub-Wallet** | Sub-Wallets can be created programmatically using a valid email string and name through the API. The email does not need to belong to the actual end user, as KYC is not required for Sub-Wallet creation. |
+
+### Supported Operations
+
+Both Prime Wallets and Sub-Wallets support operational wallet infrastructure for deposits, balances, internal transfers, withdrawals, and instant swap operations.
+
+| Category | Action | Description |
+| :-- | :-- | :-- |
+| **Balances** | Get Sub-Wallet Asset Details | View wallet asset balances and supported currency holdings. |
+| **Deposits** | Generate Deposit Address | Generate deposit addresses per supported asset and blockchain network. |
+|  | Get List of Deposit Addresses | Retrieve Prime Wallet or Sub-Wallet deposit addresses. |
+| **Internal Transfers** | Transfer Sub-Wallet ↔ Prime Wallet | Move assets internally for treasury operations, liquidity routing, and settlement workflows. |
+|  | Get Transfer History | Retrieve internal transfer records and transaction history. |
+| **Withdrawals** | Create Withdrawal | Transfer supported assets externally across supported blockchain networks. |
+|  | Get Withdrawal Details | Retrieve withdrawal transaction details and status information. |
+|  | List Withdrawals | Retrieve withdrawal history records. |
+| **Instant Swap** | Get Instant Swap Quote Price | Retrieve quote pricing for supported instant swap pairs. |
+|  | Create Instant Swap Order | Execute instant swap orders using OpenXSwitch liquidity infrastructure. |
+|  | Get Instant Swap Details | Retrieve instant swap transaction details and execution status. |
+|  | List Instant Swaps | Retrieve instant swap history records. |
