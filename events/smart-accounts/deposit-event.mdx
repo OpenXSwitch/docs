@@ -1,0 +1,11 @@
+---
+title: "Deposit Event"
+---
+
+Webhooks for `Smart Accounts` deposit flow notifies you about incoming deposits and their status.
+
+- **Parent Method:** `smart-accounts:deposit`
+- **Sub-Methods:**
+  - `pending`: Triggered when a deposit is initiated and is awaiting blockchain confirmation.
+  - `updated`: Triggered when the deposit progresses through intermediate confirmations(0,2...).
+  - `success`: Triggered when the deposit is fully confirmed and credited to the wallet

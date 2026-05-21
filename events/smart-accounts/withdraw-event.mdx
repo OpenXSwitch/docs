@@ -1,0 +1,10 @@
+---
+title: "Withdraw Event"
+---
+
+Webhooks for `Smart Accounts` withdrawal flow notify you about the status of funds being withdrawn from a wallet.
+
+- **Parent Method:** `smart-accounts:withdraw`
+- **Sub-Methods:**
+  - `unconfirmed`: Triggered when a withdrawal request is initiated but not yet processed.
+  - `confirmed`: Triggered when the withdrawal is successfully processed and funds are sent to the specified address.
