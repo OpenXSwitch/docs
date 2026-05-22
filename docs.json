@@ -29,7 +29,14 @@
                 "group": "Wallet as a Service",
                 "pages": [
                   "wallet-as-a-service/architecture",
-                  "wallet-as-a-service/quickstart",
+                  {
+                    "group": "Quickstart",
+                    "pages": [
+                      "get-started/waas/withdraw-funds-from-prime-wallet",
+                      "get-started/waas/how-to-check-withdrawal-fees",
+                      "get-started/waas/auto-sweep-funds"
+                    ]
+                  },
                   "wallet-as-a-service/sandbox-vs-live"
                 ]
               },
@@ -48,15 +55,15 @@
                 ]
               },
               {
-                "group": "Tutorials",
-                "pages": [
-                  "tutorial/transfer-funds-from-sub-wallets-to-prime-wallet"
-                ]
-              },
-              {
                 "group": "Security",
                 "pages": [
                   "security/overview"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "pages": [
+                  "concepts/balance-aggregation"
                 ]
               }
             ]

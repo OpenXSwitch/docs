@@ -1,0 +1,128 @@
+---
+title: "Withdraw Funds From Prime Wallet"
+sidebarTitle: "Withdraw Funds From Prime Wallet"
+---
+
+**Prime Wallets** are designed with additional **security controls** because they typically hold consolidated balances, treasury funds, and operational liquidity across your OpenXSwitch workspace.
+
+**Withdrawals** from the **Prime Wallet** can be initiated through both the **OpenXSwitch Console** and **API**, with multiple protection layers to reduce unauthorized fund movements.
+
+### Prime Wallet Security Controls
+
+#### Withdrawal Access Control
+
+Prime Wallet withdrawals can be independently controlled for both the Dashboard and API.
+
+- Disabling **Dashboard Withdrawals** prevents withdrawals initiated from the OpenXSwitch Console interface.
+- Disabling **API Withdrawals** blocks withdrawal requests initiated through API endpoints.
+
+This allows organizations to separately manage operational access between manual dashboard operations and programmatic/API-based withdrawal flows.
+
+<Columns cols={2}>
+  <Column>
+    <Frame>
+      ![Prime Wallet Overview Wallet As A Service](/images/Prime-Wallet-Overview---wallet-as-a-service.png)
+    </Frame>
+  </Column>
+  <Column>
+    <Frame>
+      <Frame>
+        ![Prime Wallet Settings](/images/Prime-Wallet-settings-.png)
+      </Frame>
+    </Frame>
+  </Column>
+</Columns>
+
+### Allow List Protection (Compliance Engine)
+
+To withdraw funds from a Prime Wallet to:
+
+- external wallets
+- exchanges
+- third-party services
+
+the **destination wallet** address must first be added to the withdrawal **Allow list.**
+
+The **Allow list** is managed from:
+
+**OpenXSwitch Console → Compliance Engine → Watch List**
+
+Only approved addresses can receive withdrawals from Prime Wallets.
+
+<Frame>
+  ![Watch List Add To Allow List](/images/Watch-list---add-to-allow-list-.png)
+</Frame>
+
+<Note>
+  The **Allow list** restriction applies only to **Prime Wallet** withdrawals. 
+
+  **Sub-wallets** can withdraw to external addresses without requiring allow-list approval.
+</Note>
+
+### Withdraw Funds via Dashboard
+
+You can initiate Prime Wallet withdrawals directly from the OpenXSwitch Console withdrawal interface by:
+
+1. Selecting the asset and blockchain
+2. Entering the **destination address**
+3. Specifying the withdrawal amount
+4. Reviewing applicable fees
+5. Confirming the transaction
+
+### Withdraw Funds via API
+
+#### **Request Example**
+
+```json highlight={4}
+{
+  "coin": "USDT",
+  "chain": "BNB",
+  "withdrawalAddress": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+  "amount": "100",
+  "clientTxId": "withdraw_001",
+  "fee": "0.5",
+  "memo": ""
+}
+```
+
+### Request Fields
+
+| Field | Required | Description |
+| :-- | :-- | :-- |
+| `coin` | Yes | Asset symbol to withdraw |
+| `chain` | Yes | Blockchain network |
+| `withdrawalAddress` | Yes | Destination wallet address |
+| `amount` | Yes | Amount to withdraw |
+| `clientTxId` | Yes | Unique idempotency identifier for the withdrawal |
+| `fee` | No | Optional fee field. OpenXSwitch automatically calculates and applies the correct withdrawal fee regardless of the value supplied. |
+| `memo` | No | Optional memo/tag for supported blockchains |
+
+### Withdrawal Fees
+
+Withdrawal fees are fixed and standardized per asset/network combination regardless of transaction size.
+
+For example:
+
+- Withdrawing `100 USDT` on `BNB` may incur a `0.5 USDT` fee
+- Withdrawing `10,000+ USDT` on `BNB` may still incur the same `0.5 USDT` fee
+
+This fee model simplifies operational accounting and provides predictable withdrawal costs.
+
+### Why Fees May Be Higher Than Raw Blockchain Gas Costs
+
+OpenXSwitch withdrawal fees may be higher than the underlying blockchain gas fee because the platform operates a **Gas Station** infrastructure through its **partner network** that abstracts native **gas management across multiple blockchains.**
+
+Before the actual withdrawal transaction is **broadcasted** onchain, wallets may first need to be automatically fuelled with native gas assets required to execute the transaction. This fuelling step itself incurs blockchain transaction costs before the final transfer is processed.
+
+The fee also covers:
+
+- Automated gas sponsorship and wallet fuelling
+- Cross-chain gas management infrastructure
+- Native token abstraction across supported blockchains
+- Token balance aggregation across chains - [Learn More](/concepts/balance-aggregation)
+
+This eliminates the need for users or businesses to:
+
+- Hold native gas tokens across multiple chains
+- Manually fund wallets before withdrawals
+- Manage gas operations or blockchain-specific fee logistics

@@ -1,0 +1,65 @@
+---
+title: "Wallet as a Service: Balance Aggregation"
+sidebarTitle: "Balance Aggregation"
+---
+
+Balance Aggregation in **Wallet-as-a-Service** allows balances deposited on one blockchain network to be **withdrawn** or **utilized** through another supported network without requiring users to manually **bridge** assets across chains.
+
+For example:
+
+- If you deposit `10 USDT` on the `Ethereum (ERC20)` network, you can later withdraw the same balance through other supported networks such as:
+  - `TRON (TRC20)`
+  - `BNB Smart Chain (BEP20)`
+  - `Solana`
+  - and other supported chains
+
+This creates a unified asset balance experience across multiple blockchain networks within the OpenXSwitch Wallet-as-a-Service infrastructure.
+
+### How It Works
+
+OpenXSwitch **Wallet-as-a-Service**, through its partner **liquidity and treasury infrastructure**, maintains managed treasury wallets across supported blockchains to facilitate cross-chain withdrawals and settlement operations.
+
+When assets are deposited:
+
+1. The deposit is detected and credited to your unified wallet balance
+2. OpenXSwitch internally manages liquidity and settlement routing across supported chains
+3. Withdrawals are fulfilled from available treasury liquidity on the selected destination chain
+
+This enables users and businesses to operate at the balance layer instead of being restricted to the original deposit network.
+
+### Instant Swaps and Internal Transfers
+
+#### Instant Swap
+
+Instant Swaps within **Wallet-as-a-Service** are processed **off-chain** through the OpenXSwitch infrastructure and liquidity network. This enables near-instant asset conversion without requiring users to execute direct onchain swap transactions.
+
+Benefits include:
+
+- Faster execution
+- Reduced gas dependency
+- Simplified cross-chain experience
+- No manual bridge interaction
+
+#### Internal Transfers
+
+Internal transfers between **Wallet-as-a-Service** wallets are processed **off-chain** and do not require blockchain settlement for every balance movement.
+
+This enables:
+
+- Instant transfers between wallets
+- Fee-less or reduced-cost transfers
+- Faster internal settlement within the OpenXSwitch ecosystem
+
+Only external withdrawals and final blockchain settlement operations require onchain execution.
+
+### What Happens Under the Hood
+
+**Wallet-as-a-Service** Token Balance Aggregation is powered by:
+
+- Multi-chain treasury management
+- Internal liquidity routing
+- Off-chain ledger reconciliation
+- Gas Station infrastructure for transaction execution
+- Cross-chain settlement orchestration through partner infrastructure
+
+The deposited asset and the withdrawal asset remain mapped to the same underlying balance while OpenXSwitch handles the operational complexity of liquidity movement and settlement across chains.

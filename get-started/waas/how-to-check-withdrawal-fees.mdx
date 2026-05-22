@@ -1,0 +1,57 @@
+---
+title: "How to Check Withdrawal Fees"
+sidebarTitle: "How to Check Withdrawal Fees"
+---
+
+You can retrieve withdrawal fees using either of the following methods:
+
+1. **Fee Estimation Endpoint** - [/estimate-withdrawal-fee](https://docs.openxswitch.com/api-reference/fee-endpoints/estimate-withdrawal-fee)\
+   **Example response:**
+   ```json highlight={6,15}
+   {
+     "success": true,
+     "data": {
+       "coin": "USDT",
+       "chain": "ERC20",
+       "withdrawFee": "0.01",
+       "minWithdrawAmount": "0.1",
+       "withdrawable": true
+     }
+   }
+   ```
+2. **Supported Currency & Blockchain Metadata -** [mix-endpoints/get-list-of-rechargeable-currencies](https://docs.openxswitch.com/api-reference/mix-endpoints/get-list-of-rechargeable-currencies)\
+   Withdrawal fees are also returned when retrieving supported currencies and blockchain networks\
+   **Example response:**
+   ```json highlight={15}
+   {
+     "success": true,
+     "data": [
+       {
+         "coin": "USDT",
+         "iconUrl": "https://cdn.openxswitch.com/public/logos/svg/usdt.svg",
+         "chains": [
+           {
+             "chain": "ERC20",
+             "needTag": "false",
+             "depositConfirm": "12",
+             "withdrawConfirm": "64",
+             "minDepositAmount": "0.001",
+             "minWithdrawAmount": "10",
+             "withdrawFee": "0.01",
+             "txUrl": "https://etherscan.io/tx/"
+           }
+         ]
+       }
+     ],
+     "totalPage": 0,
+     "pageNo": 0,
+     "pageLimit": 0
+   }
+   ```
+
+In this example:
+
+- Supported blockchain: `ERC20`
+- Minimum withdrawal amount: `10`
+- Withdrawal fee: `0.01`
+- Required withdrawal confirmations: `64`
