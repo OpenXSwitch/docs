@@ -3,28 +3,54 @@ title: "Sandbox vs Live"
 sidebarTitle: "Sandbox vs Live"
 ---
 
-<Note>
-  Within the **Wallet-as-a-Service** section of the OpenXSwitch platform, only **Live data is available in the console** for visibility and operational monitoring. The **Sandbox environment is purely simulation-based** and is accessible exclusively via API to support safe development and integration without exposure to production data or real assets.
-</Note>
+
+
+<Tip>
+  Within the **Wallet-as-a-Service** section of OpenXSwitch, the Console displays only **Live data** for production monitoring, while **Sandbox** is simulation-only and accessible via API for safe development and testing.
+</Tip>
 
 ### Live Environment
 
-The Live environment is used for production Wallet-as-a-Service operations where real value is moved and real users are served, including:
+The Live environment is used for production Wallet-as-a-Service operations with real assets and real users.
+
+Includes:
 
 - Creating and managing production wallets and sub-accounts
 - Processing real deposits, withdrawals, and internal transfers
-- Executing live payouts, collections, and settlement flows
-- Accessing production transaction, balance, and event data
-
-The Live environment operates with real assets and is designed for secure, scalable financial operations in production environments.
+- Executing live payouts, collections, and settlements
+- Accessing production balances, transactions, and webhook events
 
 ### Sandbox Environment
 
-The Sandbox environment is a fully simulated environment that mirrors production behavior without interacting with any blockchain networks or requiring testnet assets. It is used for development, integration, and QA, including:
+The Sandbox environment is a simulated version of production used for development and testing via API only.
 
-- Testing wallet creation, funding flows, and lifecycle management
-- Simulating deposits, withdrawals, and transfers without real or test tokens
-- Validating API integrations, webhooks, and transaction states in a controlled environment
-- Running staging and demo workflows with deterministic responses
+Includes:
 
-The Sandbox is a simulation layer of production wallet infrastructure, allowing developers to build and test end-to-end flows without dependency on external networks, tokens, or faucets.
+- Wallet creation and lifecycle testing
+- Simulated deposits, withdrawals, and transfers (no real assets)
+- Webhook and API integration testing
+- End-to-end flow validation in a controlled environment
+
+No testnet tokens or blockchain interaction is required.
+
+#### **Supported Sandbox Simulation Tokens and Network**
+
+- **USDT** → ERC20, TRC20, BEP20, POLYGON, SOL
+- **USDC** → ERC20, TRC20, POLYGON, SOL
+- **ETH** → ETH
+- **BNB** → BSC
+- **POL** → Polygon (POLYGON)
+- **TRON** → TRON
+- **SOL** → Solana (SOL)
+
+### Go Live 🚀
+
+When moving to production:
+
+- Generate a **Live API key** in your dashboard (Sandbox keys do not work in Live)
+- Switch your base URL by removing `/sandbox/`
+
+#### Example
+
+- Sandbox → `https://api.openxswitch.com/v1/sandbox/...`
+- Live → `https://api.openxswitch.com/v1/...`

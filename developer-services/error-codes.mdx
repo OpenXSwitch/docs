@@ -1,0 +1,54 @@
+---
+title: "Error Codes"
+---
+
+### Error Response Format
+
+When an error occurs, the API returns a structured JSON response:
+
+```json
+{
+  "statusCode": <integer>,  // HTTP status code (e.g., 400, 401, 500)
+  "timestamp": "<ISO 8601>",  // Timestamp of the error occurrence
+  "path": "<string>",  // API endpoint where the error occurred
+  "message": "<string | array>"  // Error description (string for general errors, array for validation errors)
+}
+```
+
+### Example Responses
+
+#### 400 Bad Request
+
+```json
+{
+  "statusCode": 400,
+  "timestamp": "2025-02-25T09:28:36.278Z",
+  "path": "/v1/sub-wallet/create",
+  "message": "Bad Request Exception"
+}
+```
+
+#### 422 Validation Error (Multiple Issues)
+
+```json
+{
+  "statusCode": 422,
+  "timestamp": "2025-02-25T09:28:36.278Z",
+  "path": "/v1/sub-wallet/create",
+  "message": [
+    "sub-walletId is required",
+    "currency must be a valid ISO code",
+    "amount must be a positive number"
+  ]
+}
+```
+
+| **Error code** | **Status** |
+| :-- | :-- |
+| 400 | Bad request |
+| 401 | UnAuthorized |
+| 403 | Forbidden |
+| 404 | Not Found |
+| 422 | UnProcessable Entity |
+| 429 | Too Many Requests |
+| 5XX | Server Error |

@@ -38,6 +38,7 @@
                       "get-started/waas/how-to-swap-a-token"
                     ]
                   },
+                  "wallet-as-a-service/supported-assets",
                   "wallet-as-a-service/sandbox-vs-live"
                 ]
               },
@@ -52,6 +53,7 @@
                       "get-started/sa/create-and-manage-wallets"
                     ]
                   },
+                  "smart-accounts/supported-assets",
                   "smart-accounts/testnet-vs-mainnet"
                 ]
               },
@@ -125,7 +127,8 @@
                 ]
               },
               "developer-services/idempotent-requests",
-              "developer-services/pagination"
+              "developer-services/pagination",
+              "developer-services/error-codes"
             ]
           }
         ]
