@@ -16,7 +16,7 @@
       {
         "tab": "Docs",
         "pages": [
-          "",
+          "introduction",
           "platform-overview",
           "supported-blockchains",
           "comparing-our-wallet-products",
