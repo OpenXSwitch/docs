@@ -1,20 +1,26 @@
----
-title: "How to Check Withdrawal Fees"
-sidebarTitle: "How to Check Withdrawal Fees"
----
-
 You can retrieve withdrawal fees using either of the following methods:
 
-1. **Fee Estimation Endpoint** - [/estimate-withdrawal-fee](https://docs.openxswitch.com/api-reference/fee-endpoints/estimate-withdrawal-fee)\
-   **Example response:**
+1. **Fee Estimation Endpoint** \
+   `POST`[/estimate-withdrawal-fee](https://docs.openxswitch.com/api-reference/fee-endpoints/estimate-withdrawal-fee)\
+   **Request Body**
+   ```json
+   {
+     "amount": "10",
+     "coin": "USDT",
+     "chain": "ERC20"
+   }
+   ```
+   \
+   **Successful Response**\
+   If the request is accepted successfully, the API returns a `200 OK` response with the swap details.
    ```json highlight={6,15}
    {
      "success": true,
      "data": {
        "coin": "USDT",
        "chain": "ERC20",
-       "withdrawFee": "0.01",
-       "minWithdrawAmount": "0.1",
+       "withdrawFee": "0.5",
+       "minWithdrawAmount": "10",
        "withdrawable": true
      }
    }

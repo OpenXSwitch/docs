@@ -16,7 +16,7 @@
       {
         "tab": "Docs",
         "pages": [
-          "introduction",
+          "",
           "platform-overview",
           "supported-blockchains",
           "comparing-our-wallet-products",
@@ -30,11 +30,12 @@
                 "pages": [
                   "wallet-as-a-service/architecture",
                   {
-                    "group": "Quickstart",
+                    "group": "Quickstart Guide",
                     "pages": [
                       "get-started/waas/withdraw-funds-from-prime-wallet",
                       "get-started/waas/how-to-check-withdrawal-fees",
-                      "get-started/waas/auto-sweep-funds"
+                      "get-started/waas/auto-sweep-funds",
+                      "get-started/waas/how-to-swap-a-token"
                     ]
                   },
                   "wallet-as-a-service/sandbox-vs-live"
@@ -44,14 +45,14 @@
                 "group": "Smart Accounts",
                 "pages": [
                   "smart-accounts/architecture",
-                  "smart-accounts/quickstart",
+                  "smart-accounts/wallet-address-model",
+                  {
+                    "group": "Quickstart Guide",
+                    "pages": [
+                      "get-started/sa/create-and-manage-wallets"
+                    ]
+                  },
                   "smart-accounts/testnet-vs-mainnet"
-                ]
-              },
-              {
-                "group": "Automation",
-                "pages": [
-                  "get-started/automation/collection-auto-sweep-rule"
                 ]
               },
               {
@@ -69,22 +70,18 @@
             ]
           },
           {
-            "group": "Compliance",
+            "group": "Platform",
             "pages": [
+              "platform/manage-team-members",
+              "platform/api-permissions",
               {
                 "group": "Compliance Engine",
                 "pages": [
                   "compliance/overview",
                   "compliance/watchlists"
                 ]
-              }
-            ]
-          },
-          {
-            "group": "Platform",
-            "pages": [
-              "platform/manage-team-members",
-              "platform/api-permissions"
+              },
+              "platform/auto-collection-and-sweep-rule"
             ]
           },
           {

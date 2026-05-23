@@ -1,4 +1,56 @@
----
-title: "Auto Sweep Funds To Prime Wallet"
-sidebarTitle: "Auto Sweep Funds To Prime Wallet"
----
+Auto Sweep allows Wallet-as-a-Service sub-wallet balances to be automatically consolidated into the Prime Wallet whenever deposits are received.
+
+This helps centralize liquidity management and reduce the need for manual treasury operations across sub-wallets.
+
+<Note>
+  Collection rules configured per **coin/token** are automatically applied across all supported blockchain networks for that asset.
+</Note>
+
+### Configure Collection Rule
+
+To enable automatic sweeping:
+
+1. Navigate to:\
+   **Wallet-as-a-Service → Automation**
+2. Create a collection rule for the target coin/token
+3. Configure the rule:
+   - `Source Wallets` → `Sub-wallets` (`default`)
+   - `Destination Wallet` → `Prime Wallet` (`default`)
+   - `Sweep Frequency` → `Real Time`
+4. Save the rule
+
+<Frame>
+  ![Auto Collection Rule Wallet As A Service](/images/Auto-Collection-rule---wallet-as-a-service.png)
+</Frame>
+
+[Learn more about Collection and Auto Sweep Rules.](/platform/auto-collection-and-sweep-rule)
+
+### How It Works
+
+Whenever a deposit is received into an eligible sub-wallet:
+
+1. The deposit is detected
+2. The wallet balance is queued for sweep
+3. Funds are automatically transferred to the Prime Wallet based on the configured rule
+
+### Important Notes
+
+<Info>
+  Auto collection rules currently support only `Real Time` execution.
+</Info>
+
+If no matching collection rule exists for the deposited:
+
+- coin/token
+
+the balance will not be swept automatically and must be transferred manually.
+
+### Manual Sweep via API
+
+You can also manually sweep funds from sub-wallets to the Prime Wallet through the API.
+
+### Endpoint
+
+`POST`[/sub-wallet/transfer/prime](https://docs.openxswitch.com/api-reference/sub-wallet-endpoints/transfer-from-sub-wallets-to-prime-wallet)
+
+This endpoint allows manual consolidation of balances when automatic sweep rules are not configured or when manual treasury control is preferred.

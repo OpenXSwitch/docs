@@ -1,0 +1,58 @@
+---
+title: "Auto Collection and Sweep Rule"
+sidebarTitle: "Auto Collection and Sweep Rule"
+---
+
+Auto Collection and Sweep Rules automate the movement and consolidation of funds from wallets into a designated settlement destination based on predefined automation rules. This helps centralize liquidity, simplify treasury operations, and reduce manual treasury management across wallets.
+
+<Check>
+  Trigger Condition: Auto-sweep rules are triggered by deposits. Whenever funds are received in eligible wallets, the sweep logic is evaluated based on your configured settings.
+</Check>
+
+### Default Sweep Destinations
+
+| Product | Default Destination | Channel |
+| :-- | :-- | --- |
+| Wallet-as-a-Service | Prime Wallet | Off-chain (no fees) |
+| Smart Accounts | Settlement Account/Wallet | On-chain |
+
+### Wallet-as-a-Service
+
+Wallet-as-a-Service supports automated collection rules configured through the platform automation system.
+
+To configure auto collection:
+
+1. Navigate to: **Wallet-as-a-Service → Automation**
+2. Create an auto collection rule per coin
+3. Configure source wallets, destination wallet, and collection frequency
+
+Collection rules are applied across supported chains for the selected asset.
+
+### Smart Accounts
+
+Smart Accounts support **wallet-level auto-sweep** configuration during wallet creation or through wallet updates.
+
+#### Enable Auto Sweep
+
+```typescript
+{
+  "autoSweep": true
+}
+```
+
+When `autoSweep` is enabled, deposited funds are automatically moved to the default settlement destination wallet.
+
+#### Sweep Thresholds (Smart Accounts)
+
+You can also configure sweep **thresholds** globally **per** **token**.\
+Thresholds determine the minimum balance required before an automatic sweep is triggered across eligible wallets.
+
+### Supported Frequencies
+
+| Frequency | Description |
+| :-- | :-- |
+| Real Time | Triggered immediately when deposits are detected in eligible wallets. |
+
+<Card title="Current Limitation" type="warning">
+  Sweeping funds to external wallets is not currently supported. Auto-sweep destinations must be managed within the OpenXSwitch wallet infrastructure.
+</Card>

@@ -1,0 +1,188 @@
+---
+title: "How to Swap a Token"
+sidebarTitle: "How to Swap a Token"
+---
+
+**Instant Swap** allows you to convert supported assets within **Wallet-as-a-Service** without manually interacting with exchanges, bridges, or onchain swap protocols.
+
+Instant Swaps are processed **off-chain** through the OpenXSwitch liquidity and settlement infrastructure, enabling fast execution, simplified asset conversion, and reduced blockchain complexity.
+
+At the time of execution:
+
+- The source asset balance is debited from the wallet
+- The destination asset balance is credited to the wallet
+- Settlement and liquidity routing are handled internally by OpenXSwitch and its partner network
+
+<Note>
+  **Trading** must be enabled (`canTrade=true`) for the wallet before swap orders can be created.
+</Note>
+
+<AccordionGroup>
+  <Accordion title="Trading/Swap Requirement">
+    Before a wallet can perform **Instant Swap** operations, trading must first be enabled for the wallet.
+
+    Trading can be enabled:
+
+    - During wallet/sub-wallet creation
+    - During wallet updates
+
+    using:
+
+    ```json
+    {
+      "canTrade": true
+    }
+    
+    ```
+
+    By default:
+
+    ```json
+    {
+      "canTrade": false
+    }
+    
+    ```
+
+    If trading is disabled, Instant Swap requests for the wallet will be rejected.
+
+    ### Enable Trading for Existing Wallets
+
+    Trading can also be enabled later for existing:
+
+    - Sub-wallets
+    - Prime Wallets
+
+    using the wallet trading activation endpoint:
+
+    `POST`[/wallets/trade/activate](https://docs.openxswitch.com/api-reference/mix-endpoints/activate-trading-for-a-walletsub-wallet)
+  </Accordion>
+</AccordionGroup>
+
+### Step 1 - Get Supported Instant Swap Currencies
+
+Retrieve the list of assets supported for Instant Swap operations.
+
+#### **Endpoint**
+
+`GET`[/instant-swap/currencies](https://docs.openxswitch.com/api-reference/instant-swap-endpoints/get-supported-instant-swap-currencies)
+
+#### **Example Response**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "coin": "ETH",
+      "maxAmount": "5",
+      "minAmount": "0.0005"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+### Step 2 - Get Instant Swap Quote
+
+Request a quote for the asset conversion before creating the swap order.
+
+#### **Endpoint**
+
+`GET`[/instant-swap/quote](https://docs.openxswitch.com/api-reference/instant-swap-endpoints/get-instant-swap-quote-price)
+
+#### Query Parameters
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| `fromCoin` | string | Yes | Source asset symbol |
+| `fromAmount` | string | Yes | Amount of source asset |
+| `toCoin` | string | Yes | Destination asset symbol |
+
+#### **Example Request**
+
+```http
+GET /instant-swap/quote?fromCoin=USDT&fromAmount=100&toCoin=ETH
+```
+
+#### **Example Response**
+
+```json
+{
+  "success": true,
+  "data": {
+    "fee": "0.0",
+    "fromCoin": "USDT",
+    "fromAmount": "100",
+    "toCoin": "ETH",
+    "toAmount": "0.0234",
+    "swapPrice": "0.000234"
+  }
+}
+```
+
+### Step 3 - Create Instant Swap Order
+
+Create the Instant Swap order using the quote parameters.
+
+#### **Endpoint**
+
+`POST`[/instant-swap](https://docs.openxswitch.com/api-reference/instant-swap-endpoints/create-a-new-instant-swap-order)
+
+#### **Request Body**
+
+```json
+{
+  "walletId": "wallet_abc123",
+  "fromCoin": "USDT",
+  "fromAmount": 100,
+  "toCoin": "ETH",
+  "extId": "swap_ref_001"
+}
+```
+
+#### **Request Fields**
+
+| Field | Required | Description |
+| :-- | :-- | :-- |
+| `walletId` | Yes | Wallet to debit and credit |
+| `fromCoin` | Yes | Source asset symbol |
+| `fromAmount` | Yes | Amount to swap |
+| `toCoin` | Yes | Destination asset symbol |
+| `extId` | Yes | Client-provided idempotency identifier |
+| `instantSync` | No | Controls synchronous processing behavior |
+
+#### Successful Response
+
+If the request is accepted successfully, the API returns a `200 OK` response with the swap details.
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "swap_abc123",
+    "extId": "ext_abc123",
+    "fee": "0.0",
+    "fromCoin": "USDT",
+    "fromAmount": "100",
+    "toCoin": "ETH",
+    "toAmount": "0.0234",
+    "swapPrice": "0.000234",
+    "ts": "2025-04-04T12:00:00Z",
+    "quoteId": "quote123",
+    "walletId": "wallet_001"
+  }
+}
+```
+
+### Webhook Notification
+
+Once the swap is processed successfully:
+
+- A webhook event is sent to your configured workspace webhook endpoint
+- Wallet balances are updated automatically
+- The updated balance state is included in the webhook payload
+
+Use webhook events as the source of truth for wallet balance synchronization after swap execution.
