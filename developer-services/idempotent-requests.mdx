@@ -1,8 +1,7 @@
 ---
 title: "Idempotent Requests"
+description: "Idempotency keys allow you to safely retry API requests without accidentally creating duplicate operations."
 ---
-
-Idempotency keys allow you to safely retry API requests without accidentally creating duplicate operations. 
 
 OpenXSwitch uses idempotency controls across Wallet-as-a-Service and Smart Account operations to ensure reliability during retries, network failures, or client timeouts.
 
@@ -31,5 +30,3 @@ Using the same `idempotencyKey` when retrying a request ensures the operation is
 | :-- | :-- | :-- |
 | Webhooks | `event.params.id` | Unique identifier for each event. Use to ensure an event is processed only once. |
 | Webhooks (alternative) | `requestId` | Unique per webhook delivery request. Useful for preventing duplicate handling during retries. |
-
- 

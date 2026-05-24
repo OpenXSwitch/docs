@@ -100,7 +100,7 @@
                 "group": "Webhook",
                 "pages": [
                   "webhook/overview",
-                  "webhook/balance-synchronization",
+                  "webhook/balance-model",
                   {
                     "group": "Events",
                     "pages": [
@@ -139,7 +139,7 @@
           {
             "group": "API Reference",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/overview"
             ]
           },
           {
@@ -174,7 +174,7 @@
           {
             "group": "API Reference",
             "pages": [
-              "smart-accounts-api-reference/introduction"
+              "smart-accounts-api-reference/overview"
             ]
           },
           {

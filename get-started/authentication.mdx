@@ -1,36 +1,40 @@
 ---
 title: "Authentication"
+description: "OpenXSwitch uses API key-based authentication to secure access to platform resources and infrastructure operations."
 ---
 
-### How to get started:
+### API Key Usage
 
-1. Navigate to: the **Accounts** \> **API Management** on OpenXSwitch Console.
-2. Click on **Create API Key**
-3. Select the appropriate access rights and permissions based on the specific API calls you intend to make (e.g., `withdrawal`, `trade`, `read` , ...).
-4. Enable IP Restrictions (Optional but Recommended)
-5. Enable IP restrictions and specify up to `5 trusted IPs`. This limits API access to those IPs only, enhancing security.
-6. Click the **Generate API key** button to generate new key for your workspace.
+All API requests must include your API key in the `Authorization` header as a Bearer token.
 
-> 🚧 API Management can only be accessed by: Owner and Admin role only.
+#### Required Header
 
-### How to authenticate using API Key
-
-To interact with OpenXSwitch APIs securely, authentication is required using a Bearer Token. This token is your API Key, which must be included in the `Authorization` header of each request.
-
-<br />
-
-### Authentication Format
-
-Every request to OpenXSwitch APIs must include the following header:
-
-```curl
+```curl highlight={1}
 Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 ```
 
-Replace `YOUR_API_KEY `with the actual API key generated in API Management.
+Replace `YOUR_API_KEY` with the key generated from your OpenXSwitch Console.
 
-<br />
+### API Key Setup
+
+1. Navigate to **Accounts → API Management** in the OpenXSwitch Console
+2. Click **Create API Key**
+3. Select required **permissions** (e.g. wallet, withdrawal, trading, read access)
+4. (Optional but recommended) Enable **IP Restrictions**
+   - Add up to 5 trusted IP addresses
+   - Requests from other IPs will be rejected
+5. Click **Generate API Key**
+
+> ⚠️ API Management is restricted to **Owner** and **Admin** roles only.
+
+### Smart Account Authentication
+
+For smart account operations (e.g. wallet creation and transfers), some endpoints require an additional header for execution context. [Learn more](/get-started/authentication)
+
+```javascript
+x-wallet-secret: YOUR_WALLET_SECRET
+```
 
 ### Example Requests
 
@@ -41,7 +45,7 @@ Request
 
 <CodeGroup>
 
-```shellscript cURL
+```shellscript cURL highlight={2}
 curl -X POST "https://api.openxswitch.com/v1/sub-wallet/create" \  
 -H "Authorization: Bearer YOUR_API_KEY" \
 -H "Content-Type: application/json" \
@@ -51,7 +55,7 @@ curl -X POST "https://api.openxswitch.com/v1/sub-wallet/create" \
 }'
 ```
 
-```typescript JavaScript
+```typescript JavaScript highlight={5}
 const axios = require('axios');
 
 const url = "https://api.openxswitch.com/v1/sub-wallet/create";
@@ -69,7 +73,7 @@ axios.post(url, data, { headers })
     .catch(error => console.error(error));
 ```
 
-```python Python
+```python Python highlight={5}
 import requests
 
 url = "https://api.openxswitch.com/v1/sub-wallet/create"
@@ -86,7 +90,7 @@ response = requests.post(url, json=data, headers=headers)
 print(response.json())
 ```
 
-```php PHP
+```php PHP highlight={6}
 <?php
 
 $url = "https://api.openxswitch.com/v1/sub-wallet/create";
@@ -115,7 +119,7 @@ echo $response;
 ?>
 ```
 
-```java JAVA
+```java JAVA highlight={14}
 import okhttp3.*;
 
 public class Main {
@@ -141,12 +145,10 @@ public class Main {
 
 </CodeGroup>
 
-<br />
-
 2. **Generate Wallet Address**\
    Generate or fetch wallet address using an authenticated API request.
 
-```curl
+```curl highlight={2}
 curl -X POST "https://api.openxswitch.com/v1/sub-wallet/address" \  
 -H "Authorization: Bearer YOUR_API_KEY" \
 -H "Content-Type: application/json" \
@@ -156,8 +158,6 @@ curl -X POST "https://api.openxswitch.com/v1/sub-wallet/address" \
   "chain": "ETH"
 }'
 ```
-
-<br />
 
 > 📘 For further details on API permission, refer to the [API permissions](api-permissions)  documentation
 

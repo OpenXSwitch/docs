@@ -1,12 +1,12 @@
 ---
-title: "Balance Synchronization"
-sidebarTitle: "Balance Synchronization"
+title: "Balance Model via Webhooks"
+sidebarTitle: "Balance Model via Webhooks"
+description: "Balance model defines how OpenXSwitch keeps wallet balances consistent with the latest state from webhook events and blockchain updates."
 ---
 
-<Note>
-  Do not implement **balance** updates using **increment**/**decrement** logic from webhook amounts.\
-  Always overwrite balances using the latest balance values returned in webhook payloads to prevent drift, duplicate accounting, or inconsistent wallet state.
-</Note>
+### Recommended Update Strategy
+
+It is recommended not to **implement** balance updates using **increment**/**decrement** logic from webhook amounts. Instead, always **overwrite** **balances** using the **latest balance** values returned in webhook payloads to prevent drift, duplicate accounting, or inconsistent wallet state.
 
 | Product | Balance Source | Recommended Handling |
 | :-- | :-- | :-- |
