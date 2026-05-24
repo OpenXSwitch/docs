@@ -71,3 +71,71 @@ Wallet balances should always be treated as **event-driven state updates** using
 ### Security & Access
 
 All API requests are authenticated using API keys, with optional additional security layers for sensitive operations such as transfers and withdrawals.
+
+It provides a unified wallet system for managing balances, transactions, and operations across multiple blockchain networks.
+
+### What You Can Do
+
+With Wallet-as-a-Service APIs, you can:
+
+- Create and manage **wallets** and **sub-wallets**
+- Generate deposit addresses across supported chains
+- Process deposits, withdrawals, and internal transfers
+- Execute internal transfers between wallets and sub-wallets
+- Perform **instant swaps** across `240+` supported assets and` 500+` **trading pairs**
+- Track balances and transaction states in real time
+- Automate fund collection and treasury operations
+- Integrate webhooks for real-time event updates
+
+## Key Concepts
+
+### Wallets & Sub-Wallets
+
+Each wallet represents a managed account that can hold multiple assets across supported blockchains. Sub-wallets enable structured fund segregation under a single organization.
+
+### Recharge Currency
+
+A digital asset used to fund wallets or sub-wallets. Users can deposit cryptocurrencies like Bitcoin, Ethereum, or stablecoins to maintain liquidity and enable transactions within the platform.
+
+👍 You can only deposit and withdraw using a recharge currency or coin.
+
+### WalletAsset
+
+A WalletAsset is a unified representation of a cryptocurrency or token in a multi-chain wallet system. It aggregates balances of the same asset across different blockchains, allowing users to deposit on one chain and withdraw on another seamlessly.
+
+#### Why WalletAsset Matters?
+
+- **Cross-Chain Balance Aggregation** – Instead of treating assets separately by chain, a WalletAsset combines them into a single view.
+- **Flexible Withdrawals** – Users can receive an asset on one chain and send it out on another, making transactions more efficient.
+- **Simplified User Experience** – Users don’t have to track different versions of the same token across multiple chains.
+
+### Internal Transfer
+
+Internal transfers allow movement of funds between wallets and sub-wallets within the OpenXSwitch ecosystem without requiring onchain settlement. These transfers are processed off-chain for speed and efficiency.
+
+### Instant Swap
+
+Instant Swap enables real-time conversion of supported assets within Wallet-as-a-Service without requiring external exchanges or manual onchain swaps. Swaps are executed off-chain through liquidity infrastructure and reflected instantly in wallet balances via event updates.
+
+### Multi-Chain Support
+
+Wallet-as-a-Service supports multiple blockchain networks with unified balance abstraction across supported assets.
+
+### Event-Driven Architecture
+
+All wallet operations emit webhook events, allowing you to track deposits, withdrawals, transfers, and balance updates in real time.
+
+### Environment Support
+
+Wallet-as-a-Service supports two environments:
+
+- **Sandbox** - simulation environment for development and testing (API only)
+- **Live** - production environment with real assets and real transactions
+
+### Balance & State Handling
+
+Wallet balances should always be treated as **event-driven state updates** using webhook payloads as the source of truth.
+
+### Security & Access
+
+All API requests are authenticated using API keys, with optional additional security layers for sensitive operations such as transfers and withdrawals.

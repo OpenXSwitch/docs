@@ -13,7 +13,9 @@ It is recommended not to **implement** balance updates using **increment**/**dec
 | Wallet-as-a-Service | `wallet.asset.balance` or `wallet.assets[].balance` | Replace the stored wallet balance directly using the latest `balance` value returned in the webhook payload. |
 | Smart Accounts | `wallet.token.balance.value` or `wallet.tokens[].balance.value` | Replace the token balance directly using the latest `balance.value` returned for the token in the webhook payload. |
 
-### Wallet-as-a-Service Example
+## Samples
+
+### Wallet-as-a-Service
 
 Wallet-as-a-Service `balances` may not always map 1:1 to immediate onchain balances because the platform supports `off-chain` ledger `operations`, internal transfers, settlement abstractions, and managed wallet accounting.
 
