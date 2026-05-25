@@ -32,6 +32,7 @@
                   {
                     "group": "Quickstart Guide",
                     "pages": [
+                      "get-started/waas/create-a-sub-wallet",
                       "get-started/waas/withdraw-funds-from-prime-wallet",
                       "get-started/waas/how-to-check-withdrawal-fees",
                       "get-started/waas/auto-sweep-funds",
@@ -50,7 +51,8 @@
                   {
                     "group": "Quickstart Guide",
                     "pages": [
-                      "get-started/sa/create-and-manage-wallets"
+                      "get-started/sa/create-and-manage-wallets",
+                      "get-started/sa/send-tokens-across-wallets"
                     ]
                   },
                   "smart-accounts/supported-assets",

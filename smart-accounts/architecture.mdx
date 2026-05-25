@@ -4,11 +4,17 @@ sidebarTitle: "Architecture"
 description: "This section introduces the core concepts and wallet models used across the OpenXSwitch Smart Account infrastructure."
 ---
 
-Smart Account is a section within the OpenXSwitch platform that houses programmable smart wallet infrastructure for gasless transactions, sponsored execution, programmable transfers, and wallet orchestration.
+**OpenXSwitch's Smart Account** Infrastructure provides programmable account infrastructure for developers, fintechs, institutions, exchanges, wallet providers, and trading platforms building on **EVM,** **Solana**, and **Stellar** network.
+
+The infrastructure is designed to **abstract blockchain complexity** while enabling **modern** financial **experiences** and **programmable** transaction flows.
 
 <Note>
-  Within the OpenXSwitch platform, “**Smart Account**” refers to the infrastructure layer and operational section, while “**Smart Wallet**” refers to the actual programmable blockchain wallet address infrastructure.
+  Within the **OpenXSwitch** platform, “**Smart Accounts**” refers to the infrastructure layer and operational section.
 </Note>
+
+<Frame>
+  ![Smart Accounts Overview Page And Stats](/images/Smart-Accounts---Overview-page-and-Stats.png)
+</Frame>
 
 ### Architecture Overview
 
@@ -35,10 +41,10 @@ Wallets within Smart Account infrastructure are known as **Smart Wallets**.
 | **Settlement** | The first wallet automatically created under a Settlement Account. | Treasury reserve management and auto-sweep destination wallet. |
 | **Deposit** | Additional smart wallet addresses created under accounts. | User deposits, programmable transfers, wallet interactions, and application-level wallet operations. |
 
-<Card title="EVM Wallet Address Model" type="note">
-  All supported EVM networks share the same wallet address infrastructure. A single smart wallet address can be used to receive supported assets across multiple supported EVM chains and tokens.\
+<Card title="Unified Wallet Addressing on EVM Chains" type="note">
+  All supported EVM networks share the same wallet address format. A single wallet address can be used to receive supported assets across multiple **EVM** chains and tokens.\
   \
-  [Learn More About Smart Wallet Addresses Model](/stable-wallet/wallet-address-model)
+  [Learn More About Wallet Addresses Model](/stable-wallet/wallet-address-model)
 </Card>
 
 ### Supported Asset Endpoints
@@ -62,10 +68,9 @@ OpenXSwitch Smart Account infrastructure supports programmable wallet provisioni
 
 # Supported Operations
 
-Smart Wallets support programmable wallet infrastructure for:
+Smart Accounts support programmable wallet for:
 
 - Deposits
-- Balances
 - Withdrawals
 - Smart account execution
 - Gasless transactions (`EVM`)
@@ -75,3 +80,15 @@ Smart Wallets support programmable wallet infrastructure for:
 - On-chain swap and bridge operations
 
 All transaction flows within Smart Account infrastructure are designed to support programmable and gas-abstracted operational experiences.
+
+### Benefits of Smart Accounts
+
+| Capability | Description |
+| :-- | :-- |
+| Transaction Batching | Combine multiple actions into a single transaction flow, reducing friction, execution steps, and gas overhead. |
+| Gas Abstraction | Allow gas fees to be sponsored or paid using supported ERC-20 assets instead of requiring native gas tokens. |
+| Better User Experience | Reduce blockchain complexity and repetitive transaction confirmations for users. |
+| Better Developer Experience | Simplify account orchestration, transaction execution, and policy management through programmable infrastructure. |
+| Multisig Support | Require multiple approvals before transactions can execute, improving institutional-grade security and reducing single points of failure. |
+| Social Recovery | Allow trusted guardians or recovery policies to restore account access without depending entirely on seed phrases. |
+| Auto Approvals & Subscriptions | Enable recurring approvals, delegated permissions, spending policies, and subscription-like transaction execution models. |
