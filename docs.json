@@ -63,7 +63,8 @@
                 "group": "Security",
                 "pages": [
                   "security/overview"
-                ]
+                ],
+                "hidden": true
               },
               {
                 "group": "Concepts",
