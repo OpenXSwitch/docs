@@ -182,7 +182,7 @@
           },
           {
             "group": "Smart Accounts",
-            "openapi": "https://docs.openxswitch.com/smart-accounts/openapi.json"
+            "openapi": "https://docs.openxswitch.com/openapi/smart-accounts/openapi.json"
           },
           {
             "group": "Compliance",
