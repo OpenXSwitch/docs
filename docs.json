@@ -180,12 +180,16 @@
             ]
           },
           {
-            "group": "Webhook",
-            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
+            "group": "Smart Accounts",
+            "openapi": "https://docs.openxswitch.com/smart-accounts/openapi.json"
           },
           {
             "group": "Compliance",
             "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
+          },
+          {
+            "group": "Webhook",
+            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
           }
         ]
       },
