@@ -1,0 +1,48 @@
+---
+title: "Go Live Checklist"
+sidebarTitle: "Go Live Checklist"
+description: "Before moving your OpenXSwitch Wallet-as-a-Service or Smart Account integration to production, ensure your APIs, webhooks, security settings, and operational workflows are properly configured for secure and reliable live blockchain operations."
+---
+
+### 1. Switch to Live API Keys
+
+Generate and use Live API credentials with the appropriate permissions for your production environment.
+
+#### Checklist
+
+-- ⬜  Base URL \[`https://api.openxswitch.com/v1/`\]
+
+- For **Wallet-as-a-Service** integrations replace the **Sandbox** base URL \[`https://api.openxswitch.com/v1/sandbox/`\] with the **Live** base URL \[`https://api.openxswitch.com/v1/`\] 
+- **Smart Account** integrations use the same **base URL** \[`https://api.openxswitch.com/v1/`\] across Sandbox and Live environments.
+
+\
+-- ⬜ Replace **Sandbox** API keys with **Live** API keys.\
+-- ⬜ Ensure the API key has the required **permissions**/**scopes** enabled.\
+-- ⬜ Configure your **Wallet Secret** if integrating with **Smart Account** infrastructure.
+
+### 2. Configure Webhooks
+
+Webhooks are required for real-time transaction updates, deposits, withdrawals, swaps, and balance synchronization.
+
+#### Checklist
+
+-- ⬜ Configure required **webhook events** for your application.\
+-- ⬜ Ensure your webhook **endpoint** is publicly accessible.\
+-- ⬜ Verify webhook signatures/hashes before processing events.\
+-- ⬜ Test webhook handling using Sandbox or simulation events.
+
+### 3. Whitelist Your Server IP Address
+
+Restrict API access to trusted infrastructure by whitelisting your server IP addresses.
+
+#### Checklist
+
+-- ⬜ **Whitelist** your production server static IP address(es).
+
+### 4. Configure Auto Collection (Optional)
+
+Auto Collection automatically consolidates customer deposits from sub-wallets into a central treasury or Prime Wallet.
+
+#### Checklist
+
+-- ⬜ Configure auto collection/Sweep rules for all supported coins/tokens on your platform.

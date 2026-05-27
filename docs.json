@@ -86,7 +86,8 @@
                   "compliance/watchlists"
                 ]
               },
-              "platform/auto-collection-and-sweep-rule"
+              "platform/auto-collection-and-sweep-rule",
+              "platform/go-live-checklist"
             ]
           },
           {
