@@ -229,8 +229,7 @@
   },
   "contextual": {
     "options": [
-    "view",
-     "chatgpt",
+    "chatgpt",
      "claude",
      "perplexity",
      "mcp",
@@ -256,5 +255,6 @@
   },
   "markdown": {
     "schema": false
-  }
+  },
+  "description": "OpenXSwitch is building infrastructure that abstracts wallets, gas, liquidity, and blockchain complexity into programmable financial primitives that developers and businesses can integrate globally."
 }
