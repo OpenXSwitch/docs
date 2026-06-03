@@ -256,5 +256,12 @@
   "markdown": {
     "schema": false
   },
-  "description": "OpenXSwitch is building infrastructure that abstracts wallets, gas, liquidity, and blockchain complexity into programmable financial primitives that developers and businesses can integrate globally."
+  "description": "OpenXSwitch is building infrastructure that abstracts wallets, gas, liquidity, and blockchain complexity into programmable financial primitives that developers and businesses can integrate globally.",
+  "seo": {
+    "metatags": {
+      "title": "OpenXSwitch Docs",
+      "keyword": "OpenXSwitch, Wallet as a service, Smart Account, Crypto as a service, Wallet infrastructure, Sablecoin Orchestration, Stablecoin Infrastructure"
+    },
+    "indexing": "all"
+  }
 }
