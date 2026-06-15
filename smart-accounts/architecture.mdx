@@ -66,7 +66,7 @@ OpenXSwitch Smart Account infrastructure supports programmable wallet provisioni
 | **Settlement** | Settlement accounts and wallets are provisioned automatically after successful workspace onboarding and activation. | Treasury operations, liquidity management, and auto-sweep infrastructure. |
 | **Deposit / User** | Smart wallets can be created programmatically using a valid email string and name through the API. | End-user wallets, embedded wallet infrastructure, and application wallet provisioning. |
 
-# Supported Operations
+## Supported Operations
 
 Smart Accounts support programmable wallet for:
 
@@ -81,55 +81,14 @@ Smart Accounts support programmable wallet for:
 
 All transaction flows within Smart Account infrastructure are designed to support programmable and gas-abstracted operational experiences.
 
-### Benefits of Smart Accounts
+## Benefits of Smart Accounts
 
 | Capability | Description |
 | :-- | :-- |
-| Transaction Batching | Combine multiple actions into a single transaction flow, reducing friction, execution steps, and gas overhead. |
-| Gas Abstraction | Allow gas fees to be sponsored or paid using supported ERC-20 assets instead of requiring native gas tokens. |
-| Better User Experience | Reduce blockchain complexity and repetitive transaction confirmations for users. |
+| Transaction Batching | Combines multiple actions into a single transaction flow, reducing friction, execution steps, and gas overhead. |
+| Gas Abstraction | Allows gas fees to be sponsored or paid using supported ERC-20 assets instead of requiring native gas tokens. |
+| Better User Experience | Reduces blockchain complexity and repetitive transaction confirmations for users. |
 | Better Developer Experience | Simplify account orchestration, transaction execution, and policy management through programmable infrastructure. |
-| Multisig Support | Require multiple approvals before transactions can execute, improving institutional-grade security and reducing single points of failure. |
-| Social Recovery | Allow trusted guardians or recovery policies to restore account access without depending entirely on seed phrases. |
-| Auto Approvals & Subscriptions | Enable recurring approvals, delegated permissions, spending policies, and subscription-like transaction execution models. |
-
-**OpenXSwitch's Smart Account** Infrastructure provides programmable account infrastructure for developers, fintechs, institutions, exchanges, wallet providers, and trading platforms building on **EVM,** **Solana**, and **Stellar** network.
-
-The infrastructure is designed to **abstract blockchain complexity** while enabling **modern** financial **experiences** and **programmable** transaction flows.
-
-<Note>
-  Within the **OpenXSwitch** platform, “**Smart Accounts**” refers to the infrastructure layer and operational section.
-</Note>
-
-<Frame>
-  ![Smart Accounts Overview Page And Stats](/images/Smart-Accounts---Overview-page-and-Stats.png)
-</Frame>
-
-<Card title="Unified Wallet Addressing on EVM Chains" type="note">
-  All supported EVM networks share the same wallet address format. A single wallet address can be used to receive supported assets across multiple **EVM** chains and tokens.\
-  \
-  [Learn More About Wallet Addresses Model](/stable-wallet/wallet-address-model)
-</Card>
-
-Smart Accounts support programmable wallet for:
-
-- Deposits
-- Withdrawals
-- Smart account execution
-- Gasless transactions (`EVM`)
-- Sponsored transactions (`Stellar`, `Solana`)
-- Auto-sweep operations
-- Batch transactions
-- On-chain swap and bridge operations
-
-### Benefits of Smart Accounts
-
-| Capability | Description |
-| :-- | :-- |
-| Transaction Batching | Combine multiple actions into a single transaction flow, reducing friction, execution steps, and gas overhead. |
-| Gas Abstraction | Allow gas fees to be sponsored or paid using supported ERC-20 assets instead of requiring native gas tokens. |
-| Better User Experience | Reduce blockchain complexity and repetitive transaction confirmations for users. |
-| Better Developer Experience | Simplify account orchestration, transaction execution, and policy management through programmable infrastructure. |
-| Multisig Support | Require multiple approvals before transactions can execute, improving institutional-grade security and reducing single points of failure. |
-| Social Recovery | Allow trusted guardians or recovery policies to restore account access without depending entirely on seed phrases. |
-| Auto Approvals & Subscriptions | Enable recurring approvals, delegated permissions, spending policies, and subscription-like transaction execution models. |
+| Multisig Support | Requires multiple approvals before transactions can execute, improving institutional-grade security and reducing single points of failure. |
+| Social Recovery | Allows trusted guardians or recovery policies to restore account access without depending entirely on seed phrases. |
+| Auto Approvals & Subscriptions | Enables recurring approvals, delegated permissions, spending policies, and subscription-like transaction execution models. |
