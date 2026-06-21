@@ -109,24 +109,24 @@
                   {
                     "group": "Events",
                     "pages": [
-                      "events/overview",
-                      {
-                        "group": "Wallet as a Service",
-                        "pages": [
-                          "events/waas/deposit-event",
-                          "events/waas/withdrawal-event",
-                          "events/waas/internal-transfer-event",
-                          "events/waas/instant-swap-event"
-                        ]
-                      },
-                      {
-                        "group": "Smart Accounts",
-                        "pages": [
-                          "events/smart-accounts/deposit-event",
-                          "events/smart-accounts/withdraw-event",
-                          "events/smart-accounts/balance-event"
-                        ]
-                      }
+                      "events/overview"
+                    ]
+                  },
+                  {
+                    "group": "Wallet as a Service",
+                    "pages": [
+                      "events/waas/deposit-event",
+                      "events/waas/withdrawal-event",
+                      "events/waas/internal-transfer-event",
+                      "events/waas/instant-swap-event"
+                    ]
+                  },
+                  {
+                    "group": "Smart Accounts",
+                    "pages": [
+                      "events/smart-accounts/deposit-event",
+                      "events/smart-accounts/withdraw-event",
+                      "events/smart-accounts/balance-event"
                     ]
                   }
                 ]
