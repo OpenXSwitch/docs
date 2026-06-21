@@ -190,3 +190,185 @@ Webhooks for `Smart Accounts` withdraw flow notifies you about the status of fun
 ```
 
 </CodeGroup>
+
+<CodeGroup>
+
+```json withdraw.pending
+{
+  "requestId": "04afc1dd8ffae1f6f8c66f96eed0f5",
+  "method": "smart-accounts:withdraw.pending",
+  "params": {
+	  "id": "6a382b941e117b9527366499",
+	  "refId": "2a1ee011-e5b5-419e-a967-bb0a8f0626c3",
+	  "idempotencyKey": "0e620f37-0f8a-4cee-b0e7-72235b697449",
+	  "tokenName": "USD Coin",
+	  "tokenSymbol": "USDC",
+	  "tokenTicker": "USDC_BASE",
+	  "tokenAddress": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+	  "decimals": 6,
+	  "isNative": false,
+	  "amount": {
+	    "value": "5",
+	    "rawValue": "5000000"
+	  },
+	  "totalAmount": {
+	    "value": "5.028011",
+	    "rawValue": "5028011"
+	  },
+	  "chainDecimals": 18,
+	  "blockchain": "BASE",
+	  "protocol": "EVM",
+	  "environment": "testnet",
+	  "network": "base-sepolia",
+	  "txType": "outgoing",
+	  "status": "pending",
+	  "fromAddress": "0xda0348137a73899a156944e31c81f05f646d168c",
+	  "toAddress": "0x226917bdc6d659672050e48ca6ce73dbd3a1d318",
+	  "txHash": "0xee30898cdfaee9c810996756337044fd98b4b0406583dd2d5706288b97f472e5",
+	  "totalFee": {
+	    "value": "0.000001224105803529",
+	    "rawValue": "1224105803529"
+	  },
+	  "feeLevel": "fast",
+	  "feeToken": "ETH",
+	  "isBatch": false,
+	  "destinations": [
+	    {
+	      "address": "0x226917bdc6d659672050e48ca6ce73dbd3a1d318",
+	      "value": "5",
+	      "rawValue": "5000000"
+	    },
+	    {
+	      "address": "0x7a750d8d6e12cce09a7c15482077a8a4d4c37de4",
+	      "value": "0.028011",
+	      "rawValue": "28011"
+	    }
+	  ],
+	  "note": null,
+	  "triggerOrigin": "blockchain",
+	  "confirmation": null,
+	  "confirmed": false,
+	  "confirmedAt": null,
+	  "walletId": "69f60c8561a6152a39f39005",
+	  "accountId": "69eba97c3f7e15428aef8811",
+	  "workspaceId": "67e723ed4b44a4f73dd2e8a2",
+	  "createdAt": "2026-06-21T18:21:08.349Z",
+	  "updatedAt": "2026-06-21T18:21:08.349Z",
+	  "wallet": {
+	    "id": "69f60c8561a6152a39f39005",
+	    "address": "0xDA0348137A73899A156944e31C81f05F646d168c",
+	    "type": "deposit",
+	    "protocol": "EVM",
+	    "isEvmCompatible": true,
+	    "name": "user_0_Zee",
+	    "refId": "f3f14dcf-a233-4128-8044-5c8f03feb230",
+	    "custodyType": "DEVELOPER",
+	    "token": {
+	      "name": "USD Coin",
+	      "symbol": "USDC",
+	      "blockchain": "BASE",
+	      "tokenAddress": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+	      "isNative": false,
+	      "decimals": 6,
+	      "standard": "ERC20",
+	      "balance": {
+	        "value": "12.471989",
+	        "rawValue": "12471989"
+	      }
+	    }
+	  }
+	}
+  }
+}
+```
+
+```json withdraw.success
+{
+  "requestId": "04afc1dd8ffae1f6f8c66f96eed0f5",
+  "method": "smart-accounts:withdraw.success",
+  "params": {
+	  "id": "6a382b941e117b9527366499",
+	  "refId": "2a1ee011-e5b5-419e-a967-bb0a8f0626c3",
+	  "idempotencyKey": "0e620f37-0f8a-4cee-b0e7-72235b697449",
+	  "tokenName": "USD Coin",
+	  "tokenSymbol": "USDC",
+	  "tokenTicker": "USDC_BASE",
+	  "tokenAddress": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+	  "decimals": 6,
+	  "isNative": false,
+	  "amount": {
+	    "value": "5",
+	    "rawValue": "5000000"
+	  },
+	  "totalAmount": {
+	    "value": "5.028011",
+	    "rawValue": "5028011"
+	  },
+	  "chainDecimals": 18,
+	  "blockchain": "BASE",
+	  "protocol": "EVM",
+	  "environment": "testnet",
+	  "network": "base-sepolia",
+	  "txType": "outgoing",
+	  "status": "success",
+	  "fromAddress": "0xda0348137a73899a156944e31c81f05f646d168c",
+	  "toAddress": "0x226917bdc6d659672050e48ca6ce73dbd3a1d318",
+	  "txHash": "0xee30898cdfaee9c810996756337044fd98b4b0406583dd2d5706288b97f472e5",
+	  "totalFee": {
+	    "value": "0.000001224105803529",
+	    "rawValue": "1224105803529"
+	  },
+	  "feeLevel": "fast",
+	  "feeToken": "ETH",
+	  "isBatch": false,
+	  "destinations": [
+	    {
+	      "address": "0x226917bdc6d659672050e48ca6ce73dbd3a1d318",
+	      "value": "5",
+	      "rawValue": "5000000"
+	    },
+	    {
+	      "address": "0x7a750d8d6e12cce09a7c15482077a8a4d4c37de4",
+	      "value": "0.028011",
+	      "rawValue": "28011"
+	    }
+	  ],
+	  "note": null,
+	  "triggerOrigin": "blockchain",
+	  "confirmation": "1",
+	  "confirmed": true,
+	  "confirmedAt": "2026-06-21T18:24:28.849Z",
+	  "walletId": "69f60c8561a6152a39f39005",
+	  "accountId": "69eba97c3f7e15428aef8811",
+	  "workspaceId": "67e723ed4b44a4f73dd2e8a2",
+	  "createdAt": "2026-06-21T18:21:08.349Z",
+	  "updatedAt": "2026-06-21T18:24:28.940Z",
+	  "wallet": {
+	    "id": "69f60c8561a6152a39f39005",
+	    "address": "0xDA0348137A73899A156944e31C81f05F646d168c",
+	    "type": "deposit",
+	    "protocol": "EVM",
+	    "isEvmCompatible": true,
+	    "name": "user_0_Zee",
+	    "refId": "f3f14dcf-a233-4128-8044-5c8f03feb230",
+	    "custodyType": "DEVELOPER",
+	    "token": {
+	      "name": "USD Coin",
+	      "symbol": "USDC",
+	      "blockchain": "BASE",
+	      "tokenAddress": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+	      "isNative": false,
+	      "decimals": 6,
+	      "standard": "ERC20",
+	      "balance": {
+	        "value": "12.471989",
+	        "rawValue": "12471989"
+	      }
+	    }
+	  }
+	}
+  }
+}
+```
+
+</CodeGroup>
