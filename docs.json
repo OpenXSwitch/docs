@@ -196,6 +196,15 @@
         ]
       },
       {
+        "tab": "Tools",
+        "hidden": true,
+        "pages": [
+          "tools",
+          "tools/token-checker",
+          "chain-checker"
+        ]
+      },
+      {
         "tab": "Changlogs",
         "groups": [
           {
