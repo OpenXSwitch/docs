@@ -59,6 +59,7 @@
                   "smart-accounts/testnet-vs-mainnet"
                 ]
               },
+              "get-started/swap-api",
               {
                 "group": "Security",
                 "pages": [
@@ -134,7 +135,8 @@
               "developer-services/pagination",
               "developer-services/error-codes"
             ]
-          }
+          },
+          "glossary"
         ]
       },
       {
