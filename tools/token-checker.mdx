@@ -4,3 +4,71 @@ description: "Check if OpenXSwitch supports your token across all chains."
 ---
 
 ## Check Token Support
+
+import { useState } from 'react';
+
+export const LinkModifier = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [outputLink, setOutputLink] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Your custom logic to manipulate or format the link
+    if (inputValue) {
+      setOutputLink(`https://yoursite.com{encodeURIComponent(inputValue)}`);
+    }
+  };
+
+  return (
+    <div className="not-prose p-6 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Enter your link:
+          </label>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="https://example.com"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
+          />
+        </div>
+        <button
+          type="submit"
+          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none"
+        >
+          Generate Link
+        </button>
+      </form>
+
+      {outputLink && (
+        <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-inner border border-gray-100 dark:border-gray-700">
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Output Component:</h4>
+          <div className="mt-2 flex items-center justify-between">
+            <a
+              href={outputLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-primary hover:underline break-all"
+            >
+              {outputLink}
+            </a>
+            <button
+              onClick={() => navigator.clipboard.writeText(outputLink)}
+              className="ml-4 px-3 py-1 bg-gray-200 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+## Link Generation Utility
+
+Use the form below to process your links and generate a transformed output.
+
+<LinkModifier />
