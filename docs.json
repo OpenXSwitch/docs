@@ -141,11 +141,42 @@
       },
       {
         "tab": "API Reference",
-        "groups": [
+        "pages": [
           {
             "group": "API Reference",
             "pages": [
               "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Wallet Management",
+            "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/index.json"
+          },
+          {
+            "group": "Users",
+            "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/users.json"
+          },
+          {
+            "group": "Transactions",
+            "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/transactions.json"
+          },
+          {
+            "group": "Compliance",
+            "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
+          },
+          {
+            "group": "Webhook",
+            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
+          }
+        ]
+      },
+      {
+        "tab": "API Reference - v1",
+        "groups": [
+          {
+            "group": "API Reference",
+            "pages": [
+              "api-reference-v1/overview"
             ]
           },
           {
@@ -171,29 +202,6 @@
           {
             "group": "Sandbox",
             "openapi": "https://docs.openxswitch.com/openapi/waas/sandbox-api.json"
-          }
-        ]
-      },
-      {
-        "tab": "Smart Account API Reference",
-        "pages": [
-          {
-            "group": "API Reference",
-            "pages": [
-              "smart-accounts-api-reference/overview"
-            ]
-          },
-          {
-            "group": "Smart Accounts",
-            "openapi": "https://docs.openxswitch.com/openapi/smart-accounts/openapi.json"
-          },
-          {
-            "group": "Compliance",
-            "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
-          },
-          {
-            "group": "Webhook",
-            "openapi": "https://docs.openxswitch.com/openapi/developer-api-webhook.json"
           }
         ]
       },
