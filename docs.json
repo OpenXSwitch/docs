@@ -224,7 +224,8 @@
               "changlog/wallet-as-a-service"
             ]
           }
-        ]
+        ],
+        "hidden": true
       }
     ]
   },
