@@ -161,6 +161,10 @@
             "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/transactions.json"
           },
           {
+            "group": "Swaps",
+            "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/swaps.json"
+          },
+          {
             "group": "Compliance",
             "openapi": "https://docs.openxswitch.com/openapi/compliance-specs.json"
           },
@@ -171,7 +175,7 @@
         ]
       },
       {
-        "tab": "API Reference - v1",
+        "tab": "Wallet as a Service - API Reference - v1",
         "groups": [
           {
             "group": "API Reference",
