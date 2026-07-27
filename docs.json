@@ -53,26 +53,11 @@
             ]
           },
           {
-            "group": "Developer Services",
+            "group": "Webhook",
             "pages": [
-              {
-                "group": "Webhook",
-                "pages": [
-                  "webhook/overview",
-                  "webhook/balance-model",
-                  {
-                    "group": "Events",
-                    "pages": [
-                      "events/overview",
-                      "events/smart-accounts/deposit-event",
-                      "events/smart-accounts/withdraw-event",
-                      "events/smart-accounts/balance-event"
-                    ]
-                  }
-                ]
-              },
-              "developer-services/pagination",
-              "developer-services/error-codes"
+              "webhook/overview",
+              "webhook/webhook-events",
+              "webhook/balance-model"
             ]
           },
           "glossary"
@@ -84,6 +69,11 @@
           "guides",
           "guides/authentication",
           "guides/idempotent-request",
+          "guides/pagination",
+          {
+            "group": "Developer Guides",
+            "pages": []
+          },
           {
             "group": "Migration Guides",
             "pages": [
