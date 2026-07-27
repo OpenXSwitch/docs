@@ -10,44 +10,11 @@ It is recommended not to **implement** balance updates using **increment**/**dec
 
 | Product | Balance Source | Recommended Handling |
 | :-- | :-- | :-- |
-| Wallet-as-a-Service | `wallet.asset.balance` or `wallet.assets[].balance` | Replace the stored wallet balance directly using the latest `balance` value returned in the webhook payload. |
-| Smart Accounts | `wallet.token.balance.value` or `wallet.tokens[].balance.value` | Replace the token balance directly using the latest `balance.value` returned for the token in the webhook payload. |
+| Wallet Infrastructure | `wallet.token.balance.value` or `wallet.tokens[].balance.value` | Replace the token balance directly using the latest `balance.value` returned for the token in the webhook payload. |
 
 ## Samples
 
-### Wallet-as-a-Service
-
-Wallet-as-a-Service `balances` may not always map 1:1 to immediate onchain balances because the platform supports `off-chain` ledger `operations`, internal transfers, settlement abstractions, and managed wallet accounting.
-
-Use the balance from:
-
-`wallet → asset or assets → balance`
-
-```json highlight={9}
-{
-  "wallet": {
-    "id": "6812b103908d2d0d49c7ff79",
-    "clientUserId": null,
-    "email": "email@openxswitch.com",
-    "name": "openxswitch-subwallet",
-    "asset": {
-      "coin": "USDT",
-      "balance": 9,
-      "frozen": 0,
-      "updatedAt": "2025-05-04T23:58:20.494Z"
-    },
-    "isSubWallet": false
-  }
-}
-```
-
-In this example:
-
-- Current wallet balance: `wallet.asset.balance = 9`
-
-### Smart Accounts
-
-Smart Account `wallets` are always synchronized with `onchain` state. `Balance` values returned in webhook events reflect the latest blockchain state for the wallet and token.
+`wallets` are always synchronized with `onchain` state. `Balance` values returned in webhook events reflect the latest blockchain state for the wallet and token.
 
 Use the balance from:
 

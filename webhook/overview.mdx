@@ -9,12 +9,12 @@ Webhooks in OpenXSwitch provide real-time notifications for key system events su
 
 #### Step 1: Add Webhook URL and Secret
 
-1. Navigate to **Accounts → Webhook** on the OpenXSwitch Console.
+1. Navigate to **Account → Webhook** on the OpenXSwitch Console.
 2. Add your webhook `endpoint` and `secret`.
-3. Select the event types you want to subscribe to (e.g., `withdraw`, `deposit`, `transfer`).
+3. Select the event types you want to subscribe to (e.g., `withdraw`, `deposit`).
 4. Choose the environment mode:
-   - **Sandbox (default)** - for development/`testnet` and testing
-   - **Live** - for production/`mainnet` events
+   - **Sandbox (default)** - for`testnet` and testing
+   - **Live** -`mainnet` events
 5. Confirm and submit to save your webhook configuration
 
 #### Step 2: Verify Webhook Setup
@@ -29,20 +29,10 @@ When an event occurs, OpenXSwitch sends a JSON payload via HTTP POST to your web
 
 <CodeGroup>
 
-```json Wallet as a service highlight={12-13}
+```json Wallet  Deposit highlight={12-13}
 {
   "requestId": "",
-  "method": "deposit.accepted",
-  "params": {
-    ...
-  }
-}
-```
-
-```json Smart Accounts
-{
-  "requestId": "",
-  "method": "smart-account:deposit.success",
+  "method": "wallets:deposit.pending",
   "params": {
     ...
   }

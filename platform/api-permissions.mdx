@@ -5,31 +5,15 @@ description: "OpenXSwitch uses a granular permission-based API access system to 
 
 Each API key is assigned specific permissions that determine which actions and endpoints can be accessed within a workspace.
 
-> API keys are environment-specific.\
-> Sandbox API keys only work within the sandbox/tesnet environment, while separate live API keys are required for production usage.
+> API keys are environment-specific.<br />Sandbox API keys only work within the `tesnet` environment, while separate live API keys are required for `mainnet` usage.
 
 ### Permission Levels
-
-#### Wallet-as-a-Service Permissions
-
-| Permission | Description |
-| :-- | :-- |
-| `read` | Grants read-only access to wallets, balances, transactions, and operational data. |
-| `write` | Required for creating or modifying resources and operational configurations. |
-| `withdraw` | Allows external withdrawals from wallets. Requires `write` permission. |
-| `transfer` | Enables internal transfers between Prime Wallets and Sub-Wallets. Requires `write` permission. |
-| `swap` | Grants access to swap functionality across supported assets. Requires `write` permission. |
-| `trade` | Enables trading operations including market and limit order execution. Requires `write` permission. |
-| `sub-wallet` | Allows creation and management of Sub-Wallet infrastructure. |
-
-#### Smart Account Permissions
 
 | Permission | Description |
 | :-- | :-- |
 | `read` | Grants read-only access to accounts, wallets, balances, and transaction activity. |
 | `write` | Required for creating or modifying smart account resources and configurations. |
 | `withdraw` | Allows external withdrawals and asset transfers from smart wallets. Requires `write` permission. |
-| `execute` | Enables smart account transaction execution including sponsored transactions, batch execution, and programmable wallet operations. Requires `write` permission. |
 
 ### Permission Dependencies
 
@@ -37,11 +21,8 @@ Certain operations require multiple permissions to be assigned together.
 
 | Action | Required Permissions |
 | :-- | :-- |
-| Wallet Withdrawals | `write` \+ `withdraw` |
-| Internal Transfers | `write` \+ `transfer` |
+| Wallet Withdraw | `write` \+ `withdraw` |
 | Swaps | `write` \+ `swap` |
-| Trading | `write` \+ `trade` |
-| Smart Account Execution | `write` \+ `execute` |
 
 ### Permission Validation
 
@@ -53,7 +34,7 @@ Example response when permissions are missing:
 {
   "statusCode": 403,
   "timestamp": "2026-05-20T10:00:00.000Z",
-  "path": "/v1/withdraw",
+  "path": "/v2/transactions/withdraw",
   "message": "The API key does not have 'withdraw' permission."
 }
 ```

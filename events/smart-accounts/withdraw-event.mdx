@@ -4,7 +4,7 @@ title: "Withdraw Event"
 
 Webhooks for `Smart Accounts` withdraw flow notifies you about the status of funds being withdrawn from a wallet.
 
-- **Parent Method:** `smart-accounts:withdraw`
+- **Parent Method:** `wallets:withdraw`
 - **Sub-Methods:**
   - `pending`: Triggered when a withdrawal request is initiated but not yet processed.
   - `success`: Triggered when the withdrawal is successfully processed and funds are sent to the specified address.
@@ -14,7 +14,7 @@ Webhooks for `Smart Accounts` withdraw flow notifies you about the status of fun
 ```json withdraw.pending
 {
   "requestId": "04afc1dd8ffae1f6f8c66f96eed0f5",
-  "method": "smart-accounts:withdraw.pending",
+  "method": "wallets:withdraw.pending",
   "params": {
 	  "id": "6a382b941e117b9527366499",
 	  "refId": "2a1ee011-e5b5-419e-a967-bb0a8f0626c3",
@@ -103,7 +103,7 @@ Webhooks for `Smart Accounts` withdraw flow notifies you about the status of fun
 ```json withdraw.success
 {
   "requestId": "04afc1dd8ffae1f6f8c66f96eed0f5",
-  "method": "smart-accounts:withdraw.success",
+  "method": "wallets:withdraw.success",
   "params": {
 	  "id": "6a382b941e117b9527366499",
 	  "refId": "2a1ee011-e5b5-419e-a967-bb0a8f0626c3",

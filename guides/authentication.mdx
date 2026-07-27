@@ -18,7 +18,7 @@ Replace `YOUR_API_KEY` with the key generated from your OpenXSwitch Console.
 
 ### API Key Setup
 
-1. Navigate to **Accounts → API Management** in the OpenXSwitch Console
+1. Navigate to **Account → API Management** in the OpenXSwitch Console
 2. Click **Create API Key**
 3. Select required **permissions** (e.g. wallet, withdrawal, trading, read access)
 4. (Optional but recommended) Enable **IP Restrictions**
@@ -28,44 +28,37 @@ Replace `YOUR_API_KEY` with the key generated from your OpenXSwitch Console.
 
 > ⚠️ API Management is restricted to **Owner** and **Admin** roles only.
 
-### Smart Account Authentication
-
-For smart account operations (e.g. wallet creation and transfers), some endpoints require an additional header for execution context. [Learn more](/get-started/authentication)
-
-```javascript
-x-wallet-secret: YOUR_WALLET_SECRET
-```
-
 ### Example Requests
 
-1. **Create Sub-wallet**\
-   Create sub-wallet using an authenticated API request.
+1. **Create a User**<br />Create a new user using an authenticated API request.
 
 Request
 
 <CodeGroup>
 
 ```shellscript cURL highlight={2}
-curl -X POST "https://api.openxswitch.com/v1/sub-wallet/create" \  
+curl -X POST "https://api.openxswitch.com/v2/users" \  
 -H "Authorization: Bearer YOUR_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
-  "email": "admin@openxswitch.com",
-  "name": "openxswitch"
+  "email": "oxs@example.com",
+  "displayName": "openxswitch",
+  "refId": "1234........."
 }'
 ```
 
 ```typescript JavaScript highlight={5}
 const axios = require('axios');
 
-const url = "https://api.openxswitch.com/v1/sub-wallet/create";
+const url = "https://api.openxswitch.com/v2/users";
 const headers = {
     "Authorization": "Bearer YOUR_API_KEY",
     "Content-Type": "application/json"
 };
 const data = {
-    "email": "admin@openxswitch.com",
-    "name": "openxswitch"
+   "email": "oxs@example.com",
+   "displayName": "openxswitch",
+   "refId": "1234........."
 };
 
 axios.post(url, data, { headers })
@@ -76,14 +69,15 @@ axios.post(url, data, { headers })
 ```python Python highlight={5}
 import requests
 
-url = "https://api.openxswitch.com/v1/sub-wallet/create"
+url = "https://api.openxswitch.com/v2/users"
 headers = {
     "Authorization": "Bearer YOUR_API_KEY",
     "Content-Type": "application/json"
 }
 data = {
-    "email": "admin@openxswitch.com",
-    "name": "openxswitch"
+   "email": "oxs@example.com",
+   "displayName": "openxswitch",
+   "refId": "1234........."
 }
 
 response = requests.post(url, json=data, headers=headers)
@@ -93,7 +87,7 @@ print(response.json())
 ```php PHP highlight={6}
 <?php
 
-$url = "https://api.openxswitch.com/v1/sub-wallet/create";
+$url = "https://api.openxswitch.com/v2/users";
 
 $headers = [
     "Authorization: Bearer YOUR_API_KEY",
@@ -101,8 +95,9 @@ $headers = [
 ];
 
 $data = json_encode([
-    "email" => "admin@openxswitch.com",
-    "name" => "openxswitch"
+    "email" => "oxs@example.com",
+    "displayName" => "openxswitch",
+    "refId" => "1234........."
 ]);
 
 $ch = curl_init();
@@ -128,10 +123,10 @@ public class Main {
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, 
-            "{ \"email\": \"admin@openxswitch.com\", \"name\": \"openxswitch\" }");
+            "{ \"email\": \"oxs@example.com\", \"displayName\": \"openxswitch\" }");
 
         Request request = new Request.Builder()
-            .url("https://api.openxswitch.com/v1/sub-wallet/create")
+            .url("https://api.openxswitch.com/v2/users")
             .post(body)
             .addHeader("Authorization", "Bearer YOUR_API_KEY")
             .addHeader("Content-Type", "application/json")
@@ -144,20 +139,6 @@ public class Main {
 ```
 
 </CodeGroup>
-
-2. **Generate Wallet Address**\
-   Generate or fetch wallet address using an authenticated API request.
-
-```curl highlight={2}
-curl -X POST "https://api.openxswitch.com/v1/sub-wallet/address" \  
--H "Authorization: Bearer YOUR_API_KEY" \
--H "Content-Type: application/json" \
--d '{
-  "subWalletId": "3224333.....",
-  "coin": "ETH",
-  "chain": "ETH"
-}'
-```
 
 > 📘 For further details on API permission, refer to the [API permissions](api-permissions)  documentation
 

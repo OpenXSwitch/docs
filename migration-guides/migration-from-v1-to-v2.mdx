@@ -1,0 +1,312 @@
+---
+title: "Migration from V1 to V2"
+description: "This guide outlines the steps to upgrade your integration from OpenXSwitch v1 to OpenXSwitch v2."
+---
+
+This walkthrough guides you step-by-step through migrating your infrastructure from **OpenXSwitch v1** to **OpenXSwitch v2**.
+
+**v2** introduces an upgraded smart account architecture delivering gasless operations, native testnet execution, auto-sweeping rules, native transaction batching, and isolated account containers.
+
+## 🏗 Summary of Changes
+
+| **Feature / Component** | **v1** | **v2** |
+| --- | --- | --- |
+| **User Onboarding** | `sub-wallet` model | `users` primitive |
+| **Address Generation** | Token-specific address generation | Account & multi-chain wallets model |
+| **Testing Environment** | Off-chain simulation sandbox | Native testnet execution |
+| **Batch Transactions** | Not supported | Native batching support |
+| **Smart Wallets** | Not supported | Built-in smart contract wallet support |
+| **Gasless Transactions** | Not supported | Built-in Paymaster & Fee-Payer sponsorship |
+| **Accounts** | Not supported | Container model for logical fund isolation |
+
+## Account Architecture Overview
+
+In v1, the architecture relied on a **Prime Wallet and Sub-Wallet** model (1:N), where a single central Prime Wallet managed liquidity and treasury operations across multiple sub-wallets.
+
+In v2, infrastructure hierarchy transitions to an **Accounts** container model:
+
+- **Account-Based Isolation:** You can create an account specifically for your application or business unit. All wallets generated can be attached directly to that account.
+- **Fund & Access Control Segregation:** This structure ensures complete separation of funds, permissions, policies, and operational controls at both the Account and Wallet levels.
+
+Within this new architecture, accounts typically fall into two categories:
+
+- **Settlement Account:** Serves as the primary operational or treasury container for managing enterprise funds, sweeps, and global balances.
+- **Users Account:** Acts as an isolated container assigned to individual end-users to manage dedicated smart wallet instances and balances.
+
+## Base URL Updates
+
+Update your base request URL across all API client configurations:
+
+- **v1 Base URL**: `[https://api.openxswitch.com/v1]`
+- **v2 Base URL**: `[https://api.openxswitch.com/v2]`
+
+## Step-by-Step Migration Walkthrough
+
+### Step 1: User Onboarding (`sub-wallet` ➔ `users`)
+
+In **v1**, user identities were represented as `sub-wallet` records. In **v2**, this primitive is renamed to `users`. Existing sub-wallet IDs are maintained throughout the migration.
+
+#### 🔄 Action: `Create Sub-Wallet` ➔ `Create User`
+
+- **v1** : `POST /v1/sub-wallet/create`
+- **v2**: `POST /v2/users`
+
+##### Request Changes
+
+Replace `clientUserId` with `refId`, rename `name` to `displayName`, and drop `canTrade`.
+
+**v1  (**`POST /v1/sub-wallet/create`**):**
+
+<CodeGroup>
+
+```json Request highlight={3-5}
+{
+  "email": "sam.vwede@example.com",
+  "name": "Sam Vwede", // [!code --]
+  "clientUserId": "client_001", // [!code --]
+  "canTrade": true // [!code --]
+}
+```
+
+```json Response
+{
+  "id": "63e1b8c2f18e310bb11f8a9c",
+  "clientUserId": "client_001",
+  "email": "walletName@openxswitch.org",
+  "name": "OX Wallet",
+  "isActive": "true",
+  "language": "en_US",
+  "canTrade": false,
+  "createdAt": "2025-01-17T10:00:00Z",
+  "updatedAt": "2025-01-17T12:00:00Z",
+  "workspaceId": "63e1b8c2f18e310bb11f8a9c"
+}
+```
+
+</CodeGroup>
+
+**v2  (**`POST /v2/users`**):**
+
+<CodeGroup>
+
+```json Request highlight={3-4}
+{
+  "email": "sam.vwede@example.com",
+  "displayName": "Sam.Vwede", // [!code ++]
+  "refId": "client_001" // [!code ++]
+}
+```
+
+```json Response
+{
+  "id": "63e1b8c2f18e310bb11f8a9c",
+  "refId": "client_001",
+  "email": "sam.vwede@example.com",
+  "displayName": "Sam.Vwede",
+  "isActive": "true",
+  "createdAt": "2025-01-17T10:00:00Z",
+  "updatedAt": "2025-01-17T12:00:00Z",
+  "workspaceId": "63e1b8c2f18e310bb11f8a9c"
+}
+```
+
+</CodeGroup>
+
+> 📘 **Migration Note**
+>
+> Existing sub-wallets maintain their original identifiers during migration. To retrieve or update migrated records, replace `/v1/sub-wallet?subWalletId={id}` with `/v2/users?userId={id}` in your endpoints.
+
+### Step 2: Blockchain Wallets & Addresses (`sub-wallet/address` ➔ `wallets`)
+
+In v1, distinct **addresses** had to be generated per **token** and **network**. In v2, a single **wallet** address handles **deposits** across all supported tokens on a given network protocol.
+
+#### 🔄 Action: `Generate Deposit Address` ➔ `Create Smart Wallet`
+
+- **v1**: `POST /v1/sub-wallet/address`
+- **v2**: `POST /v2/wallets`
+
+##### Request Changes
+
+Pass `userId` and `accountId` directly in the payload, provide an `idempotencyKey`, and designate the specific target blockchain network string (e.g., `ethereum-mainnet`).
+
+**v1  (**`POST /v1/sub-wallet/address`**):**
+
+<CodeGroup>
+
+```json Request highlight={2-4}
+{
+  "subWalletId": "63e1b8c2f18e310bb11f8a9c", // [!code --]
+  "coin": "USDT", // [!code --]
+  "chain": "Ethereum" // [!code --]
+}
+```
+
+```json Response
+{
+  "id": "34303043....",
+  "coin": "Bitcoin",
+  "chain": "Ethereum",
+  "network": "Mainnet",
+  "address": "0x123456789abcdef",
+  "workspaceId": "60f7d4b5b4d5c909a85b8d7e",
+  "createdAt": null,
+  "walletId": "63e1b8c2f18e310bb11f8a9c",
+  "tag": "Memo123"
+}
+```
+
+</CodeGroup>
+
+**v2  (**`POST /v2/wallets`**):**
+
+<CodeGroup>
+
+```json Request highlight={2-8}
+{
+  "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04", // [!code ++]
+  "accountId": "123e4567-e89b-12d3-a456-426614174000", // [!code ++]
+  "blockchain": "ethereum-mainnet", // [!code ++]
+  "name": "user_1 Wallet", // [!code ++]
+  "refId": "ref_user_1", // [!code ++]
+  "userId": "user_1", // [!code ++]
+  "autoSweep": false // [!code ++]
+}
+```
+
+```json Response
+{
+  "id": "8e6f5877-d71a-4017-a3eb-3d1d4464e274",
+  "address": "0x1234567890123456789012345678901234567890",
+  "blockchain": "ethereum",
+  "protocol": "EVM",
+  "network": "mainnet",
+  "isEvmCompatible": true,
+  "type": "smart_wallet",
+  "intent": "deposit",
+  "gaslessWithdraw": true,
+  "autoSweep": true,
+  "state": "LIVE",
+  "custodyType": "DEVELOPER",
+  "userId": "user_1",
+  "accountId": "WALLET_ACCOUNT_ID",
+  "workspaceId": "WORKSPACE_ID",
+  "createdAt": "2022-01-01T00:00:00.000Z",
+  "updatedAt": "2022-01-01T00:00:00.000Z",
+  "decimals": 18,
+  "name": "Wallet 1",
+  "refId": "WALLET_REF_ID"
+}
+```
+
+</CodeGroup>
+
+### Step 3: Checking Balances (`sub-wallet/assets` ➔ `users/balances`)
+
+#### 🔄 Action: `Get Sub-Wallet Assets` ➔ `Get User Balances`
+
+- **v1** : `GET /v1/sub-wallet/assets?subWalletId={id}`
+- **v2** : `GET /v2/users/balances?userId={id}`
+
+##### Response Comparison
+
+v2 provides comprehensive token metadata (standards, contract addresses, raw/formatted amounts) instead of single-string outputs.
+
+<CodeGroup>
+
+```json V1 Response
+{
+  "coin": "USDT",
+  "balance": "1.234",
+  "frozen": "0.123",
+  "updatedAt": "2023-01-01T00:00:00Z"
+}
+```
+
+```json V2 Response
+{
+  "token": {
+    "name": "Tether USD",
+    "symbol": "USDT",
+    "blockchain": "ethereum",
+    "isNative": true,
+    "standard": "ERC-20",
+    "tokenAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    "decimals": 6
+  },
+  "amount": {
+    "formatted": "479000.10",
+    "raw": "47900010"
+  },
+  "environment": "mainnet",
+  "createdAt": "2025-04-02T17:20:42.160Z",
+  "updatedAt": "2025-04-02T17:20:42.160Z"
+}
+```
+
+</CodeGroup>
+
+> ⚠️ **Deprecation Notice: Internal Off-Chain Transfers**
+>
+> Off-chain free internal transfers available in v1 are deprecated. In v2, all asset movements are executed transparently on-chain.
+
+### Step 4: Outbound Transactions (`withdraw/create` ➔ `transactions/withdraw`)
+
+#### 🔄 Action: `Create Sub-Wallet Withdrawal` ➔ `Execute Withdrawal Transaction`
+
+- **v1**: `POST /v1/withdraw/create`
+- **v2**: `POST /v2/transactions/withdraw`
+
+##### Request Changes
+
+Pass `walletId` instead of `subWalletId`, supply `toAddress` instead of `withdrawalAddress`, and include an `idempotencyKey`.
+
+<CodeGroup>
+
+```json v1 Request [v1/withdraw/create]
+{
+  "subWalletId": "63e1b8c2f18e310bb11f8a9c",
+  "coin": "USDT",
+  "chain": "Ethereum",
+  "withdrawalAddress": "0x1234567890123456789012345678901234567890",
+  "amount": "0.5",
+  "clientTxId": "txn_ref_123",
+  "fee": "0.01",
+  "memo": "Test transfer"
+}
+```
+
+```json v2 Request [/v2/transactions/withdraw]
+{
+  "idempotencyKey": "0e472f6b-336b-4d4f-87d6-4f93e4e4e4e4",
+  "walletId": "0e472f6b-336b-4d4f-87d6-4f93e4e4e4e4",
+  "amount": "0.5",
+  "withdrawalAddress": "0x1234567890123456789012345678901234567890",
+  "token": "USDT",
+  "blockchain": "ethereum-mainnet",
+  "refId": "txn_ref_123",
+  "note": "This is a test transaction",
+  "metadata": {
+    "employeeId": "EMP001"
+  }
+}
+```
+
+</CodeGroup>
+
+#### 🔄 Action: `Fetch Transaction History`
+
+Transaction lookup endpoints have been unified under a consolidated `GET /v2/transactions` resource with filtering options:
+
+- **Fetch Deposits**:
+  - **v1**: `GET /v1/sub-wallet/deposit`
+  - **v2**: `GET /v2/transactions?txType=incoming`
+- **Fetch Withdrawals**:
+  - **v1**: `GET /v1/sub-wallet/withdraw`
+  - **v2**: `GET /v2/transactions?txType=outgoing`
+
+### Step 5: Instant Swaps (`instant-swap` ➔ `swap`)
+
+#### 🔄 Action: `Execute Instant Swap` ➔ `Create Swap Transaction`
+
+- **v1**: `POST /v1/instant-swap`
+- **v2**: `POST /v2/swap`
