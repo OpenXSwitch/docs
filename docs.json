@@ -82,6 +82,7 @@
         "tab": "Guides",
         "pages": [
           "guides/overview",
+          "guides/overview",
           {
             "group": "Guides",
             "pages": [
