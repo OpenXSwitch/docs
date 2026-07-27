@@ -85,18 +85,8 @@
           "guides",
           "guides/authentication",
           "guides/idempotent-requests",
-          {
-            "group": "Developer guides",
-            "pages": [
-              "make-your-first-request"
-            ]
-          },
-          {
-            "group": "Migration Guides",
-            "pages": [
-              "migration-guides/migration-from-v1-to-v2"
-            ]
-          }
+          "",
+          ""
         ]
       },
       {
