@@ -81,6 +81,7 @@
       {
         "tab": "Guides",
         "pages": [
+          "guides/introduction",
           "guides/overview",
           "guides/overview",
           {
