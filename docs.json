@@ -82,62 +82,14 @@
         "tab": "Guides",
         "pages": [
           "guides",
-          "guides/introduction",
-          "guides/overview",
-          "guides/overview",
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/authentication",
-              "guides/idempotent-request"
-            ]
-          },
-          {
-            "group": "Migration Guides",
-            "pages": [
-              "migration-from-v1-to-v2"
-            ]
-          },
-          "guides/overview",
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/authentication",
-              "guides/idempotent-request",
-              {
-                "group": "Developer Guides",
-                "pages": [
-                  "guides/dev-guides/make-your-first-api-request"
-                ]
-              }
-            ]
-          },
+          "guides/authentication",
+          "guides/idempotent-request",
           {
             "group": "Migration Guides",
             "pages": [
               "guides/migration-from-v1-to-v2"
             ]
-          },
-          "guides",
-          "guides/authentication",
-          "guides/idempotent-requests",
-          {
-            "group": "Developer Guides",
-            "pages": [
-              "make-your-first-request"
-            ]
-          },
-          {
-            "group": "Migration Guides",
-            "pages": [
-              "migration-guides/migration-from-v1-to-v2"
-            ]
-          },
-          "guides",
-          "guides/authentication",
-          "guides/idempotent-requests",
-          "",
-          ""
+          }
         ]
       },
       {
