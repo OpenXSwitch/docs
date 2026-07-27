@@ -1,0 +1,63 @@
+---
+title: "Wallet Infrastructure: Architecture"
+description: "This section introduces the core concepts and wallet models used across the OpenXSwitch Wallet Infrastructure."
+sidebarTitle: "Architecture"
+---
+
+OpenXSwitch’s Wallet Infrastructure provides programmable wallet infrastructure for developers, fintechs, institutions, exchanges, wallet providers, and trading platforms building on EVM, Solana, Bitcoin, and other supported chains.
+
+The infrastructure is designed to abstract blockchain complexity while enabling modern financial experiences and programmable transaction flows.
+
+## Architecture Overview
+
+OpenXSwitch Wallet Infrastructure supports core concepts designed for programmable wallet operations, treasury routing, settlement flows, and end-user wallet management:
+
+| **Model** | **Description** | **Best For** |
+| --- | --- | --- |
+| **Accounts** | Logical **container** used to **group** and manage wallets. | **Treasury** separation, application-level grouping, operational **isolation**, and user segmentation. |
+| **Users** | **End-user** entities associated with accounts or specific wallet permissions. | Identity mapping, **user-level** access management, and customer wallet orchestration. |
+| **Wallets** | Actual blockchain **wallet** **addresses** grouped and managed under an account structure. | Deposits, programmable transfers, gasless transactions, and wallet execution flows. |
+
+<Tip>
+  **Wallets** can be directly attached to a user entity for identity mapping and user-level access.
+</Tip>
+
+## Types of Accounts
+
+| **Account Type** | **Description** | **Use Case** |
+| :-- | :-- | :-- |
+| **Settlement** | Treasury-level account used for operational liquidity and settlement management. | Auto-sweep destination, treasury management, liquidity routing, and settlement operations. |
+| **User** | Account structure used for end-user applications and wallet orchestration. | Consumer applications, embedded wallets, user balances, and programmable wallet flows. |
+
+## Types of Wallets
+
+OpenXSwitch Wallet Infrastructure supports two types of wallet models designed for programmable operations, liquidity management, and user segregation:
+
+- **Smart Wallets (Account Abstraction):** Programmable on-chain smart contract wallets that support gasless transactions, transaction sponsorship, batch execution, and advanced policy-based permissions.
+- **Wallets:** Standard blockchain addresses provisioned under an account structure for multi-chain asset routing and custody.
+
+A single wallet address can be used to receive supported assets across multiple EVM chains and tokens. To learn more, see [Unified Wallet Addressing on EVM Chains](https://www.google.com/search?q=https://docs.openxswitch.com/wallet-as-a-service/architecture%23unified-wallet-addressing-on-evm-chains).
+
+## Settlement Infrastructure
+
+### What Makes a Wallet a Settlement Wallet?
+
+A **Settlement Wallet** is defined by the following characteristics:
+
+- **Type Designation:** Possesses the explicit role type `settlement` within the infrastructure configuration.
+- **Automated Creation:** Automatically created during initial workspace setup when your wallet infrastructure is provisioned.
+- **Central Treasury Hub:** Serves as the primary operational target for internal transfers, settlement flows, and workspace-level auto-sweeps.
+
+### Key Capabilities of an Account
+
+Accounts serve as administrative and logical containers for grouping wallets, users, and operational rules. Key capabilities include:
+
+- **Withdrawal Execution:** Execute external crypto withdrawals via both the OpenXSwitch API and the operational Dashboard.
+- **Global Account Control (Disable/Enable):** Disabling or enabling an Account immediately applies to **all wallets** attached to that account.
+  - _Disabling an Account:_ Temporarily suspends operations and freezes outbound actions for all underlying wallets under that account.
+  - _Enabling an Account:_ Restores operational status and API access to all wallets grouped within the account structure.
+- **Watchlist Configuration:** Configure watchlist monitoring directly at the Account level to track and screen specific blockchain addresses for risk management.
+
+### User Entity Attachment
+
+> **Note:** User entities are attached **directly to specific wallets** (rather than to Accounts). This enables identity mapping, user-level access management, and customer wallet orchestration directly at the individual wallet level.

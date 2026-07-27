@@ -1,0 +1,45 @@
+---
+title: "Unified EVM Address"
+description: "Wallet addresses are generated per protocol model and directly reflect blockchain-native ownership on supported networks."
+sidebarTitle: "Unified EVM Address"
+---
+
+All supported EVM networks share a single, unified address format. A single EVM wallet address can receive assets across multiple EVM-compatible chains and tokens.
+
+## Protocol Address Behavior
+
+| **Protocol Model** | **Address Behavior** |
+| --- | --- |
+| **EVM Networks** | One wallet address shared across supported EVM-compatible blockchains and tokens. |
+| **Solana** | Wallet addresses are unique to the Solana network. |
+| **Bitcoin** | Wallet addresses are unique to the Bitcoin network. |
+| **Other Networks** | Wallet addresses are protocol-specific and isolated per blockchain network. |
+
+## How It Works
+
+Wallet addresses are generated and managed based on blockchain protocol groups rather than individual chains.
+
+When you create a wallet on an EVM chain (such as `BASE`) using a specific reference ID (`refId`), an EVM address is generated:
+
+```json highlight={3}
+{
+  "accountId": "e29b41d4a7164440",
+  "refId": "550e8400-e29b-41d4-a716-446655440000",
+  "blockchain": "BASE"
+}
+```
+
+If you subsequently issue another wallet creation request using the same `refId` on a different EVM network (such as `ETH` or `POLYGON`), OpenXSwitch returns the same EVM wallet address:
+
+```json highlight={3}
+{
+  "accountId": "e29b41d4a7164440",
+  "refId": "550e8400-e29b-41d4-a716-446655440000",
+  "blockchain": "ETH"
+}
+```
+
+This architecture allows developers to:
+
+- **Reuse EVM Addresses:** Reuse a single `refId` to maintain a consistent address per user across all supported EVM chains.
+- **Isolate Addresses:** Pass distinct `refId` values to generate isolated wallet addresses per user or operational strategy.

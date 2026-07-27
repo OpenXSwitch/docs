@@ -14,72 +14,28 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Docs",
+        "tab": "Introduction",
         "pages": [
           "introduction",
           "platform-overview",
-          "supported-blockchains",
-          "comparing-our-wallet-products",
-          {
-            "group": "Get Started",
-            "pages": [
-              "get-started/authentication",
-              "get-started/technical-support-and-onboarding",
-              {
-                "group": "Wallet as a Service",
-                "pages": [
-                  "wallet-as-a-service/architecture",
-                  {
-                    "group": "Quickstart Guide",
-                    "pages": [
-                      "get-started/waas/create-a-sub-wallet",
-                      "get-started/waas/withdraw-funds-from-prime-wallet",
-                      "get-started/waas/how-to-check-withdrawal-fees",
-                      "get-started/waas/auto-sweep-funds",
-                      "get-started/waas/how-to-swap-a-token"
-                    ]
-                  },
-                  "wallet-as-a-service/supported-assets",
-                  "wallet-as-a-service/sandbox-vs-live"
-                ]
-              },
-              {
-                "group": "Smart Accounts",
-                "pages": [
-                  "smart-accounts/architecture",
-                  "smart-accounts/wallet-address-model",
-                  {
-                    "group": "Quickstart Guide",
-                    "pages": [
-                      "get-started/sa/create-and-manage-wallets",
-                      "get-started/sa/send-tokens-across-wallets"
-                    ]
-                  },
-                  "smart-accounts/supported-assets",
-                  "smart-accounts/testnet-vs-mainnet"
-                ]
-              },
-              "get-started/swap-api",
-              {
-                "group": "Security",
-                "pages": [
-                  "security/overview"
-                ],
-                "hidden": true
-              },
-              {
-                "group": "Concepts",
-                "pages": [
-                  "concepts/balance-aggregation"
-                ]
-              }
-            ]
-          },
+          "technical-support-and-onboarding",
           {
             "group": "Platform",
             "pages": [
+              "platform/supported-blockchains",
+              "platform/supported-assets",
+              "platform/testnet-vs-mainnet",
               "platform/manage-team-members",
               "platform/api-permissions",
+              {
+                "group": "Wallet Infrastructure",
+                "pages": [
+                  "wallet-infrastructure/architecture",
+                  "wallet-infrastructure/smart-contract-wallets",
+                  "wallet-infrastructure/unified-evm-address",
+                  "wallet-infrastructure/auto-collection-and-sweep-rule"
+                ]
+              },
               {
                 "group": "Compliance Engine",
                 "pages": [
@@ -87,7 +43,6 @@
                   "compliance/watchlists"
                 ]
               },
-              "platform/auto-collection-and-sweep-rule",
               "platform/go-live-checklist"
             ]
           },
@@ -109,21 +64,7 @@
                   {
                     "group": "Events",
                     "pages": [
-                      "events/overview"
-                    ]
-                  },
-                  {
-                    "group": "Wallet as a Service",
-                    "pages": [
-                      "events/waas/deposit-event",
-                      "events/waas/withdrawal-event",
-                      "events/waas/internal-transfer-event",
-                      "events/waas/instant-swap-event"
-                    ]
-                  },
-                  {
-                    "group": "Smart Accounts",
-                    "pages": [
+                      "events/overview",
                       "events/smart-accounts/deposit-event",
                       "events/smart-accounts/withdraw-event",
                       "events/smart-accounts/balance-event"
@@ -131,7 +72,6 @@
                   }
                 ]
               },
-              "developer-services/idempotent-requests",
               "developer-services/pagination",
               "developer-services/error-codes"
             ]
@@ -140,14 +80,34 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Guides",
         "pages": [
+          "guides",
+          "guides/authentication",
+          "guides/idempotent-requests",
           {
-            "group": "API Reference",
+            "group": "Developer Guides",
             "pages": [
-              "api-reference/overview"
+              "make-your-first-request"
             ]
           },
+          {
+            "group": "Migration Guides",
+            "pages": [
+              "migration-guides/migration-from-v1-to-v2"
+            ]
+          },
+          "guides",
+          "guides/authentication",
+          "guides/idempotent-requests",
+          "",
+          ""
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "pages": [
+          "api-reference/overview",
           {
             "group": "Wallet Management",
             "openapi": "https://docs.openxswitch.com/openapi/wallet-infra/index.json"

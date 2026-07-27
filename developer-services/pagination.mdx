@@ -3,7 +3,7 @@ title: "Pagination"
 description: "OpenXSwitch API uses pagination for REST endpoints that return array-based responses."
 ---
 
-Pagination allows applications to retrieve large datasets in smaller, structured batches. Endpoints that return lists such as deposits, withdrawals, transactions, wallets, orders, or sub-wallets support pagination through the `pageNo` and `pageLimit` query parameters.
+Pagination allows applications to retrieve large datasets in smaller, structured batches. Endpoints that return lists such as deposits, withdrawals, transactions, wallets, or swaps support pagination through the `pageNo` and `pageLimit` query parameters.
 
 By default, endpoints return the most recent records first.
 
@@ -12,7 +12,7 @@ By default, endpoints return the most recent records first.
 ### Example Request
 
 ```javascript
-GET {base}/v1/sub-wallet/list?pageNo=1&pageLimit=20
+GET {base}/v2/wallets/list?pageNo=1&pageLimit=20
 ```
 
 Example response:

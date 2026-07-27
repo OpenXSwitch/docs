@@ -4,34 +4,27 @@ sidebarTitle: "Watchlists"
 description: "Withdrawals are filtered through watchlist rules to enforce operational policies, reduce unauthorized activity, and restrict transfers to high-risk or prohibited destinations."
 ---
 
-### Withdrawal Protection via Watchlist
+OpenXSwitch secures outbound transactions by enforcing **Watchlist Policies** at the **Account level** during withdrawal and settlement operations. Watchlists enforce access parameters across all wallets under a given Account, evaluating transfers directly prior to transaction submission and rejecting restricted attempts before execution.
 
-OpenXSwitch secures withdrawal operations using Watchlist Policies. Through allowlists and blocklists, businesses can control which wallet addresses are permitted or restricted from receiving funds across both Wallet-as-a-Service and Smart Account infrastructure.
+### How Watchlists Work
 
-Watchlist policies can be applied to:
+When watchlist policies are enabled on an **Account**, all external withdrawals initiated by any wallet under that Account are evaluated against the configured watchlist type:
 
-- Prime Wallet withdrawals
-- Sub-Wallet withdrawals
-- Smart Account wallet transactions
+- **Allowlist:** Only destination addresses explicitly included in the allowlist are permitted to receive funds. Any withdrawal attempt to an address outside the allowlist is **rejected by default**.
+- **Blocklist:** All destination addresses are permitted by default, **except** addresses explicitly added to the blocklist. Any withdrawal attempt to a blocklisted address is **automatically blocked and rejected**.
 
 ### Watchlist Types
 
-| Type | Description |
-| :-- | :-- |
-| **Allowlist** | Only addresses explicitly approved within the allowlist are permitted to receive funds from Prime Wallets (Wallet-as-a-Service) and Settlement Wallets (Smart Account). All other addresses are rejected by default. Recommended for high-security operational environments. |
-| **Blocklist** | All addresses are permitted except addresses explicitly added to the blocklist. Used to prevent transfers to known malicious, restricted, or non-approved destinations. |
+| **Type** | **Operational Logic** | **Best For** |
+| :-- | :-- | :-- |
+| **Allowlist** | Transfers are **restricted strictly** to explicitly added and approved wallet addresses. | High-security operational environments and closed settlement loops. |
+| **Blocklist** | Transfers to blacklisted addresses are **strictly forbidden**; all other destinations are permitted. | Preventing payouts to known malicious, sanctions-restricted, or prohibited addresses. |
 
 ### Supported Operations
 
-Watchlist policies can be enforced during:
+Account-level watchlist policies are evaluated automatically before transaction execution during:
 
-- External withdrawals
-- Settlement operations
-- Smart account transaction execution
+- **External Withdrawals:** Outbound transfers from underlying wallets to external blockchain addresses.
+- **Settlement Operations:** Treasury routing and external settlement transfers.
 
-### Operational Notes
-
-- Watchlist policies are evaluated automatically during transaction execution.
-- Policies apply only to supported withdrawal and transfer operations.
-- Address validation occurs before transaction submission.
-- Restricted transactions are rejected before execution.
+> **Operational Note:** Address validation occurs prior to on-chain submission at the Account layer. Restricted transactions are rejected instantly before hitting the network, saving gas costs and maintaining tight security compliance across all associated wallets.

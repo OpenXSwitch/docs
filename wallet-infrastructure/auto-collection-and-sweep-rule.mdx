@@ -1,0 +1,48 @@
+---
+title: "Auto Collection and Sweep Rule"
+sidebarTitle: "Auto Collection and Sweep Rule"
+description: "Auto-sweep helps centralize liquidity, simplify treasury operations, and reduce manual treasury management across your wallets."
+---
+
+<Check>
+  Trigger Condition: Auto-sweep rules are triggered by deposits. Whenever funds are received in eligible wallets, the sweep logic is evaluated based on your configured settings.
+</Check>
+
+### Default Sweep Destinations
+
+| Product | Default Destination | Channel |
+| :-- | :-- | --- |
+| Wallet Infrastructure | Settlement Account/Wallet | On-chain |
+
+### Configuration Levels
+
+Auto-sweep rules can be configured at two distinct levels depending on your operational needs:
+
+#### 1. Workspace-Level (Global Setup)
+
+Configure workspace-wide automation that can be easily turned on or off to apply to all existing and newly created wallets within your workspace. No threshold configuration is required at this level.
+
+- **Navigate to:** Workspace Console → Wallet Infrastructure → Settings → Configuration
+- **Control:** Toggle the global auto-sweep status **ON** or **OFF** to enable or disable automatic liquidity collection workspace-wide.
+
+#### 2. Wallet-Level (Specific Wallet Setup)
+
+Enable or disable auto-sweep behavior for specific individual wallets via the Platform Dashboard or API during wallet creation or update.
+
+```json highlight={2}
+{
+  "autoSweep": true,
+}
+```
+
+When `autoSweep` is set to `true`, deposited funds are automatically consolidated into the primary settlement account.
+
+### Supported Frequencies
+
+| Frequency | Description |
+| :-- | :-- |
+| Real Time | Triggered immediately when deposits are detected in eligible wallets. |
+
+<Card title="Current Limitation" type="warning">
+  Sweeping funds to external wallets is not currently supported. Auto-sweep destinations must be managed within the OpenXSwitch wallet infrastructure.
+</Card>

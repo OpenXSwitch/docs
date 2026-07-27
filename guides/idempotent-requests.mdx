@@ -1,0 +1,22 @@
+---
+title: "Idempotent Requests"
+---
+
+OpenXSwitch Wallet Infrastructure APIs support the `idempotencyKey` parameter for endpoints that create new resources or initiate state-changing operations. Using an idempotency key allows you to safely retry API requests without accidentally executing duplicate operations during network timeouts, client retries, or unexpected network failures.
+
+### How Idempotency Works
+
+When retrying a request with an existing `idempotencyKey`, OpenXSwitch executes the operation **only once**. Subsequent requests containing the same key will return the original execution result rather than re-running the operation.
+
+- **Key Parameter:** Send a unique string identifier via the `idempotencyKey` parameter.
+- **Guaranteed Execution:** Ensures at-most-once processing across resource creation and transaction execution endpoints.
+
+### Supported Operations
+
+The `idempotencyKey` parameter is supported on key state-changing endpoints within Wallet Infrastructure:
+
+- **Create Account:** Prevents creating duplicate Account containers during account setup.
+- **Create Wallet:** Guarantees single-wallet provisioning per provisioning request.
+- **Create Transfer Transaction:** Prevents double-spending or duplicate transfer execution during network retries.
+
+> **Best Practice:** Generate a unique v4 UUID for every state-changing request. If a request times out or receives a 5xx error response, safely re-send the exact request using the same `idempotencyKey`.
