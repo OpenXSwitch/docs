@@ -31,9 +31,9 @@
                 "group": "Wallet Infrastructure",
                 "pages": [
                   "wallet-infrastructure/architecture",
+                  "wallet-infrastructure/smart-contract-wallets",
                   "wallet-infrastructure/unified-evm-address",
-                  "wallet-infrastructure/auto-collection-and-sweep-rule",
-                  "wallet-infrastructure/smart-contract-wallets"
+                  "wallet-infrastructure/auto-collection-and-sweep-rule"
                 ]
               },
               {
@@ -82,6 +82,21 @@
       {
         "tab": "Guides",
         "pages": [
+          "guides",
+          "guides/authentication",
+          "guides/idempotent-requests",
+          {
+            "group": "Developer Guides",
+            "pages": [
+              "make-your-first-request"
+            ]
+          },
+          {
+            "group": "Migration Guides",
+            "pages": [
+              "migration-guides/migration-from-v1-to-v2"
+            ]
+          },
           "guides",
           "guides/authentication",
           "guides/idempotent-requests",
