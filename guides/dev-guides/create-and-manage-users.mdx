@@ -1,0 +1,176 @@
+---
+title: "Create and Manage Users"
+sidebarTitle: "Create and Manage Users"
+---
+
+A **User** represents an application-specific identity within your workspace. Creating a user allows you to generate chain-specific wallet addresses, query balances, and track activity metrics scoped directly to that individual entity.
+
+## Prerequisites
+
+Before you begin, ensure that you have:
+
+- Obtained an **API key** from the [**OpenXSwitch Console**.](https://console.openxswitch.com/)
+
+An active API key with the necessary write permissions configured for the target environment (Sandbox or Live).
+
+## The Plan
+
+We'll go through:
+
+1. **Creating a User via the API:** Provision a user record scoped to your workspace.
+2. **[Linking Wallets to Users](/guides/dev-guides/create-and-manage-wallets):** Associate chain-specific wallets directly with your `userId`.
+3. **Fetching User Wallets:** Retrieve all blockchain wallet instances associated with the user.
+4. **Fetching User Balances:** View real-time asset holdings across the user's wallets.
+5. **Checking User Stats:** Retrieve operational activity metrics for the user.
+
+## Step 1: Create a User via the API
+
+To provision a user identity in your application account, execute a `POST` request to the `/v2/users` endpoint.
+
+```json highlight={1}
+URL: https://api.openxswitch.com/v2/users
+
+{
+  "email": "<string>",
+  "displayName": "<string>",
+  "refId": "<string>"
+}
+```
+
+### Request Payload Fields
+
+- `email` _(string, optional)_: The user's primary email address.
+- `displayName` _(string, optional)_: Human-readable display label for the user.
+- `refId` _(string, optional)_: External client reference ID to map back to your application database.
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "63e1b8c2f18e310bb11f8a9c",
+    "refId": "client_001",
+    "email": "sam.vwede@example.com",
+    "displayName": "Sam.Vwede",
+    "isActive": "true",
+    "createdAt": "2025-01-17T10:00:00Z",
+    "updatedAt": "2025-01-17T12:00:00Z",
+    "workspaceId": "63e1b8c2f18e310bb11f8a9c"
+  }
+}
+```
+
+## Step 2. 💡 **Linking Wallets to Users**
+
+Creating a user automatically establishes an identity context within your application account. Once created, you can deploy or link chain-specific smart wallets directly to this `userId`. For complete details on wallet provisioning, see the [Create and Manage Wallets Guide](/guides/dev-guides/create-and-manage-wallets).
+
+## Step 3: Fetch User Wallets
+
+Once a user is created, retrieve all deployed wallet addresses across supported blockchain networks using the `GET` endpoint `/v2/users/{userId}/wallets`
+
+```json
+URL: https://api.openxswitch.com/v2/users/wallets?userId={userId}
+```
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "8e6f5877-d71a-4017-a3eb-3d1d4464e274",
+      "address": "0x1234567890123456789012345678901234567890",
+      "blockchain": "ethereum",
+      "protocol": "EVM",
+      "network": "mainnet",
+      "isEvmCompatible": true,
+      "type": "smart_wallet",
+      "intent": "deposit",
+      "gaslessWithdraw": true,
+      "autoSweep": true,
+      "state": "LIVE",
+      "custodyType": "DEVELOPER",
+      "userId": "user_1",
+      "accountId": "WALLET_ACCOUNT_ID",
+      "workspaceId": "WORKSPACE_ID",
+      "createdAt": "2022-01-01T00:00:00.000Z",
+      "updatedAt": "2022-01-01T00:00:00.000Z",
+      "decimals": 18,
+      "name": "Wallet 1",
+      "refId": "WALLET_REF_ID"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+## Step 4: Fetch User Balances
+
+To inspect the real-time token and native balances across a user's wallets, query the balances endpoint.
+
+```json
+URL: https://api.openxswitch.com/v2/users/balances?userId={userId}
+```
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "token": {
+        "name": "Tether USD",
+        "symbol": "USDT",
+        "blockchain": "ethereum",
+        "isNative": true,
+        "standard": "ERC-20",
+        "tokenAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "decimals": 6
+      },
+      "amount": {
+        "formatted": "479000.10",
+        "raw": "47900010"
+      },
+      "environment": "mainnet",
+      "createdAt": "2025-04-02T17:20:42.160Z",
+      "updatedAt": "2025-04-02T17:20:42.160Z"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+## Step 5: Fetch User Stats
+
+You can retrieve aggregated activity statistics (such as total deposits, withdrawals, and 30-day transaction volume) for reporting or risk monitoring purposes.
+
+```json
+URL: https://api.openxswitch.com/v2/users/stats?userId={userId}
+```
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "depositsCount": 86,
+    "depositsCountIn30Days": 18,
+    "transactionVolumeCount": 104,
+    "transactionVolumeCountIn30Days": 26,
+    "withdrawsCount": 18,
+    "withdrawsCountIn30Days": 8
+  }
+}
+```
+
+## Next Steps
+
+- [Create and Manage Wallets:](/guides/dev-guides/create-and-manage-wallets) Deploy new chain-specific smart wallets or fetch deposit addresses bound to your user entity.

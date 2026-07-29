@@ -6,28 +6,114 @@ Webhooks allow you to receive real-time notifications for events that occur on w
 
 ## Event Type
 
-Each notifications flow consists of a `parent method` with `sub-methods` representing the lifecycle, status, or progress of an event.
+Each notification flow corresponds to a specific lifecycle event within the Wallet Infrastructure platform:
 
-| Parent methods | Description |
-| :-- | --- |
-| `wallets:deposit` |  |
-| `wallets:withdraw` |  |
-| `wallets:swap` |  |
+- `wallets:deposit.pending`: Triggered when an incoming deposit is detected on-chain but awaiting required network block confirmations.
+- `wallets:deposit.success`: Triggered when a deposit reaches required confirmations and funds are successfully credited.
+- `wallets:withdraw.pending`: Triggered when a withdrawal request is initiated and queued for execution.
+- `wallets:withdraw.success`: Triggered when an outbound withdrawal transaction is successfully confirmed on-chain.
+- `wallets:swap.success`: Triggered when a token swap order finishes execution across target chains and assets.
 
 ## **Event Schema**
 
-<AccordionGroup>
-  <Accordion title="Deposit">
-  </Accordion>
+### Root Payload Fields
 
-  <Accordion title="Withdraw">
+| **Field** | **Description** | **Type** |
+| :-- | :-- | :-- |
+| `requestId` | Unique tracking identifier for the webhook delivery request. | `string` |
+| `method` | Event type identifier (e.g., `wallets:deposit.success`, `wallets:swap.success`). | `string` |
+| `params` | Object containing event-specific transaction and resource details. | `object` |
+
+<AccordionGroup>
+  <Accordion title="Transaction (Deposit | Withdraw)">
+    | Field | Description | Type |
+    | :-- | :-- | :-- |
+    | `params.id` | Unique ID of the transaction record. | `string` |
+    | `params.refId` | External or internal system reference ID. | `string` |
+    | `params.idempotencyKey` | Key used for idempotency protection on state-changing requests. | `string` |
+    | `params.tokenName` | Display name of the cryptocurrency asset (e.g., `USD Coin`). | `string` |
+    | `params.tokenSymbol` | Asset ticker symbol (e.g., `USDC`). | `string` |
+    | `params.tokenTicker` | Platform asset identifier (e.g., `USDC_BASE`). | `string` |
+    | `params.tokenAddress` | On-chain contract address of the transferred token. | `string` |
+    | `params.decimals` | Decimal precision defined by the asset's contract. | `number` |
+    | `params.isNative` | Indicates if the asset is the native network currency. | `boolean` |
+    | `params.amount.value` | Human-readable transaction amount string. | `string` |
+    | `params.amount.rawValue` | Atomic unit representation of the transaction amount. | `string` |
+    | `params.chainDecimals` | Decimal precision of the underlying blockchain network. | `number` |
+    | `params.blockchain` | Target blockchain protocol identifier (e.g., `BASE`). | `string` |
+    | `params.protocol` | Network virtual machine/architecture type (e.g., `EVM`). | `string` |
+    | `params.environment` | Network mode (`testnet` / `live`). | `string` |
+    | `params.network` | Specific blockchain network name (e.g., `base-sepolia`). | `string` |
+    | `params.txType` | Primary direction of transaction (`incoming` or `outgoing`). | `string` |
+    | `params.status` | Current transaction execution status (`pending`, `success`). | `string` |
+    | `params.fromAddress` | Blockchain address originating the transfer. | `string` |
+    | `params.toAddress` | Destination blockchain address. | `string` |
+    | `params.txHash` | Blockchain transaction hash. | `string` |
+    | `params.note` | Optional internal note attached to the transaction. | `string \| null` |
+    | `params.triggerOrigin` | Trigger source (`blockchain` for detected deposits, `api` for programmatic requests). | `string` |
+    | `params.confirmation` | Current block confirmation count. | `string` |
+    | `params.confirmed` | Indicates whether network confirmation requirements have been satisfied. | `boolean` |
+    | `params.confirmedAt` | ISO 8601 timestamp when block confirmation was achieved. | `string` |
+    | `params.userId` | Unique ID of the associated User entity. | `string` |
+    | `params.walletId` | Unique ID of the associated Wallet endpoint. | `string` |
+    | `params.accountId` | Unique ID of the governing Account container. | `string` |
+    | `params.workspaceId` | Unique ID of the organization workspace. | `string` |
+    | `params.createdAt` | Creation timestamp of the transaction. | `string` |
+    | `params.updatedAt` | Last update timestamp of the transaction. | `string` |
+    | `params.wallet.id` | ID of the target wallet. | `string` |
+    | `params.wallet.address` | Primary blockchain address assigned to the wallet. | `string` |
+    | `params.wallet.type` | Infrastructure wallet type (e.g., `deposit`, `settlement`). | `string` |
+    | `params.wallet.protocol` | Virtual machine protocol standard (e.g., `EVM`). | `string` |
+    | `params.wallet.isEvmCompatible` | Indicates EVM execution capability. | `boolean` |
+    | `params.wallet.name` | Label or display name assigned to the wallet. | `string` |
+    | `params.wallet.userId` | User ID attached to the wallet. | `string` |
+    | `params.wallet.refId` | External mapping reference for the wallet. | `string` |
+    | `params.wallet.custodyType` | Custody model framework (`DEVELOPER`). | `string` |
+    | `params.wallet.token.balance` | Real-time updated wallet balance post-transaction. | `object` |
   </Accordion>
 
   <Accordion title="Swap">
+    | Field | Description | Type |
+    | :-- | :-- | :-- |
+    | `params.id` | Unique ID of the swap order. | `string` |
+    | `params.idempotencyKey` | Unique key sent during order creation to ensure single execution. | `string` |
+    | `params.refId` | System reference identifier for the swap operation. | `string` |
+    | `params.from.token` | Source token ticker symbol (e.g., `USDC`). | `string` |
+    | `params.from.chain` | Source blockchain network (e.g., `ETHEREUM`). | `string` |
+    | `params.from.contractAddress` | Smart contract address of the source token. | `string` |
+    | `params.from.amount` | Amount of source token submitted for swap. | `string` |
+    | `params.to.token` | Destination token ticker symbol (e.g., `USDC`). | `string` |
+    | `params.to.chain` | Destination blockchain network (e.g., `ARBITRUM`). | `string` |
+    | `params.to.contractAddress` | Smart contract address of the target token. | `string` |
+    | `params.to.amount` | Estimated or final output amount on the target network. | `string` |
+    | `params.amountType` | Swap pricing calculation mode (`exactInput` or `exactOutput`). | `string` |
+    | `params.slippage` | Slippage tolerance threshold applied during execution (e.g., `auto`). | `string` |
+    | `params.environment` | Network environment mode (`sandbox` or `live`). | `string` |
+    | `params.status` | Final execution status of the order (`success`, `pending`). | `string` |
+    | `params.txHash` | Inbound/source blockchain transaction hash. | `string` |
+    | `params.hashOut` | Outbound/destination transaction hash (populated once cross-chain delivery settles). | `string \| null` |
+    | `params.fee.token` | Token used to pay platform/execution fees. | `string` |
+    | `params.fee.chain` | Network chain where the execution fee was deducted. | `string` |
+    | `params.fee.decimal` | Decimal precision of the fee token contract. | `string` |
+    | `params.fee.contractAddress` | Smart contract address of the fee token. | `string` |
+    | `params.fee.amount` | Platform fee amount deducted for the swap. | `string` |
+    | `params.fee.amountInUsd` | USD valuation equivalent of the platform fee. | `string` |
+    | `params.bridgeFee.token` | Token used to pay cross-chain liquidity bridge fees. | `string` |
+    | `params.bridgeFee.chain` | Network chain where the bridge fee was processed. | `string` |
+    | `params.bridgeFee.contractAddress` | Smart contract address of the bridge fee token. | `string` |
+    | `params.bridgeFee.amount` | Cross-chain bridge provider fee amount. | `string` |
+    | `params.bridgeFee.amountInUsd` | USD valuation equivalent of the bridge fee. | `string` |
+    | `params.triggerOrigin` | Execution trigger source (`api` or `console`). | `string` |
+    | `params.transactionGroupId` | Shared tracking ID linking multi-leg or cross-chain swap executions. | `string` |
+    | `params.createdAt` | Creation timestamp of the swap order. | `string (ISO 8601)` |
+    | `params.updatedAt` | Timestamp when the swap order was last updated. | `string (ISO 8601)` |
+    | `params.walletId` | ID of the Wallet entity executing the swap. | `string` |
+    | `params.accountId` | ID of the Account container associated with the wallet. | `string` |
+    | `params.workspaceId` | ID of the organization workspace. | `string` |
   </Accordion>
 </AccordionGroup>
 
-## <br />**Event Examples**
+## **Event Examples**
 
 <AccordionGroup>
   <Accordion title="Incoming Deposit (pending) example">
@@ -375,6 +461,60 @@ Each notifications flow consists of a `parent method` with `sub-methods` represe
     	  }
     	}
       }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Swap (success) example">
+    ```json
+    {
+      "requestId": "04afc1dd8ffae1f6f8c66f96eed0f5",
+      "method": "wallets:swap.success",
+      "params": {
+    	  "id": "6a68cfce4ee8fda4940bfad0",
+    	  "idempotencyKey": "360316a4-c6d8-4efa-a2ea-2ef5847be96e",
+    	  "refId": "whprn-1785252137197-bb3749136904",
+    	  "from": {
+    	    "token": "USDC",
+    	    "chain": "ETHEREUM",
+    	    "contractAddress": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    	    "amount": "6"
+    	  },
+    	  "to": {
+    	    "token": "USDC",
+    	    "chain": "ARBITRUM",
+    	    "contractAddress": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+    	    "amount": "5.913586"
+    	  },
+    	  "amountType": "exactInput",
+    	  "slippage": "auto",
+    	  "environment": "testnet",
+    	  "status": "success",
+    	  "txHash": "0xc825ef19cefb6085aefe39a453e5f97893755f2ca0b0c1c4b061ebead711421d",
+    	  "hashOut": null,
+    	  "fee": {
+    	    "token": "USDC",
+    	    "chain": "ETHEREUM",
+    	    "decimal": "6",
+    	    "contractAddress": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+    	    "amount": "0.031403",
+    	    "amountInUsd": "0.031399999999999997"
+    	  },
+    	  "bridgeFee": {
+    	    "token": "USDC",
+    	    "chain": "ARBITRUM",
+    	    "contractAddress": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+    	    "amount": "0.016571",
+    	    "amountInUsd": "0.016569094334999999"
+    	  },
+    	  "triggerOrigin": "api",
+    	  "transactionGroupId": "568a808e-e0a7-4d54-ae93-4859b2e1d725",
+    	  "createdAt": "2026-07-28T15:50:37.763Z",
+    	  "updatedAt": "2026-07-28T16:05:08.167Z",
+    	  "walletId": "6a68b709637b8f5046f9e431",
+    	  "accountId": "6a4e5f0257cd222d532fd201",
+    	  "workspaceId": "68448233bdb9b58d5c9ef9e8"
+    	}
     }
     ```
   </Accordion>

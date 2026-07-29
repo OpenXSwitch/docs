@@ -1,0 +1,159 @@
+---
+title: "Create and Manage Wallets"
+sidebarTitle: "Create and Manage Wallets"
+---
+
+A **Wallet** represents an on-chain deposit and execution address provisioned under an Application Account. You can programmatically deploy wallets across supported blockchains, link them directly to end-users, query asset balances, and manage operational controls such as auto-sweeping and wallet state.
+
+## Prerequisites
+
+Before starting this guide, ensure you have:
+
+- Obtained an **API key** from the [**OpenXSwitch Console**.](https://console.openxswitch.com/)
+- **Configured an Application Account:** An active `accountId` generated via the API or dashboard. See G[et Started with Account Management](/guides/dev-guides/get-started-with-account-management) for details.
+
+## The Plan
+
+We'll go through:
+
+1. **Creating a Wallet via API:** Provisioning a chain-specific wallet address scoped to an account.
+2. **Updating Wallet Settings:** Managing wallet activity state (`isActive`), display labels, and auto-sweep configurations.
+3. **Fetching Wallet Balances:** Querying asset holdings by wallet ID or blockchain address.
+4. **Next Steps:** Configuring treasury sweeps.
+
+## Step 1: Create a Wallet via API
+
+To provision a new wallet, send a `POST` request to the `/v2/wallets` endpoint.
+
+```json
+URL: https://api.openxswitch.com/v2/wallets
+
+{
+    "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04",
+    "accountId": "123e4567-e89b-12d3-a456-426614174000",
+    "blockchain": "ethereum-mainnet",
+    "name": "user_1 Wallet",
+    "refId": "ref_user_1",
+    "userId": "user_1",
+    "autoSweep": false
+ }
+```
+
+### Key Request Parameters
+
+- `idempotencyKey` _(string, **required**)_: A unique string to prevent duplicate wallet creation requests.
+- `accountId` _(string, **required**)_: The parent Application Account container.
+- `blockchain` _(string, **required**)_: Target network identifier (e.g., `ethereum-mainnet`, `polygon-mainnet`).
+- `name` _(string, optional)_: A human-readable display label for internal tracking.
+- `userId` _(string, optional)_: Pass a `userId` during creation to link this wallet directly to an end-user identity.
+- `refId` _(string, optional)_: Client reference identifier. Re-using the same `refId` across different EVM chains ensures deterministically identical wallet addresses.
+- `autoSweep` _(boolean, optional)_: Set to `true` to automatically route incoming deposits directly into your primary **Settlement Account** treasury. Defaults to `false`.
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "8e6f5877-d71a-4017-a3eb-3d1d4464e274",
+    "address": "0x1234567890123456789012345678901234567890",
+    "blockchain": "ethereum",
+    "protocol": "EVM",
+    "network": "mainnet",
+    "isEvmCompatible": true,
+    "type": "smart_wallet",
+    "intent": "deposit",
+    "gaslessWithdraw": true,
+    "autoSweep": true,
+    "state": "LIVE",
+    "custodyType": "DEVELOPER",
+    "userId": "user_1",
+    "accountId": "WALLET_ACCOUNT_ID",
+    "workspaceId": "WORKSPACE_ID",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2022-01-01T00:00:00.000Z",
+    "decimals": 18,
+    "name": "Wallet 1",
+    "refId": "WALLET_REF_ID"
+  }
+}
+```
+
+## Step 2: Update Wallet Settings
+
+You can modify wallet metadata, toggle auto-sweeping, or adjust the wallet's active status using the `PATCH` endpoint.
+
+> 💡 **User Association**
+>
+> If a wallet was created without a `userId`, you can link the wallet to a user identity during an update request by supplying the `userId` field.
+
+```json
+URL: https://api.openxswitch.com/v2/wallets?walletId={walletId}
+{
+    "userId": "user_1",
+    "name": "Primary User 1 Wallet",
+    "isActive": true,
+    "autoSweep": true
+ }
+```
+
+### Field Breakdown
+
+- `name` _(string, optional)_: Updated display name for internal tracking.
+- `userId` _(string, optional)_: Links or updates the owner user entity for this wallet.
+- `autoSweep` _(boolean, optional)_: Enables or disables automatic treasury sweeping rules for incoming funds.
+- `isActive` _(boolean, optional)_: Set to `false` to freeze wallet actions.
+
+> ⚠️ **Important Security Rule**
+>
+> If `isActive` is set to `false`, the wallet is disabled. Disabled wallets **cannot withdraw or swap funds**.
+
+## Step 3: Fetch Wallet Balances
+
+To inspect real-time token or native cryptocurrency balances, query the balances endpoint. You must provide either the `walletId` or the on-chain `address` as a parameter.
+
+```json
+URL: https://api.openxswitch.com/v2/wallets/balances?walletId={walletId}
+```
+
+### Query Parameters
+
+- `walletId` _(string, conditional)_: The unique ID of the wallet (Required if `address` is omitted).
+- `address` _(string, conditional)_: The on-chain wallet address (Required if `walletId` is omitted).
+- `blockchain` _(string, optional)_: Filter results to a specific network.
+- `token` _(string, optional)_: Filter by a specific asset symbol or contract address (e.g., `USDT`).
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "token": {
+        "name": "Tether USD",
+        "symbol": "USDT",
+        "blockchain": "ethereum",
+        "isNative": true,
+        "standard": "ERC-20",
+        "tokenAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "decimals": 6
+      },
+      "amount": {
+        "formatted": "479000.10",
+        "raw": "47900010"
+      },
+      "environment": "mainnet",
+      "createdAt": "2025-04-02T17:20:42.160Z",
+      "updatedAt": "2025-04-02T17:20:42.160Z"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+## Next Steps
+
+- **[Auto Collection and Sweep Rule](/wallet-infrastructure/auto-collection-and-sweep-rule):** Configure automated collection rules to aggregate user deposits into your central **Settlement Account**.

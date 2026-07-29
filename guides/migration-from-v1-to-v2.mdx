@@ -309,3 +309,52 @@ Transaction lookup endpoints have been unified under a consolidated `GET /v2/tra
 
 - **v1**: `POST /v1/instant-swap`
 - **v2**: `POST /v2/swap`
+
+Here is the revised Migration Guide tailored specifically to your exact platform updates:
+
+## 🔄 What Does This Mean for Existing Integrations?
+
+If you are migrating your existing integration to the upgraded infrastructure, use this guide to update your endpoints, identifiers, wallet provisioning, and webhook event handlers.
+
+### 👤 1. Users Infrastructure (Zero-Friction User Migration)
+
+- **No User Re-creation Needed:** You do **not** need to re-create users for your existing customers.
+- **Reused Identifiers:** All existing sub-wallets created via the API have been migrated automatically. Your previous `subWalletId` now acts directly as the new `userId`.
+- **What to Change:** Update the base URL endpoint in your requests—your existing sub-wallet IDs continue to work seamlessly without additional mapping.
+
+### 👛 2. Address & Wallet Management
+
+In the updated model, a user utilizes a single wallet container across supported assets, requiring you to provision chain-specific wallet addresses using the updated wallet creation endpoint.
+
+- **Provisioning Wallets:** Call the new wallet creation endpoint per supported chain:
+
+JSON
+
+```json
+{
+  "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04",
+  "accountId": "123e4567-e89b-12d3-a456-426614174000",
+  "blockchain": "ethereum-mainnet",
+  "name": "user_1 Wallet",
+  "refId": "ref_user_1",
+  "userId": "user_1",
+  "autoSweep": false
+}
+```
+
+- `accountId`**:** Retrieve your Account ID by completing the workspace setup via the [Accounts & Workspace Console](https://www.google.com/search?q=https://console.openxswitch.com/).
+- `userId`**:** Pass your existing `subWalletId` directly into this field.
+- **EVM Address Consistency:** To ensure a user shares the exact same blockchain address across all EVM-compatible chains, pass the same `refId` string for every EVM chain provisioning request.
+- **Wallet-Level Auto-Sweep:** Auto-sweep capabilities are now configured directly at the individual wallet level. Set `"autoSweep": true` if you want automatic fund sweeps enabled for that specific wallet.
+
+### 💸 3. Transactions
+
+- **Endpoint Updates:** Update all payment, deposit, and withdrawal endpoints to the new transaction URL paths.
+- **Idempotency Headers/Fields:** Pass standard idempotency keys on state-changing transaction endpoints to ensure safe retry logic.
+
+### 🔔 4. Webhook Event Consumption
+
+Refer to the complete [Webhook Event Documentation](/webhook/webhook-events) for the updated topic structure and full payload schema reference.
+
+- **Update Event Names:** Update your webhook listeners to match the new topic identifiers (e.g., replace legacy topics with `wallets:deposit.success`, `wallets:withdraw.success`, `wallets:swap.success`).
+- **Update Payload Parsing:** Modify your application code to handle the updated event payload schema (e.g., parsing `params.amount.value`, `params.amount.rawValue`, and structured `params.wallet` objects).

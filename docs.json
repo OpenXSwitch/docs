@@ -72,7 +72,11 @@
           "guides/pagination",
           {
             "group": "Developer Guides",
-            "pages": []
+            "pages": [
+              "guides/dev-guides/get-started-with-account-management",
+              "guides/dev-guides/create-and-manage-users",
+              "guides/dev-guides/create-and-manage-wallets"
+            ]
           },
           {
             "group": "Migration Guides",
