@@ -1,0 +1,244 @@
+---
+title: "Send and Transfer Tokens"
+sidebarTitle: "Send and Transfer Tokens"
+---
+
+Transferring or withdrawing tokens allows you to programmatically move digital assets from a specified wallet address to an external recipient address or internal infrastructure.
+
+## Prerequisites
+
+Before starting this guide, ensure you have:
+
+- **Obtained an API key from the OpenXSwitch Console.**
+- **An active API key with the necessary write and withdraw permissions.**
+- **Obtained an** `accountId` (if not using the default dashboard account). See the [Get Started with Account Management](/guides/dev-guides/get-started-with-account-management) for details.
+- **A provisioned source wallet with sufficient asset balance.**
+
+## The Plan
+
+We'll go through:
+
+1. **Fetching Supported Blockchains and Tokens:** Identifying valid target networks and asset symbols.
+2. **Obtaining Source Wallet ID:** Retrieving the originating `walletId` containing the assets.
+3. **Initiating a Token Withdrawal:** Submitting the transfer request via the API.
+4. **Fetching Transaction Status:** Tracking transaction state using the returned transaction ID.
+
+## Step 1: Fetch Supported Blockchains & Tokens
+
+Before initiating a transfer, query the tokens endpoint to fetch supported cryptocurrencies and their associated blockchain network identifiers (`slug` or `name`).
+
+Send a `GET` request to retrieve available tokens along with their supported target networks:
+
+```json
+URL: https://api.openxswitch.com/v2/chains/tokens-with-chains
+```
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18,
+      "isNative": false,
+      "standards": [
+        "ERC20"
+      ],
+      "media": {
+        "url": "https://cdn.openxswitch.com/public/logos/svg/eth.svg",
+        "type": "image/svg+xml"
+      },
+      "features": [],
+      "blockchains": [
+        {
+          "slug": "ethereum-sepolia",
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "decimals": 18,
+          "onchain": {
+            "protocol": "EVM",
+            "chainId": 1
+          },
+          "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+          },
+          "isTestnet": false,
+          "standards": [
+            "ERC20"
+          ],
+          "media": {
+            "url": "https://cdn.openxswitch.com/public/logos/svg/eth.svg",
+            "type": "image/svg+xml"
+          },
+          "blockExplorer": "https://etherscan.io"
+        }
+      ]
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+> 💡 **Selecting Network and Asset Parameters**
+>
+> - Use the `symbol` (e.g., `"ETH"` or `"USDT"`) for the `token` parameter when initiating a withdrawal request.
+> - For the `blockchain` parameter, you can pass either the network `name` (e.g., `"Ethereum"`) or the network `slug` (e.g., `"ethereum-sepolia"`). Using the `name` is recommended for standard network routing unless targeting a specific testnet environment.
+
+## Step 2: Obtain Source Wallet ID
+
+You must provide a valid `walletId` from which the assets will be debited. If you do not already have the wallet ID, you can retrieve it using either of the following endpoints depending on your application flow:
+
+### Option A: Query Wallets by User ID
+
+If the source wallet is linked to a specific user entity, fetch all wallets associated with that `userId`:
+
+```json
+URL: https://api.openxswitch.com/v2/users/wallets?userId={userId}
+```
+
+### Option B: List Account Wallets
+
+If you are operating across account-level wallets or treasury reserves, fetch all wallets provisioned under your workspace/account:
+
+```json
+URL: https://api.openxswitch.com/v2/wallets/list?accountId={accountId}
+```
+
+### Sample Response (Common)
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "8e6f5877-d71a-4017-a3eb-3d1d4464e274",
+      "address": "0x1234567890123456789012345678901234567890",
+      "blockchain": "ethereum",
+      "protocol": "EVM",
+      "network": "mainnet",
+      "isEvmCompatible": true,
+      "type": "smart_wallet",
+      "intent": "deposit",
+      "gaslessWithdraw": true,
+      "autoSweep": true,
+      "state": "LIVE",
+      "custodyType": "DEVELOPER",
+      "userId": "user_1",
+      "accountId": "WALLET_ACCOUNT_ID",
+      "workspaceId": "WORKSPACE_ID",
+      "createdAt": "2022-01-01T00:00:00.000Z",
+      "updatedAt": "2022-01-01T00:00:00.000Z",
+      "decimals": 18,
+      "name": "Wallet 1",
+      "refId": "WALLET_REF_ID"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+> **Tip:** Select and copy the `walletId` matching the target `blockchain` network and asset balance to pass into the withdrawal payload in Step 3.
+
+## Step 3: Initiate a Token Withdrawal
+
+To execute a token transfer or external withdrawal, send a `POST` request to the `/v2/transactions/withdraw` endpoint.
+
+```json
+URL: https://api.openxswitch.com/v2/transactions/withdraw
+{
+    "idempotencyKey": "0e472f6b-336b-4d4f-87d6-4f93e4e4e4e4",
+    "walletId": "0e472f6b-336b-4d4f-87d6-4f93e4e4e4e4",
+    "amount": "0.5",
+    "withdrawalAddress": "0x1234567890123456789012345678901234567890",
+    "token": "USDT",
+    "blockchain": "ethereum",
+    "refId": "txn_ref_123",
+    "note": "This is a test transaction"
+ }
+```
+
+### Request Payload Fields
+
+- `idempotencyKey` _(string, **required**)_: Unique client string to prevent duplicate execution during retries.
+- `walletId` _(string, **required**)_: The source wallet initiating the transfer.
+- `amount` _(string, **required**)_: The nominal token or native currency quantity to send.
+- `withdrawalAddress` _(string, **required**)_: The destination blockchain address.
+- `token` _(string, **required**)_: Asset symbol (e.g., `USDT`, `ETH`).
+- `blockchain` _(string, **required**)_: Target network identifier.
+- `refId` _(string, optional)_: Client transaction reference ID for internal mapping.
+- `note` _(string, optional)_: Human-readable internal label or memo.
+
+## Step 4: Fetch Transaction Details
+
+To monitor execution status, query the transaction endpoint using the `transactionId` returned in Step 3.
+
+Bash
+
+```json
+URL: https://api.openxswitch.com/v2/transactions?transactionId={transactionId}
+```
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "TRANSACTION_ID",
+    "refId": "REF_ID",
+    "idempotencyKey": "IDEMPOTENCY_KEY",
+    "tokenName": "Bitcoin",
+    "tokenSymbol": "BTC",
+    "tokenTicker": "BTC",
+    "tokenAddress": "0x1234567890123456789012345678901234567890",
+    "decimals": 18,
+    "isNative": true,
+    "amount": {
+      "formatted": "479000.10",
+      "raw": "47900010"
+    },
+    "totalAmount": {
+      "formatted": "479000.10",
+      "raw": "47900010"
+    },
+    "chainDecimals": 18,
+    "blockchain": "ethereum",
+    "protocol": "EVM",
+    "environment": "mainnet",
+    "network": "ethereum-mainnet",
+    "standard": "ERC20",
+    "txType": "incoming",
+    "txSubType": "DEPOSIT",
+    "status": "pending",
+    "fromAddress": "0x1234567890123456789012345678901234567890",
+    "toAddress": "0x1234567890123456789012345678901234567890",
+    "txHash": "0x1234567890123456789012345678901234567890",
+    "totalFee": {
+      "formatted": "479000.10",
+      "raw": "47900010"
+    },
+    "feeLevel": "normal",
+    "feeToken": "ETH",
+    "isBatch": false,
+    "note": "Note",
+    "triggerOrigin": "TRIGGER_ORIGIN",
+    "transactionGroupId": "TRANSACTION_GROUP_ID",
+    "confirmation": 1,
+    "confirmed": true,
+    "confirmedAt": "2022-01-01T00:00:00.000Z",
+    "userId": "USER_ID",
+    "walletId": "WALLET_ID",
+    "accountId": "ACCOUNT_ID",
+    "workspaceId": "WORKSPACE_ID"
+  }
+}
+```

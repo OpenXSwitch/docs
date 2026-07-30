@@ -10,16 +10,67 @@ A **Wallet** represents an on-chain deposit and execution address provisioned un
 Before starting this guide, ensure you have:
 
 - Obtained an **API key** from the [**OpenXSwitch Console**.](https://console.openxswitch.com/)
-- **Configured an Application Account:** An active `accountId` generated via the API or dashboard. See G[et Started with Account Management](/guides/dev-guides/get-started-with-account-management) for details.
+- **Configured an Application Account:** An active `accountId` generated via the API. See [Get Started with Account Management](/guides/dev-guides/get-started-with-account-management) for details.
 
 ## The Plan
 
 We'll go through:
 
+**Pre-Step:** Fetch supported blockchains using `GET /v2/chains` to retrieve target `blockchain` identifiers.
+
 1. **Creating a Wallet via API:** Provisioning a chain-specific wallet address scoped to an account.
 2. **Updating Wallet Settings:** Managing wallet activity state (`isActive`), display labels, and auto-sweep configurations.
 3. **Fetching Wallet Balances:** Querying asset holdings by wallet ID or blockchain address.
 4. **Next Steps:** Configuring treasury sweeps.
+
+## Pre-Step: Fetch Supported Blockchains & Assets
+
+To identify valid `blockchain` network identifiers before provisioning a wallet, you can fetch the list of supported networks and rechargeable currencies using the endpoints below.
+
+### 1. Get List of Supported Blockchains & Assets
+
+Send a `GET /v2/chains` request to retrieve all supported networks, token standards, and chain configurations.
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "slug": "ethereum-sepolia",
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "decimals": 18,
+      "onchain": {
+        "protocol": "EVM",
+        "chainId": 1
+      },
+      "nativeCurrency": {
+        "name": "Ether",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "isTestnet": false,
+      "standards": [
+        "ERC20"
+      ],
+      "media": {
+        "url": "https://cdn.openxswitch.com/public/logos/svg/eth.svg",
+        "type": "image/svg+xml"
+      },
+      "blockExplorer": "https://etherscan.io"
+    }
+  ],
+  "totalPage": 123,
+  "pageNo": 123,
+  "pageLimit": 123
+}
+```
+
+💡 **Selecting the Right Network Value**
+
+When creating a wallet in **Step 1**, you can pass either the `name` (e.g., `"Ethereum"`) or the `slug` (e.g., `"ethereum-sepolia"`) in the `blockchain` field. Using the `name` is recommended for standard network routing unless targeting a specific testnet environment.
 
 ## Step 1: Create a Wallet via API
 
@@ -157,3 +208,4 @@ URL: https://api.openxswitch.com/v2/wallets/balances?walletId={walletId}
 ## Next Steps
 
 - **[Auto Collection and Sweep Rule](/wallet-infrastructure/auto-collection-and-sweep-rule):** Configure automated collection rules to aggregate user deposits into your central **Settlement Account**.
+- [Send and Transfer Tokens](/guides/dev-guides/send-and-transfer-tokens)

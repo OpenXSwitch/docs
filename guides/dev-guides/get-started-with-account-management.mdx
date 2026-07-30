@@ -3,13 +3,15 @@ title: "Get Started with Account Management"
 sidebarTitle: "Get Started with Account Management"
 ---
 
-Once you complete workspace onboarding, your default operational account is activated. To manage user identities, apply wallet-level controls, and manage asset flows, you must configure a dedicated **Account** for your application.
+## Setting Up Your Application Account
+
+Once you complete workspace onboarding, your default operational account is activated on the dashboard. To manage user identities, apply custom wallet-level controls, and manage asset flows, you can optionally configure a dedicated Application Account (`type = 'user'`).
 
 ## Prerequisites
 
 Before starting this guide, ensure you have:
 
-- Obtained an **API key** from the [OpenXSwitch Console](https://console.openxswitch.com)
+- **Obtained an API key from the OpenXSwitch Console.**
 
 An active API key with the necessary write permissions configured for the target environment (Sandbox or Live).
 
@@ -17,39 +19,34 @@ An active API key with the necessary write permissions configured for the target
 
 We'll go through:
 
-1. **Creating an Account via API:** Provisioning an isolated Users Account to manage end-user wallet instances and policies.
+1. **Creating an Account via API:** Provisioning an isolated Account (`type = 'user'`) to manage end-user wallet instances and policies.
 2. **Configuring Account Controls via Dashboard:** Managing settings, withdrawal restrictions, and compliance rules in the OpenXSwitch Console.
 3. **Next Steps:** Integrating user wallets, webhook listeners, and operational auto-sweep rules.
 
 ## Step 1: Create an Account via API
 
-Accounts within the platform fall into two primary categories:
+Accounts within the platform fall into two primary categories based on their `type`:
 
-- **Settlement Account:** Serves as the primary enterprise operational or treasury account created automatically upon successful onboarding to manage enterprise funds, auto-sweeps, and global balances.
-- **Users Account:** Acts as an isolated account assigned to your specific end-user application to manage dedicated smart wallet instances, balances, and operational policies.
+- **Settlement Account (**`type = 'settlement'`**):** Serves as the primary enterprise operational or treasury account created automatically upon successful onboarding to manage enterprise funds, auto-sweeps, and global balances.
+- **Application Account (**`type = 'user'`**):** _(Optional)_ Acts as an isolated account assigned to your specific end-user application to manage dedicated smart wallet instances, balances, and operational policies. If you do not create a separate Application Account, you can continue using the default account provisioned on your dashboard.
 
-To manage end-users, create a dedicated Users Account via the API:
-
-Bash
+To create a dedicated Application Account, send a request via the API:
 
 ```json
-curl --request POST \
-  --url https://api.openxswitch.com/v2/accounts \
-  --header 'Authorization: Bearer oxs.QdwAKOAWNWZzur4AjOevSBl1iDIXOi6XtQ' \
-  --header 'Content-Type: application/json' \
-  --data '{
+URL: https://api.openxswitch.com/v2/accounts
+{
     "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04",
     "name": "Sandbox Account"
-  }'
+ }
 ```
 
 > **Important:** The `accountId` returned in the response will be used across your application to scope wallet creation, transaction routing, and compliance policies.
 
-For complete parameter breakdowns, response schemas, and error handling, refer to the **Accounts API Reference**.
+For complete parameter breakdowns, response schemas, and error handling, refer to the [Accounts API Reference.](https://docs.openxswitch.com/api-reference/accounts/create-account)
 
 ## Step 2: Configure Account Controls via the Dashboard
 
-After creating your Account, you can manage security, withdrawal rules, and compliance watchlists directly from the OpenXSwitch Console.
+After creating your Account (or when managing your default dashboard account), you can customize security settings, withdrawal rules, and compliance watchlists directly from the OpenXSwitch Console.
 
 1. Log into the [OpenXSwitch Console](https://console.openxswitch.com).
 2. Navigate to **Wallet Infrastructure → Accounts**.
