@@ -80,6 +80,7 @@
         "pages": [
           "guides",
           "guides/authentication",
+          "guides/pricing",
           "guides/idempotent-request",
           "guides/pagination",
           {
