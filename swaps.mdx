@@ -1,0 +1,49 @@
+---
+sidebarTitle: "overview"
+title: "Assets Swaps"
+---
+
+The OpenXSwitch Swap API allows developers to execute instant same-chain and cross-chain asset swaps programmatically across supported blockchain networks. By routing liquidity through decentralized exchanges (DEXs), automated market makers (AMMs), and Request-for-Quote (RFQ) venues, OpenXSwitch provides fast, low-cost asset conversions directly within your user wallets or treasury operations.
+
+#### Supported Liquidity & Asset Routes
+
+- **EVM Cross-Chain & Same-Chain Swaps:** Enables capital-efficient, high-speed DEX swaps across Ethereum L1 and EVM L2s (Arbitrum, Optimism, Base, Polygon) with minimal slippage.
+- **Tokenized Stock Swaps (via Robinhood Chain):** Facilitates instant on-chain swaps between Robinhood Stock Tokens (e.g., NVDA, AAPL, SPY) and stablecoins (e.g., USDG) via native RFQ execution.
+- **Bitcoin & Non-EVM Swaps (_Coming Soon_):** Enables decentralized cross-chain swaps between native Bitcoin (BTC) and EVM ecosystems.
+
+#### Key Benefits
+
+- **Unified API Interface:** Swap digital assets and tokenized stocks across disparate blockchains using a single RESTful endpoint.
+- **Gasless Execution:** Integrate with OpenXSwitch's built-in ERC-4337 Paymaster infrastructure to execute swaps gaslessly or allow users to pay route fees in stablecoins.
+- **Auto-Routing:** Automated routing across DEX venues to guarantee optimal liquidity depth and execution speed across crypto and tokenized equities.
+- **Low-Cost Settlement:** Capital-efficient trade routing with transparent execution fees starting as low as 0.0.5% per swap.
+
+#### How Asset Swaps Work
+
+1. **Request a Quote:** Query the OpenXSwitch Swap API with the source chain, source asset, destination chain, destination asset, and amount.
+2. **Review Execution Parameters:** The API queries underlying DEX aggregators to return live exchange rates, expected slippage, estimated execution time, and fee breakdown.
+3. **Generate CallData & Execute:** The DEX or liquidity venue generates the optimized transaction `callData`. OpenXSwitch then securely signs and executes the transaction on-chain on behalf of the smart wallet or treasury account.
+4. **Monitor Lifecycle:** Track settlement status in real-time via OpenXSwitch Webhooks.
+
+#### Security & On-Chain Execution
+
+- **DEX-Generated CallData:** OpenXSwitch queries decentralized exchange protocols to construct calibrated, optimized `callData` payload parameters without exposing private keys or taking unneeded custody during route generation.
+- **TEE Security & On-Chain Execution:** Every transaction payload is validated, signed, and broadcast inside OpenXSwitch’s secure **Trusted Execution Environment (TEE)**. This ensures key isolation, hardware-enforced integrity, and institutional-grade transaction orchestration directly to the destination blockchain network.
+- **Slippage & Deadline Controls:** Every generated swap payload includes strictly enforced slippage tolerance bounds and transaction execution deadlines to protect users from front-running, sandwich attacks, or extreme market volatility.
+
+#### Technical Specification
+
+| Property | Specification |
+| --- | --- |
+| **Supported EVM Routes** | Ethereum, Arbitrum, Optimism, Base, Polygon _(powered by EVM DEX liquidity)_ |
+| **Supported Stock Assets** | Robinhood Stock Tokens via RFQ on Robinhood Chain |
+| **Supported Non-EVM Routes** | Bitcoin Native BTC _(Coming Soon)_ |
+| **Execution Speed** | Real-time to 2 minutes (depending on source chain finality) |
+| **Sponsorship** | Compatible with EVM ERC-4337 Paymaster sponsorship |
+
+#### Common Use Cases
+
+- **Stock & Equity Trading:** Enable users to trade in and out of tokenized stocks using stablecoins inside your application.
+- **Cross-Chain Treasury Rebalancing:** Automatically sweep or balance treasury funds across different EVM chains into stablecoins on a single primary network.
+- **In-App Asset Conversion:** Allow users to convert BTC or ETH directly into stablecoins or tokenized equities.
+- **Same-Chain Swaps & Token Trading:** Execute instant, low-cost asset swaps between native tokens, stablecoins, and altcoins on the same blockchain network without leaving your application.

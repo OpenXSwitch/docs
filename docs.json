@@ -46,6 +46,18 @@
             ]
           },
           {
+            "group": "Swaps",
+            "pages": [
+              "swaps"
+            ]
+          },
+          {
+            "group": "Stock Tokens",
+            "pages": [
+              "stock-tokens"
+            ]
+          },
+          {
             "group": "Gas Fees",
             "pages": [
               "gas-fees/overview",

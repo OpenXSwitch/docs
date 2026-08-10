@@ -1,0 +1,47 @@
+---
+title: "Stock Tokens"
+sidebarTitle: "Overview"
+---
+
+Stock Tokens bring **real-world asset** (RWA) investment primitives directly onto the blockchain through **Robinhood Chain**. Issued as standard **ERC-20 tokens**, Stock Tokens provide economic exposure to underlying US shares and ETFs, enabling developers and businesses to build programmable trading, brokerage, and investment products directly within OpenXSwitch infrastructure.
+
+#### Why Build with Stock Tokens?
+
+- **Programmable Real-World Assets:** Standardized ERC-20 interface that works out of the box with existing wallets, libraries, and tooling.
+- **On-Chain Price Feeds:** Every Stock Token is integrated with live Chainlink price feeds, allowing smart contracts to read equity valuations directly on-chain.
+- **Composable Primitives:** Easily combine stock exposure with on-chain trading, lending, yield strategies, and structured products.
+- **24/7 Global Access:** Assets live in users' wallets and remain tradeable and accessible around the clock.
+- **OpenXSwitch Integration:** Easily issue, manage, and execute gasless stock token transfers using OpenXSwitch's unified APIs and smart wallet infrastructure.
+
+### Technical Specification
+
+| Property | Specification |
+| --- | --- |
+| **Token Standard** | Standard ERC-20 (18 Decimals) |
+| **Underlying Ticker** | Tied 1:1 to underlying equities or ETFs by ticker symbol |
+| **Price Feeds** | Per-asset Chainlink Data Feeds |
+| **Execution Mechanism** | Trades via Request-for-Quote (RFQ) swaps at launch; fully transferable standard ERC-20s |
+| **Supported Network** | Robinhood Chain |
+
+### Use Cases
+
+Building with Stock Tokens uses the same developer patterns as standard digital assets, augmented with real-time on-chain pricing:
+
+| Use Case | Description | Example Integration |
+| --- | --- | --- |
+| **Portfolio & Display** | Display tokenized stock balances and live USD valuations. | A wallet dashboard displaying a user's NVDA, AAPL, and SPY tokens alongside daily P&L. |
+| **Trading** | Embedded swap interfaces. | A trading widget quoting NVDA $$\leftrightarrow$$ USDG via RFQ and settling on-chain. |
+| **Lending & Borrowing** | Use stock tokens as collateral. | Deposit NVDA tokens as collateral on a lending venue to borrow USDG stablecoins. |
+| **Indices & Baskets** | Bundle multiple tokens into unified products. | An "AI Basket" (NVDA, MSFT, GOOGL) that auto-values via Chainlink feeds. |
+| **Yield Strategies** | Earn yield on equity exposure. | Supply stock tokens to a lending vault to earn additional yield on top of stock dividends. |
+| **Global Access** | Regional equity access. | Offer US equity exposure to users in eligible global regions through mobile fintech apps. |
+
+### Corporate Actions & Multipliers
+
+**What are Corporate Actions & Multipliers?** In traditional finance, corporate actions; such as stock splits, reverse splits, and stock dividends—alter the total share supply or share value of an equity without changing the investor's underlying economic value. 
+
+In Robinhood Assets, corporate actions are handled programmatically on-chain via a dynamic multiplier extension (**ERC-8056: Scaled UI Amount Extension**), ensuring that token holdings accurately reflect splits and adjustments seamlessly without friction.
+
+- **Static Raw Balances:** The underlying token balance in a user's wallet remains static during splits, while the share-per-token ratio adjusts dynamically via the `uiMultiplier()` function.
+- **Automated Oracles:** Chainlink price feeds automatically incorporate the multiplier into the reported price.
+- **Seamless Swaps:** On-chain swaps, liquidity pools, and smart contract logic continue operating normally without requiring manual re-balances or token transfers.
