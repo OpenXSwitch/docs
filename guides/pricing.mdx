@@ -8,8 +8,8 @@ sidebarTitle: "Pricing"
 
 OpenXSwitch uses a flexible dual-billing model designed to support projects from early development through enterprise scale:
 
-1. **Monthly Subscription Plans:** Base pricing tiers designed for startups and enterprises needing predictable monthly operations with included wallet capacity and transfer allowances.
-2. **Package-Based (One-Time Setup):** Pre-funded, pay-as-you-go capacity packages with no recurring monthly commitment. Designed for high-volume deployments or fixed operational budgets. See [One-Time Setup Packages](/guides/pricing#one-time-setup-packages) for details.
+1. **Monthly Subscriptions:** Predictable monthly plans with included wallet limits and transfer allowances. Best for startups and steady operations.
+2. **One-Time Setup Packages:** Pay-as-you-go capacity packages with **no recurring monthly fees**. Best for high-volume deployments or bulk wallet provisioning. See [One-Time Setup Packages](/guides/pricing#one-time-setup-packages) for details.
 
 #### Pricing Tiers
 
@@ -35,6 +35,8 @@ Choose the billing tier that fits your application's transaction volume and infr
 - Real-time **Blockchain Events** & Webhook infrastructure.
 - ERC-4337 **Gas Station & Paymaster** sponsorship infrastructure.
 
+## Pricing FAQ
+
 ### Wallet Usage & Metering Model
 
 OpenXSwitch tracks wallet utilization based on provisioned wallets (wallets created, regardless of whether they are active or idle) to ensure fair resource allocation.
@@ -46,7 +48,7 @@ OpenXSwitch tracks wallet utilization based on provisioned wallets (wallets crea
   - EVM chains share a single unified address.
   - Solana and Bitcoin issue distinct single-chain addresses.
   - **User Capacity Calculation:** If your application provisions 1 EVM address, 1 Solana address, and 1 Bitcoin address per user (3 total wallet addresses), the **2,500 wallet allowance** in the Basic Plan allows you to fully serve **~833 active end-users** across all three ecosystems without overage.
-- **Basic Plan Allowance:** The Basic Plan includes **2,500 provisioned wallets**. Overages for additional created wallets are metered dynamically at **\$0.05 per wallet / month**.
+
 - **Fixed Wallet Package Guarantee:** Clients on a One-Time Setup Package incur **no wallet overage fees**; your provisioned wallets remain valid within your purchased capacity threshold.
 
 #### **How Volume Overages Work**
@@ -59,9 +61,10 @@ OpenXSwitch tracks wallet utilization based on provisioned wallets (wallets crea
 For organizations that prefer no monthly commitments or need large upfront wallet provisioning without monthly subscription overhead, OpenXSwitch offers pre-packaged usage plans:
 
 - **Flexible Wallet Pricing:** Bulk wallet provisioning starting at **\$0.50 per wallet**.
-
 - **No Monthly Commitment:** One-time package purchases include access to all platform features, unlimited API calls, auto-sweep workflows, stock token access, and swap APIs without requiring a monthly recurring plan fee.
 
-> **Enterprise Bulk Example:** A fintech platform migrating to OpenXSwitch can fulfill a 10,000-wallet requirement with zero recurring monthly subscription fees. By purchasing an Enterprise One-Time Setup Package for \$5,000 (\$0.50/wallet), they unlock full infrastructure access for all 10,000 wallets without ongoing maintenance or overage charges.
+<Card title="Enterprise Bulk Example" icon="sparkles">
+  A fintech platform migrating to OpenXSwitch can fulfill a 10,000-wallet requirement with zero recurring monthly subscription fees. By purchasing an Enterprise One-Time Setup Package for \$5,000 (\$0.50/wallet), they unlock full infrastructure access for all 10,000 wallets without ongoing maintenance or overage charges.
+</Card>
 
 To configure a custom one-time package or enterprise deployment, contact our sales team at [sales@openxswitch.com](https://www.google.com/search?q=mailto%3Asales%40openxswitch.com).
