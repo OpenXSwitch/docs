@@ -70,7 +70,7 @@ Send a `GET /v2/chains` request to retrieve all supported networks, token standa
 
 💡 **Selecting the Right Network Value**
 
-When creating a wallet in **Step 1**, you can pass either the `name` (e.g., `"Ethereum"`) or the `slug` (e.g., `"ethereum-sepolia"`) in the `blockchain` field. Using the `name` is recommended for standard network routing unless targeting a specific testnet environment.
+When creating a wallet in **Step 1**, you can pass the `name` (e.g., `"Ethereum"`) in the `blockchain`field. Using the `name` is recommended for standard network routing unless targeting a specific testnet environment.
 
 ## Step 1: Create a Wallet via API
 
@@ -82,7 +82,7 @@ URL: https://api.openxswitch.com/v2/wallets
 {
     "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04",
     "accountId": "123e4567-e89b-12d3-a456-426614174000",
-    "blockchain": "ethereum-mainnet",
+    "blockchain": "ethereum",
     "name": "user_1 Wallet",
     "refId": "ref_user_1",
     "userId": "user_1",
@@ -94,7 +94,7 @@ URL: https://api.openxswitch.com/v2/wallets
 
 - `idempotencyKey` _(string, **required**)_: A unique string to prevent duplicate wallet creation requests.
 - `accountId` _(string, **required**)_: The parent Application Account container.
-- `blockchain` _(string, **required**)_: Target network identifier (e.g., `ethereum-mainnet`, `polygon-mainnet`).
+- `blockchain` _(string, **required**)_: Target network identifier (e.g., `ethereum`, `polygon`).
 - `name` _(string, optional)_: A human-readable display label for internal tracking.
 - `userId` _(string, optional)_: Pass a `userId` during creation to link this wallet directly to an end-user identity.
 - `refId` _(string, optional)_: Client reference identifier. Re-using the same `refId` across different EVM chains ensures deterministically identical wallet addresses.
