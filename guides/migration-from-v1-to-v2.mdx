@@ -126,7 +126,7 @@ In v1, distinct **addresses** had to be generated per **token** and **network**.
 
 ##### Request Changes
 
-Pass `userId` and `accountId` directly in the payload, provide an `idempotencyKey`, and designate the specific target blockchain network string (e.g., `ethereum-mainnet`).
+Pass `userId` and `accountId` directly in the payload, provide an `idempotencyKey`, and designate the specific target blockchain network string (e.g., `ethereum`).
 
 **v1  (**`POST /v1/sub-wallet/address`**):**
 
@@ -164,7 +164,7 @@ Pass `userId` and `accountId` directly in the payload, provide an `idempotencyKe
 {
   "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04", // [!code ++]
   "accountId": "123e4567-e89b-12d3-a456-426614174000", // [!code ++]
-  "blockchain": "ethereum-mainnet", // [!code ++]
+  "blockchain": "ethereum", // [!code ++]
   "name": "user_1 Wallet", // [!code ++]
   "refId": "ref_user_1", // [!code ++]
   "userId": "user_1", // [!code ++]
@@ -334,7 +334,7 @@ JSON
 {
   "idempotencyKey": "8d5be8f5-a8e7-4e8a-b715-0e7d6f2a6d04",
   "accountId": "123e4567-e89b-12d3-a456-426614174000",
-  "blockchain": "ethereum-mainnet",
+  "blockchain": "ethereum",
   "name": "user_1 Wallet",
   "refId": "ref_user_1",
   "userId": "user_1",
